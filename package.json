@@ -1,5 +1,5 @@
 {
-  "name": "cloud-robot-next",
+  "name": "cloud-robot-dashboard",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,12 +12,24 @@
     "@types/node": "20.5.0",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
+    "@types/socket.io": "^3.0.2",
     "autoprefixer": "10.4.15",
+    "axios": "^1.4.0",
+    "chart.js": "^4.3.3",
+    "express": "^4.18.2",
+    "http": "^0.0.1-security",
     "next": "13.4.18",
     "postcss": "8.4.28",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "recharts": "^2.7.3",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
     "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "zeromq": "^5.3.1"
+  },
+  "devDependencies": {
+    "@types/zeromq": "^5.2.2"
   }
 }
