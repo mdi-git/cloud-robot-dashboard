@@ -9,5 +9,5 @@ let i = 0;
 
 setInterval(function() {
   console.log("1씩 늘리기...", i++);
-  sock.send([`test ${i}`]);
-}, 2000);
+  sock.send(i%2 === 0 ? `(RemainingTaskCount ${i})` : `(PerfirmableTaskCount "AMR_LIFT1" ${i})`);
+}, 5000);
