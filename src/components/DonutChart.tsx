@@ -1,4 +1,4 @@
-import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip } from "recharts";
+import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { useState, useEffect } from "react";
 
 interface DonutChartProps {
@@ -8,10 +8,6 @@ interface DonutChartProps {
 const COLORS = [
   "#0088FE",
   "#00C49F",
-  "#FFBB28",
-  "#FF8042",
-  "#FF6633",
-  "#FF3377",
 ];
 
 const DonutChart: React.FC<DonutChartProps> = ({ data }) => {
@@ -23,7 +19,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ data }) => {
   return (
     <>
       {isClient && (
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={230} minWidth={200}>
           <PieChart>
             <Pie
               data={data}
@@ -41,6 +37,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ data }) => {
               ))}
             </Pie>
             <Tooltip />
+            <Legend />
           </PieChart>
         </ResponsiveContainer>
       )}
