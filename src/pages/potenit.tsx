@@ -1,19 +1,27 @@
 import ChartComponent from "@/components/DonutChart";
+import { setDataState } from "@/features/dataSlice";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 interface RobotData {
-  RemainingTaskCount: number;
-  OngoingTaskCount: number;
-  CompletedTaskCount: number;
-  NewTaskCount: number;
-  CumulativeTaskSpeed: number;
-  AverageTaskSpeed: number;
-  TaskProgress: [robotId: string, progress: string];
-  RobotTaskStatus: [robotId: string, taskId: string, taskName: string, status: "start" | "progress" | "pause" | "complete"];
-  BatteryRemain: [robotId: string, batteryStatus: number];
-  BatteryStatus: [robotId: string, batteryStatus: "Using" | "Charging"];
-  PerfirmableTaskCount: [robotId: string, count: number];
+  REMAININGTASKCOUNT: number;
+  ONGOINGTASKCOUNT: number;
+  COMPLETEDTASKCOUNT: number;
+  NEWTASKCOUNT: number;
+  CUMULATIVETASKSPEED: number;
+  AVERAGETASKSPEED: number;
+  TASKPROGRESS: [robotId: string, progress: string];
+  ROBOTTASKSTATUS: [
+    robotId: string,
+    taskId: string,
+    taskName: string,
+    status: "start" | "progress" | "pause" | "complete"
+  ];
+  BATTERYREMAIN: [robotId: string, BATTERYSTATUS: number];
+  BATTERYSTATUS: [robotId: string, BATTERYSTATUS: "Using" | "Charging"];
+  PERFIRMABLETASKCOUNT: [robotId: string, count: number];
+  ROBOTAT: [robotId: string, x: number, y: number];
 }
 
 interface RobotStatusData {
@@ -33,18 +41,18 @@ function getKeyValueObject(str: string) {
 
     if (/"([^"]+)"/.test(values)) {
       parsedValues =
-        values.split(' ').map((match) => isNaN(parseInt(match)) ? match.slice(1, -1) : parseInt(match)) || [];
-        console.log(values)
+        values
+          .split(" ")
+          .map((match) =>
+            isNaN(parseInt(match)) ? match.slice(1, -1) : parseInt(match)
+          ) || [];
     } else {
       parsedValues = parseInt(values);
     }
 
-    console.log('parsedValues:', parsedValues)
-
     let output: { [key: string]: (string | number)[] | number } = {
-      [key]: parsedValues,
+      [key.toUpperCase()]: parsedValues,
     };
-    console.log('output: ', output)
     return output;
   } else {
     console.log("No valid input found.");
@@ -52,28 +60,25 @@ function getKeyValueObject(str: string) {
   }
 }
 
-function getRobotDataByRobotId(arr: (string|number)[]) {
-
-}
-
 export default function Potenit() {
-  const chartData = [
-    { name: "Red", value: 12 },
-    { name: "Blue", value: 19 },
-  ];
+  const selector = useAppSelector((state) => state.data);
+  const dispatch = useAppDispatch();
 
   const [receivedData, setReceivedData] = useState<RobotData>({
-    RemainingTaskCount: 0,
-    OngoingTaskCount: 0,
-    CompletedTaskCount: 0,
-    NewTaskCount: 0,
-    CumulativeTaskSpeed: 0,
-    AverageTaskSpeed: 0,
-    TaskProgress: ["", ""],
-    RobotTaskStatus: ["", "", "", "progress"],
-    BatteryRemain: ["", 0],
-    BatteryStatus: ["", "Using"],
-    PerfirmableTaskCount: ["", 0],
+    // REMAININGTASKCOUNT: 0,
+    // ONGOINGTASKCOUNT: 0,
+    // COMPLETEDTASKCOUNT: 0,
+    // NEWTASKCOUNT: 0,
+    // CUMULATIVETASKSPEED: 0,
+    // AVERAGETASKSPEED: 0,
+
+    TASKPROGRESS: ["", ""],
+    ROBOTTASKSTATUS: ["", "", "", "progress"],
+    BATTERYREMAIN: ["", 0],
+    BATTERYSTATUS: ["", "Using"],
+    PERFIRMABLETASKCOUNT: ["", 0],
+    ROBOTAT: ["", 0, 0],
+    ...JSON.parse(selector.potenitInfo),
   });
 
   const [robotStatus, setRobotStatus] = useState<RobotStatusData>({
@@ -81,8 +86,15 @@ export default function Potenit() {
     AMR_LIFT2: {},
     AMR_LIFT3: {},
     AMR_LIFT4: {},
-    PALLETIZER1: {}
+    PALLETIZER1: {},
+    ...JSON.parse(selector.potenitChart),
   });
+
+  useEffect(() => {
+    console.log(JSON.parse(selector.potenitChart));
+    setReceivedData({ ...receivedData, ...JSON.parse(selector.potenitInfo) });
+    setRobotStatus({ ...robotStatus, ...JSON.parse(selector.potenitChart) });
+  }, []);
 
   useEffect(() => {
     const socket = io("http://localhost:3001", { transports: ["websocket"] });
@@ -91,8 +103,16 @@ export default function Potenit() {
     });
 
     socket.on("getData", (data) => {
+      console.log(data, atob(data));
       setReceivedData((prevReceivedData) => {
-        const tempData = getKeyValueObject(data);
+        const tempData = getKeyValueObject(atob(data));
+        dispatch(
+          setDataState({
+            ...selector,
+            potenitInfo: JSON.stringify({ ...prevReceivedData, ...tempData }),
+            potenitChart: JSON.stringify({...robotStatus})
+          })
+        );
         return { ...prevReceivedData, ...tempData };
       });
     });
@@ -100,27 +120,76 @@ export default function Potenit() {
 
   useEffect(() => {
     setRobotStatus((prevRobotStatus) => {
-      const temp:ObjectProps = {};
-      if(receivedData.PerfirmableTaskCount[0]) {
-        temp[`${receivedData.PerfirmableTaskCount[0]}`] = {PerfirmableTaskCount: receivedData.PerfirmableTaskCount[1]}
+      const temp: ObjectProps = {};
+      const robotId = receivedData.TASKPROGRESS[0];
+      if (robotId) {
+        temp[`${robotId}`] = {
+          ...prevRobotStatus[robotId],
+          TASKPROGRESS: receivedData.TASKPROGRESS[1],
+        };
       }
-      return { ...prevRobotStatus, ...temp};
-    })
-  }, [receivedData.PerfirmableTaskCount])
+      return { ...prevRobotStatus, ...temp };
+    });
+  }, [receivedData.TASKPROGRESS]);
 
   useEffect(() => {
     setRobotStatus((prevRobotStatus) => {
-      const temp:ObjectProps = {};
-      if(receivedData.TaskProgress[0]) {
-        temp[`${receivedData.TaskProgress[0]}`] = {TaskProgress: receivedData.TaskProgress[1]}
+      const temp: ObjectProps = {};
+      const robotId = receivedData.ROBOTTASKSTATUS[0];
+      if (robotId) {
+        temp[`${robotId}`] = {
+          ...prevRobotStatus[robotId],
+          ROBOTTASKSTATUS: receivedData.ROBOTTASKSTATUS[1],
+        };
       }
-      return { ...prevRobotStatus, ...temp};
-    })
-  }, [receivedData.TaskProgress])
 
-  // @TODO 나머지 value들도 ...
+      return { ...prevRobotStatus, ...temp };
+    });
+  }, [receivedData.ROBOTTASKSTATUS]);
 
-  console.log('robotStatus', robotStatus)
+  useEffect(() => {
+    setRobotStatus((prevRobotStatus) => {
+      const temp: ObjectProps = {};
+      const robotId = receivedData.BATTERYREMAIN[0];
+      if (robotId) {
+        temp[`${robotId}`] = {
+          ...prevRobotStatus[robotId],
+          BATTERYREMAIN: receivedData.BATTERYREMAIN[1],
+        };
+      }
+
+      return { ...prevRobotStatus, ...temp };
+    });
+  }, [receivedData.BATTERYREMAIN]);
+
+  useEffect(() => {
+    setRobotStatus((prevRobotStatus) => {
+      const temp: ObjectProps = {};
+      const robotId = receivedData.BATTERYSTATUS[0];
+      if (robotId) {
+        temp[`${robotId}`] = {
+          ...prevRobotStatus[robotId],
+          BATTERYSTATUS: receivedData.BATTERYSTATUS[1],
+        };
+      }
+
+      return { ...prevRobotStatus, ...temp };
+    });
+  }, [receivedData.BATTERYSTATUS]);
+
+  useEffect(() => {
+    setRobotStatus((prevRobotStatus) => {
+      const temp: ObjectProps = {};
+      const robotId = receivedData.PERFIRMABLETASKCOUNT[0];
+      if (robotId) {
+        temp[`${robotId}`] = {
+          ...prevRobotStatus[robotId],
+          PERFIRMABLETASKCOUNT: receivedData.PERFIRMABLETASKCOUNT[1],
+        };
+      }
+      return { ...prevRobotStatus, ...temp };
+    });
+  }, [receivedData.PERFIRMABLETASKCOUNT]);
 
   return (
     <>
@@ -136,7 +205,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {receivedData.RemainingTaskCount}
+                  {receivedData.REMAININGTASKCOUNT}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -149,7 +218,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {receivedData.OngoingTaskCount}
+                  {receivedData.ONGOINGTASKCOUNT}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -162,7 +231,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {receivedData.CompletedTaskCount}
+                  {receivedData.COMPLETEDTASKCOUNT}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -177,7 +246,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {receivedData.NewTaskCount}
+                  {receivedData.NEWTASKCOUNT}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -190,7 +259,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {receivedData.CumulativeTaskSpeed}
+                  {receivedData.CUMULATIVETASKSPEED}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -203,7 +272,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {receivedData.AverageTaskSpeed}
+                  {receivedData.AVERAGETASKSPEED}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -218,57 +287,183 @@ export default function Potenit() {
             <div className="flex justify-around">
               <div className="w-full">
                 <div className="font-bold">AMR_Lift1</div>
-                <div>진행도 {robotStatus['AMR_LIFT1'] ? robotStatus['AMR_LIFT1'].TaskProgress : "-/-"}</div>
+                <div>
+                  진행도{" "}
+                  {robotStatus["AMR_LIFT1"].TASKPROGRESS
+                    ? robotStatus["AMR_LIFT1"].TASKPROGRESS +
+                      `(${eval(robotStatus["AMR_LIFT1"].TASKPROGRESS) * 100}%)`
+                    : "-/-"}
+                </div>
                 <div className="mt-3 font-bold">현재 진행중인 작업</div>
-                <div> status</div>
+                <div>
+                  {robotStatus["AMR_LIFT1"].ROBOTTASKSTATUS
+                    ? `${robotStatus["AMR_LIFT1"].ROBOTTASKSTATUS[1]} / ${robotStatus["AMR_LIFT1"].ROBOTTASKSTATUS[2]} / ${robotStatus["AMR_LIFT1"].ROBOTTASKSTATUS[3]}`
+                    : "-"}{" "}
+                </div>
                 <div className="mt-4">배터리 상황</div>
-                <ChartComponent data={chartData} />
+                <ChartComponent
+                  data={[
+                    {
+                      name: "사용됨",
+                      value:
+                        100 - (robotStatus["AMR_LIFT1"].BATTERYREMAIN || 0),
+                    },
+                    {
+                      name: "충전됨",
+                      value: robotStatus["AMR_LIFT1"].BATTERYREMAIN
+                        ? Number(robotStatus["AMR_LIFT1"].BATTERYREMAIN)
+                        : 0,
+                    },
+                  ]}
+                />
                 <div className="mt-4 font-bold">
                   배터리 잔량에 따른 수행 가능 작업 수
                 </div>
-                <div>{robotStatus['AMR_LIFT1'].PerfirmableTaskCount ? robotStatus['AMR_LIFT1'].PerfirmableTaskCount : 0}건</div>
+                <div>
+                  {robotStatus["AMR_LIFT1"].PERFIRMABLETASKCOUNT
+                    ? robotStatus["AMR_LIFT1"].PERFIRMABLETASKCOUNT
+                    : 0}
+                  건
+                </div>
               </div>
               <div className="w-full">
                 <div className="font-bold">AMR_Lift2</div>
-                <div>진행도</div>
+                <div>
+                  진행도{" "}
+                  {robotStatus["AMR_LIFT2"].TASKPROGRESS
+                    ? robotStatus["AMR_LIFT2"].TASKPROGRESS +
+                      `(${eval(robotStatus["AMR_LIFT2"].TASKPROGRESS) * 100}%)`
+                    : "-/-"}
+                </div>
                 <div className="mt-3 font-bold">현재 진행중인 작업</div>
-                <div>taskName status</div>
+                <div>
+                  {robotStatus["AMR_LIFT2"].ROBOTTASKSTATUS
+                    ? `${robotStatus["AMR_LIFT2"].ROBOTTASKSTATUS[1]} / ${robotStatus["AMR_LIFT2"].ROBOTTASKSTATUS[2]} / ${robotStatus["AMR_LIFT2"].ROBOTTASKSTATUS[3]}`
+                    : "-"}{" "}
+                </div>
                 <div className="mt-4">배터리 상황</div>
-                <ChartComponent data={chartData} />
+                <ChartComponent
+                  data={[
+                    {
+                      name: "사용됨",
+                      value:
+                        100 - (robotStatus["AMR_LIFT2"].BATTERYREMAIN || 0),
+                    },
+                    {
+                      name: "충전됨",
+                      value: robotStatus["AMR_LIFT2"].BATTERYREMAIN
+                        ? Number(robotStatus["AMR_LIFT2"].BATTERYREMAIN)
+                        : 0,
+                    },
+                  ]}
+                />
                 <div className="mt-4 font-bold">
                   배터리 잔량에 따른 수행 가능 작업 수
                 </div>
-                <div>10건</div>
+                <div>
+                  {robotStatus["AMR_LIFT2"].PERFIRMABLETASKCOUNT
+                    ? robotStatus["AMR_LIFT2"].PERFIRMABLETASKCOUNT
+                    : 0}
+                  건
+                </div>
               </div>
               <div className="w-full">
                 <div className="font-bold">AMR_Lift3</div>
-                <div>진행도</div>
+                <div>
+                  진행도{" "}
+                  {robotStatus["AMR_LIFT3"].TASKPROGRESS
+                    ? robotStatus["AMR_LIFT3"].TASKPROGRESS +
+                      `(${eval(robotStatus["AMR_LIFT3"].TASKPROGRESS) * 100}%)`
+                    : "-/-"}
+                </div>
                 <div className="mt-3 font-bold">현재 진행중인 작업</div>
-                <div>taskName status</div>
+                <div>
+                  {robotStatus["AMR_LIFT3"].ROBOTTASKSTATUS
+                    ? `${robotStatus["AMR_LIFT3"].ROBOTTASKSTATUS[1]} / ${robotStatus["AMR_LIFT3"].ROBOTTASKSTATUS[2]} / ${robotStatus["AMR_LIFT3"].ROBOTTASKSTATUS[3]}`
+                    : "-"}{" "}
+                </div>
                 <div className="mt-4">배터리 상황</div>
-                <ChartComponent data={chartData} />
+                <ChartComponent
+                  data={[
+                    {
+                      name: "사용됨",
+                      value:
+                        100 - (robotStatus["AMR_LIFT3"].BATTERYREMAIN || 0),
+                    },
+                    {
+                      name: "충전됨",
+                      value: robotStatus["AMR_LIFT3"].BATTERYREMAIN
+                        ? Number(robotStatus["AMR_LIFT3"].BATTERYREMAIN)
+                        : 0,
+                    },
+                  ]}
+                />
                 <div className="mt-4 font-bold">
                   배터리 잔량에 따른 수행 가능 작업 수
                 </div>
-                <div>10건</div>
+                <div>
+                  {robotStatus["AMR_LIFT3"].PERFIRMABLETASKCOUNT
+                    ? robotStatus["AMR_LIFT3"].PERFIRMABLETASKCOUNT
+                    : 0}
+                  건
+                </div>
               </div>
               <div className="w-full">
                 <div className="font-bold">AMR_Lift4</div>
-                <div>진행도</div>
+                <div>
+                  진행도{" "}
+                  {robotStatus["AMR_LIFT4"].TASKPROGRESS
+                    ? robotStatus["AMR_LIFT4"].TASKPROGRESS +
+                      `(${eval(robotStatus["AMR_LIFT4"].TASKPROGRESS) * 100}%)`
+                    : "-/-"}
+                </div>
                 <div className="mt-3 font-bold">현재 진행중인 작업</div>
-                <div>taskName status</div>
+                <div>
+                  {robotStatus["AMR_LIFT4"].ROBOTTASKSTATUS
+                    ? `${robotStatus["AMR_LIFT4"].ROBOTTASKSTATUS[1]} / ${robotStatus["AMR_LIFT4"].ROBOTTASKSTATUS[2]} / ${robotStatus["AMR_LIFT4"].ROBOTTASKSTATUS[3]}`
+                    : "-"}{" "}
+                </div>
                 <div className="mt-4">배터리 상황</div>
-                <ChartComponent data={chartData} />
+                <ChartComponent
+                  data={[
+                    {
+                      name: "사용됨",
+                      value:
+                        100 - (robotStatus["AMR_LIFT4"].BATTERYREMAIN || 0),
+                    },
+                    {
+                      name: "충전됨",
+                      value: robotStatus["AMR_LIFT4"].BATTERYREMAIN
+                        ? Number(robotStatus["AMR_LIFT4"].BATTERYREMAIN)
+                        : 0,
+                    },
+                  ]}
+                />
                 <div className="mt-4 font-bold">
                   배터리 잔량에 따른 수행 가능 작업 수
                 </div>
-                <div>10건</div>
+                <div>
+                  {robotStatus["AMR_LIFT4"].PERFIRMABLETASKCOUNT
+                    ? robotStatus["AMR_LIFT4"].PERFIRMABLETASKCOUNT
+                    : 0}
+                  건
+                </div>
               </div>
               <div className="w-full">
                 <div className="font-bold">PALLETIZER1</div>
-                <div>진행도</div>
+                <div>
+                  진행도{" "}
+                  {robotStatus["PALLETIZER1"].TASKPROGRESS
+                    ? robotStatus["PALLETIZER1"].TASKPROGRESS +
+                      `(${eval(robotStatus["PALLETIZER1"].TASKPROGRESS) * 100}%)`
+                    : "-/-"}
+                </div>
                 <div className="mt-3 font-bold">현재 진행중인 작업</div>
-                <div>taskName status</div>
+                <div>
+                  {robotStatus["PALLETIZER1"].ROBOTTASKSTATUS
+                    ? `${robotStatus["PALLETIZER1"].ROBOTTASKSTATUS[1]} / ${robotStatus["PALLETIZER1"].ROBOTTASKSTATUS[2]} / ${robotStatus["PALLETIZER1"].ROBOTTASKSTATUS[3]}`
+                    : "-"}{" "}
+                </div>
               </div>
             </div>
           </div>
