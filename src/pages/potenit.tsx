@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 interface RobotData {
-  REMAININGTASKCOUNT: number;
-  ONGOINGTASKCOUNT: number;
-  COMPLETEDTASKCOUNT: number;
-  NEWTASKCOUNT: number;
-  CUMULATIVETASKSPEED: number;
-  AVERAGETASKSPEED: number;
+  REMAININGTASKCOUNT: [robotType: "real" | "simulation", count: number];
+  ONGOINGTASKCOUNT: [robotType: "real" | "simulation", count: number];
+  COMPLETEDTASKCOUNT: [robotType: "real" | "simulation", count: number];
+  NEWTASKCOUNT: [robotType: "real" | "simulation", count: number];
+  CUMULATIVETASKSPEED: [robotType: "real" | "simulation", count: number];
+  AVERAGETASKSPEED: [robotType: "real" | "simulation", count: number];
   TASKPROGRESS: [robotId: string, progress: string];
   ROBOTTASKSTATUS: [
     robotId: string,
@@ -53,6 +53,7 @@ function getKeyValueObject(str: string) {
     let output: { [key: string]: (string | number)[] | number } = {
       [key.toUpperCase()]: parsedValues,
     };
+
     return output;
   } else {
     console.log("No valid input found.");
@@ -65,20 +66,19 @@ export default function Potenit() {
   const dispatch = useAppDispatch();
 
   const [receivedData, setReceivedData] = useState<RobotData>({
-    // REMAININGTASKCOUNT: 0,
-    // ONGOINGTASKCOUNT: 0,
-    // COMPLETEDTASKCOUNT: 0,
-    // NEWTASKCOUNT: 0,
-    // CUMULATIVETASKSPEED: 0,
-    // AVERAGETASKSPEED: 0,
-
+    REMAININGTASKCOUNT: ["real", 0],
+    ONGOINGTASKCOUNT: ["real", 0],
+    COMPLETEDTASKCOUNT: ["real", 0],
+    NEWTASKCOUNT: ["real", 0],
+    CUMULATIVETASKSPEED: ["real", 0],
+    AVERAGETASKSPEED: ["real", 0],
     TASKPROGRESS: ["", ""],
     ROBOTTASKSTATUS: ["", "", "", "progress"],
     BATTERYREMAIN: ["", 0],
     BATTERYSTATUS: ["", "Using"],
     PERFIRMABLETASKCOUNT: ["", 0],
     ROBOTAT: ["", 0, 0],
-    ...JSON.parse(selector.potenitInfo),
+    
   });
 
   const [robotStatus, setRobotStatus] = useState<RobotStatusData>({
@@ -90,10 +90,30 @@ export default function Potenit() {
     ...JSON.parse(selector.potenitChart),
   });
 
+  const [realInfo, setRealInfo] = useState<RobotStatusData>({
+    REMAININGTASKCOUNT: ["real", 0],
+    ONGOINGTASKCOUNT: ["real", 0],
+    COMPLETEDTASKCOUNT: ["real", 0],
+    NEWTASKCOUNT: ["real", 0],
+    CUMULATIVETASKSPEED: ["real", 0],
+    AVERAGETASKSPEED: ["real", 0],
+  })
+
+  const [simulationInfo, setSimulationInfo] = useState<RobotStatusData>({
+    REMAININGTASKCOUNT: ["simulation", 0],
+    ONGOINGTASKCOUNT: ["simulation", 0],
+    COMPLETEDTASKCOUNT: ["simulation", 0],
+    NEWTASKCOUNT: ["simulation", 0],
+    CUMULATIVETASKSPEED: ["simulation", 0],
+    AVERAGETASKSPEED: ["simulation", 0],
+  })
+
   useEffect(() => {
     console.log(JSON.parse(selector.potenitChart));
-    setReceivedData({ ...receivedData, ...JSON.parse(selector.potenitInfo) });
+    setReceivedData({ ...receivedData });
     setRobotStatus({ ...robotStatus, ...JSON.parse(selector.potenitChart) });
+    setRealInfo({...JSON.parse(selector.real)})
+    setSimulationInfo({...JSON.parse(selector.real)});
   }, []);
 
   useEffect(() => {
@@ -103,20 +123,132 @@ export default function Potenit() {
     });
 
     socket.on("getData", (data) => {
-      console.log(data, atob(data));
+      // console.log(data, atob(data));
       setReceivedData((prevReceivedData) => {
         const tempData = getKeyValueObject(atob(data));
-        dispatch(
-          setDataState({
-            ...selector,
-            potenitInfo: JSON.stringify({ ...prevReceivedData, ...tempData }),
-            potenitChart: JSON.stringify({...robotStatus})
-          })
-        );
         return { ...prevReceivedData, ...tempData };
       });
     });
   }, []);
+
+  useEffect(() => {
+    const isReal = receivedData.REMAININGTASKCOUNT[0] === "real"
+    if (isReal) {
+      dispatch(
+        setDataState({
+          ...selector,
+          real: JSON.stringify({ ...JSON.parse(selector.real), REMAININGTASKCOUNT: receivedData.REMAININGTASKCOUNT })
+        })
+      );
+    } else {
+      dispatch(
+        setDataState({
+          ...selector,
+          real: JSON.stringify({ ...JSON.parse(selector.simulation), REMAININGTASKCOUNT: receivedData.REMAININGTASKCOUNT })
+        })
+      );
+    }
+  }, [receivedData.REMAININGTASKCOUNT]);
+
+  useEffect(() => {
+    const isReal = receivedData.ONGOINGTASKCOUNT[0] === "real"
+    if (isReal) {
+      dispatch(
+        setDataState({
+          ...selector,
+          real: JSON.stringify({ ...JSON.parse(selector.real), ONGOINGTASKCOUNT: receivedData.ONGOINGTASKCOUNT })
+        })
+      );
+    } else {
+      dispatch(
+        setDataState({
+          ...selector,
+          real: JSON.stringify({ ...JSON.parse(selector.simulation), ONGOINGTASKCOUNT: receivedData.ONGOINGTASKCOUNT })
+        })
+      );
+    }
+  }, [receivedData.ONGOINGTASKCOUNT]);
+
+  useEffect(() => {
+
+    const isReal = receivedData.COMPLETEDTASKCOUNT[0] === "real"
+    if (isReal) {
+      dispatch(
+        setDataState({
+          ...selector,
+          real: JSON.stringify({ ...JSON.parse(selector.real), COMPLETEDTASKCOUNT: receivedData.COMPLETEDTASKCOUNT })
+        })
+      );
+    } else {
+      dispatch(
+        setDataState({
+          ...selector,
+          real: JSON.stringify({ ...JSON.parse(selector.simulation), COMPLETEDTASKCOUNT: receivedData.COMPLETEDTASKCOUNT })
+        })
+      );
+    }
+  
+  }, [receivedData.COMPLETEDTASKCOUNT]);
+
+  useEffect(() => {
+
+    const isReal = receivedData.NEWTASKCOUNT[0] === "real"
+    if (isReal) {
+      dispatch(
+        setDataState({
+          ...selector,
+          real: JSON.stringify({ ...JSON.parse(selector.real), NEWTASKCOUNT: receivedData.NEWTASKCOUNT })
+        })
+      );
+    } else {
+      dispatch(
+        setDataState({
+          ...selector,
+          real: JSON.stringify({ ...JSON.parse(selector.simulation), NEWTASKCOUNT: receivedData.NEWTASKCOUNT })
+        })
+      );
+    }
+  }, [receivedData.NEWTASKCOUNT]);
+
+  useEffect(() => {
+
+    const isReal = receivedData.CUMULATIVETASKSPEED[0] === "real"
+    if (isReal) {
+      dispatch(
+        setDataState({
+          ...selector,
+          real: JSON.stringify({ ...JSON.parse(selector.real), CUMULATIVETASKSPEED: receivedData.CUMULATIVETASKSPEED })
+        })
+      );
+    } else {
+      dispatch(
+        setDataState({
+          ...selector,
+          real: JSON.stringify({ ...JSON.parse(selector.simulation), CUMULATIVETASKSPEED: receivedData.CUMULATIVETASKSPEED })
+        })
+      );
+    }
+  }, [receivedData.CUMULATIVETASKSPEED]);
+
+  useEffect(() => {
+
+    const isReal = receivedData.AVERAGETASKSPEED[0] === "real"
+    if (isReal) {
+      dispatch(
+        setDataState({
+          ...selector,
+          real: JSON.stringify({ ...JSON.parse(selector.real), AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED })
+        })
+      );
+    } else {
+      dispatch(
+        setDataState({
+          ...selector,
+          real: JSON.stringify({ ...JSON.parse(selector.simulation), AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED })
+        })
+      );
+    }
+  }, [receivedData.AVERAGETASKSPEED]);
 
   useEffect(() => {
     setRobotStatus((prevRobotStatus) => {
@@ -197,6 +329,9 @@ export default function Potenit() {
         <div className="w-full">
           <div className="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3 mb-3">
             <p className="font-bold text-lg">포테닛 물류센터 용 대시보드</p>
+            {JSON.stringify(realInfo)} <br/>
+            {JSON.stringify(simulationInfo)} <br/>
+            {selector.real}
           </div>
           <div className="flex justify-around">
             <div className="basis-1/3 mr-3 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-4 dark:bg-gray-800 dark:border-gray-700">
@@ -205,7 +340,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {receivedData.REMAININGTASKCOUNT}
+                  {realInfo.REMAININGTASKCOUNT[1]}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -218,7 +353,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {receivedData.ONGOINGTASKCOUNT}
+                  {realInfo.ONGOINGTASKCOUNT[1]}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -231,7 +366,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {receivedData.COMPLETEDTASKCOUNT}
+                  {realInfo.COMPLETEDTASKCOUNT[1]}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -246,7 +381,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {receivedData.NEWTASKCOUNT}
+                  {realInfo.NEWTASKCOUNT[1]}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -259,7 +394,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {receivedData.CUMULATIVETASKSPEED}
+                  {realInfo.CUMULATIVETASKSPEED[1]}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -272,10 +407,10 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {receivedData.AVERAGETASKSPEED}
+                  {realInfo.AVERAGETASKSPEED[1]}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
-                  건
+                  (속도)
                 </span>
               </div>
             </div>
@@ -316,7 +451,7 @@ export default function Potenit() {
                     },
                   ]}
                 />
-                <div className="mt-4 font-bold">
+                {/* <div className="mt-4 font-bold">
                   배터리 잔량에 따른 수행 가능 작업 수
                 </div>
                 <div>
@@ -324,7 +459,7 @@ export default function Potenit() {
                     ? robotStatus["AMR_LIFT1"].PERFIRMABLETASKCOUNT
                     : 0}
                   건
-                </div>
+                </div> */}
               </div>
               <div className="w-full">
                 <div className="font-bold">AMR_Lift2</div>
@@ -357,7 +492,7 @@ export default function Potenit() {
                     },
                   ]}
                 />
-                <div className="mt-4 font-bold">
+                {/* <div className="mt-4 font-bold">
                   배터리 잔량에 따른 수행 가능 작업 수
                 </div>
                 <div>
@@ -365,7 +500,7 @@ export default function Potenit() {
                     ? robotStatus["AMR_LIFT2"].PERFIRMABLETASKCOUNT
                     : 0}
                   건
-                </div>
+                </div> */}
               </div>
               <div className="w-full">
                 <div className="font-bold">AMR_Lift3</div>
@@ -398,7 +533,7 @@ export default function Potenit() {
                     },
                   ]}
                 />
-                <div className="mt-4 font-bold">
+                {/* <div className="mt-4 font-bold">
                   배터리 잔량에 따른 수행 가능 작업 수
                 </div>
                 <div>
@@ -406,7 +541,7 @@ export default function Potenit() {
                     ? robotStatus["AMR_LIFT3"].PERFIRMABLETASKCOUNT
                     : 0}
                   건
-                </div>
+                </div> */}
               </div>
               <div className="w-full">
                 <div className="font-bold">AMR_Lift4</div>
@@ -439,7 +574,7 @@ export default function Potenit() {
                     },
                   ]}
                 />
-                <div className="mt-4 font-bold">
+                {/* <div className="mt-4 font-bold">
                   배터리 잔량에 따른 수행 가능 작업 수
                 </div>
                 <div>
@@ -447,7 +582,7 @@ export default function Potenit() {
                     ? robotStatus["AMR_LIFT4"].PERFIRMABLETASKCOUNT
                     : 0}
                   건
-                </div>
+                </div> */}
               </div>
               <div className="w-full">
                 <div className="font-bold">PALLETIZER1</div>
