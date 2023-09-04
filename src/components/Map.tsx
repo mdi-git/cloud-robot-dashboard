@@ -83,12 +83,46 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj }) => {
         stroke: "blue",
       });
 
+      const point1 = new Konva.Circle({
+        x: 650, y: 50, fill: 'blue', radius: 4
+      })
+      const point2 = new Konva.Circle({
+        x: 650, y: 160, fill: 'blue', radius: 4
+      })
+      const point3 = new Konva.Circle({
+        x: 650, y: 95, fill: 'blue', radius: 4
+      })
+      const point4 = new Konva.Circle({
+        x: 650, y: 115, fill: 'blue', radius: 4
+      })
+
+      const point1x = new Konva.Circle({
+        x: stage.width() - 385, y: 50, fill: 'blue', radius: 4
+      })
+      const point2x = new Konva.Circle({
+        x: stage.width() - 385, y: 160, fill: 'blue', radius: 4
+      })
+      const point3x = new Konva.Circle({
+        x: stage.width() - 385, y: 95, fill: 'blue', radius: 4
+      })
+      const point4x = new Konva.Circle({
+        x: stage.width() - 385, y: 115, fill: 'blue', radius: 4
+      })
+
       layer.add(xAxis1);
       layer.add(xAxis2);
       layer.add(xAxis3);
       layer.add(xAxis4);
       layer.add(yAxis1);
       layer.add(yAxis2);
+      layer.add(point1);
+      layer.add(point2);
+      layer.add(point3);
+      layer.add(point4);
+      layer.add(point1x);
+      layer.add(point2x);
+      layer.add(point3x);
+      layer.add(point4x);
       for (let i = 0; i < 8; i++) {
         layer.add(
           new Konva.Line({
@@ -96,6 +130,26 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj }) => {
             stroke: "blue",
           })
         );
+        layer.add(
+          new Konva.Circle({
+            x: 705 + 100 * i, y: 50, fill: 'blue', radius: 4
+          })
+        )
+        layer.add(
+          new Konva.Circle({
+            x: 705 + 100 * i, y: 160, fill: 'blue', radius: 4
+          })
+        )
+        layer.add(
+          new Konva.Circle({
+            x: 705 + 100 * i, y: 95, fill: 'blue', radius: 4
+          })
+        )
+        layer.add(
+          new Konva.Circle({
+            x: 705 + 100 * i, y: 115, fill: 'blue', radius: 4
+          })
+        )
       }
     }
 
@@ -108,29 +162,55 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj }) => {
       });
 
       const xAxis2 = new Konva.Line({
-        points: [650, 410, stage.width() - 385, 410],
+        points: [650, 415, stage.width() - 385, 415],
         stroke: "orange",
       });
 
       const xAxis3 = new Konva.Line({
-        points: [650, 430, stage.width() - 385, 430],
+        points: [650, 440, stage.width() - 385, 440],
         stroke: "orange",
       });
 
       const xAxis4 = new Konva.Line({
-        points: [650, 480, stage.width() - 385, 480],
+        points: [650, 485, stage.width() - 385, 485],
         stroke: "red",
       });
 
       const yAxis1 = new Konva.Line({
-        points: [650, 365, 650, 480],
+        points: [650, 365, 650, 485],
         stroke: "blue",
       });
 
       const yAxis2 = new Konva.Line({
-        points: [stage.width() - 385, 365, stage.width() - 385, 480],
+        points: [stage.width() - 385, 365, stage.width() - 385, 485],
         stroke: "blue",
       });
+
+      const point1 = new Konva.Circle({
+        x: 650, y: 365, fill: 'blue', radius: 4
+      })
+      const point2 = new Konva.Circle({
+        x: 650, y: 415, fill: 'blue', radius: 4
+      })
+      const point3 = new Konva.Circle({
+        x: 650, y: 440, fill: 'blue', radius: 4
+      })
+      const point4 = new Konva.Circle({
+        x: 650, y: 485, fill: 'blue', radius: 4
+      })
+
+      const point1x = new Konva.Circle({
+        x: stage.width() - 385, y: 365, fill: 'blue', radius: 4
+      })
+      const point2x = new Konva.Circle({
+        x: stage.width() - 385, y: 415, fill: 'blue', radius: 4
+      })
+      const point3x = new Konva.Circle({
+        x: stage.width() - 385, y: 440, fill: 'blue', radius: 4
+      })
+      const point4x = new Konva.Circle({
+        x: stage.width() - 385, y: 485, fill: 'blue', radius: 4
+      })
 
       layer.add(xAxis1);
       layer.add(xAxis2);
@@ -138,13 +218,41 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj }) => {
       layer.add(xAxis4);
       layer.add(yAxis1);
       layer.add(yAxis2);
+      layer.add(point1);
+      layer.add(point2);
+      layer.add(point3);
+      layer.add(point4);
+      layer.add(point1x);
+      layer.add(point2x);
+      layer.add(point3x);
+      layer.add(point4x);
       for (let i = 0; i < 8; i++) {
         layer.add(
           new Konva.Line({
-            points: [700 + 100 * i, 365, 700 + 100 * i, 480],
+            points: [700 + 100 * i, 365, 700 + 100 * i, 485],
             stroke: "blue",
           })
         );
+        layer.add(
+          new Konva.Circle({
+            x: 700 + 100 * i, y: 365, fill: 'blue', radius: 4
+          })
+        )
+        layer.add(
+          new Konva.Circle({
+            x: 700 + 100 * i, y: 415, fill: 'blue', radius: 4
+          })
+        )
+        layer.add(
+          new Konva.Circle({
+            x: 700 + 100 * i, y: 440, fill: 'blue', radius: 4
+          })
+        )
+        layer.add(
+          new Konva.Circle({
+            x: 700 + 100 * i, y: 485, fill: 'blue', radius: 4
+          })
+        )
       }
     }
 
@@ -172,10 +280,28 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj }) => {
         stroke: "blue",
       });
 
+      const point1 = new Konva.Circle({
+        x: 650, y: 680, fill: 'blue', radius: 4
+      })
+      const point2 = new Konva.Circle({
+        x: stage.width() - 385, y: 680, fill: 'blue', radius: 4
+      })
+      const point3 = new Konva.Circle({
+        x: 650, y: 720, fill: 'blue', radius: 4
+      })
+      const point4 = new Konva.Circle({
+        x: stage.width() - 385, y: 720, fill: 'blue', radius: 4
+      })
+
+
       layer.add(xAxis1);
       layer.add(xAxis2);
       layer.add(yAxis1);
       layer.add(yAxis2);
+      layer.add(point1);
+      layer.add(point2);
+      layer.add(point3);
+      layer.add(point4);
       for (let i = 0; i < 8; i++) {
         layer.add(
           new Konva.Line({
@@ -183,6 +309,16 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj }) => {
             stroke: "blue",
           })
         );
+        layer.add(
+          new Konva.Circle({
+            x: 700 + 100 * i, y: 680, fill: 'blue', radius: 4
+          })
+        )
+        layer.add(
+          new Konva.Circle({
+            x: 700 + 100 * i, y: 720, fill: 'blue', radius: 4
+          })
+        )
       }
     }
 
