@@ -28,19 +28,6 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj }) => {
     y: 1000 - (obj["147"][1] / maxCoordinate) * 3800 - 170,
   });
 
-  // useEffect(() => {
-
-  //   const timer = setInterval(() => {
-  //     setNewDotPosition1((prev) => {
-  //       return {x: prev.x++, y: prev.y++}
-  //     })
-  //   }, 1000)
-
-  //   return () => {
-  //     clearInterval(timer)
-  //   }
-  // }, [])
-
   useEffect(() => {
     const stage = new Konva.Stage({
       container: "coordinate-plane-container",
@@ -379,49 +366,6 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj }) => {
       layer.add(yAxis1);
       layer.add(yAxis2);
     }
-    // // Draw y-axis
-    // const yAxis = new Konva.Line({
-    //   points: [30, 0, stage.height() - 800, stage.height() - 13],
-    //   stroke: "black",
-    // });
-
-    // for(let i = 0; i <= 6; i += 1) {
-    //   const label = new Konva.Label({
-    //     x: 5,
-    //     y: (i * 2) + (i * 132),
-    //     draggable: true,
-    //   });
-
-    //   label.add(
-    //     new Konva.Text({
-    //       text: (12-(i*2)).toString(),
-    //       fontSize: 15,
-    //       lineHeight: 1.2,
-    //       fill: "black",
-    //     })
-    //   );
-    //   layer.add(label);
-    // }
-
-    // for(let i = 0; i <= 10; i += 1) {
-    //   const label = new Konva.Label({
-    //     x: 30+  (i * 170),
-    //     y: 817,
-    //     draggable: true,
-    //   });
-
-    //   label.add(
-    //     new Konva.Text({
-    //       text: ((i*5)).toString(),
-    //       fontSize: 15,
-    //       lineHeight: 1.2,
-    //       fill: "black",
-    //     })
-    //   );
-    //   layer.add(label);
-    // }
-    // Add x-axis and y-axis to the layer
-    // layer.add(yAxis);
 
     // Draw points and edges
     data.forEach((point) => {
@@ -486,41 +430,10 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj }) => {
       });
     });
 
-    // Draw grid lines along the x-axis
-    // for (let i = 1; i <= maxCoordinate; i+=5.3) {
-    //   const scaledX = (i / maxCoordinate) * 2260; // Adjust the scaling factor as needed
-
-    //   const verticalLine = new Konva.Line({
-    //     points: [scaledX, 10, scaledX, stage.height()],
-    //     stroke: "lightgray",
-    //     dash: [10, 10], // Dashed pattern for grid lines
-    //   });
-
-    //   layer.add(verticalLine);
-    // }
-
-    // // Draw grid lines along the y-axis
-    // for (let i = -1.7; i <= maxCoordinate; i+=4.3) {
-    //   const scaledY = (i / maxCoordinate) * 2200; // Adjust the scaling factor as needed
-
-    //   const horizontalLine = new Konva.Line({
-    //     points: [
-    //       50,
-    //       stage.height() - scaledY - 70,
-    //       stage.width() - 150,
-    //       stage.height() - scaledY - 70,
-    //     ],
-    //     stroke: "lightgray",
-    //     dash: [10, 10], // Dashed pattern for grid lines
-    //   });
-
-    //   layer.add(horizontalLine);
-    // }
-
     const newDot = new Konva.Circle({
       x: newDotPosition1.x,
       y: newDotPosition1.y,
-      radius: dotRadius,
+      radius: dotRadius+ 5,
       fill: "green", // Choose a color for the new dot
       draggable: true,
       onDragEnd: (event: { target: any }) => {

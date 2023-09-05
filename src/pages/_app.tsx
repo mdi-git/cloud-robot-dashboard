@@ -29,6 +29,12 @@ interface RobotData {
   BATTERYSTATUS: [robotId: string, BATTERYSTATUS: "Using" | "Charging"];
   PERFIRMABLETASKCOUNT: [robotId: string, count: number];
   ROBOTAT: [robotId: string, x: number, y: number];
+  ROBOTPOSITION: [
+    robotId: string,
+    taskId: string,
+    taskName: string,
+    status: "start" | "progress" | "pause" | "complete"
+  ];
 }
 
 interface RobotStatusData {
@@ -84,6 +90,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     BATTERYSTATUS: ["", "Using"],
     PERFIRMABLETASKCOUNT: ["", 0],
     ROBOTAT: ["", 0, 0],
+    ROBOTPOSITION: ["", "", "", "pause"]
     
   });
 
@@ -334,6 +341,26 @@ const App = ({ Component, pageProps }: AppProps) => {
       return { ...prevRobotStatus, ...temp };
     });
   }, [receivedData.PERFIRMABLETASKCOUNT]);
+
+  useEffect(() => {
+    setRobotStatus((prevRobotStatus) => {
+      const temp: ObjectProps = {};
+      const robotId = receivedData.ROBOTPOSITION[0];
+      if (robotId) {
+        temp[`${robotId}`] = {
+          ...prevRobotStatus[robotId],
+          ROBOTPOSITION: receivedData.ROBOTPOSITION[1],
+        };
+      }
+      dispatch(
+        setDataState({
+          ...selector,
+          potenitChart: JSON.stringify({...JSON.parse(selector.potenitChart), ...temp})
+        })
+      )
+      return { ...prevRobotStatus, ...temp };
+    });
+  }, [receivedData.ROBOTPOSITION]);
 
   useEffect(() => {
     setRobotStatus((prevRobotStatus) => {
