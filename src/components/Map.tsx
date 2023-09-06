@@ -1,7 +1,10 @@
-// components/CoordinatePlane.tsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Konva from "konva";
-import { Stage, Layer } from "react-konva";
+import { Stage, Layer, Circle, Line } from "react-konva";
+
+const MAX_COORDINATE = 70;
+const DOT_RADIUS = 8;
+
 
 interface Point {
   name: number;
@@ -16,29 +19,32 @@ interface ObjectProps {
 interface CoordinatePlaneProps {
   data: Point[];
   obj: ObjectProps;
+  robot1: string; // robot1의 위치 Node 번호 (key)
 }
 
-const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj }) => {
-  const maxCoordinate = 70; // Maximum x and y coordinate values
-  const dotRadius = 8;
-  console.log(obj["147"]);
-
-  const [newDotPosition1, setNewDotPosition1] = useState({
-    x: (obj["147"][0] / maxCoordinate) * 2450,
-    y: 1000 - (obj["147"][1] / maxCoordinate) * 3800 - 170,
+const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1 }) => {
+  const [dotPos1, setDotPos1] = useState({
+    x: (obj[robot1][0] / MAX_COORDINATE) * 2450,
+    y: 1000 - (obj[robot1][1] / MAX_COORDINATE) * 3800 - 170,
   });
 
   useEffect(() => {
-    const stage = new Konva.Stage({
+    setDotPos1({ x: (obj[robot1][0] / MAX_COORDINATE) * 2450,
+    y: 1000 - (obj[robot1][1] / MAX_COORDINATE) * 3800 - 170,})
+  }, [robot1])
+  const layerRef = useRef<Konva.Layer | null>(null);
+
+  useEffect(() => {
+    if(layerRef.current) {
+      const stage = new Konva.Stage({
       container: "coordinate-plane-container",
       width: window.innerWidth - 30,
       height: 1000,
     });
+    const layer = layerRef.current
 
-    const layer = new Konva.Layer();
-
-    // 우측 1번째
-    {
+     // 우측 1번째
+     {
       const xAxis1 = new Konva.Line({
         // x1, y1, x2, y2, x3, y3
         points: [650, 50, stage.width() - 385, 50],
@@ -373,15 +379,15 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj }) => {
 
       // Scale the coordinates to fit within the screen
       // const scaledX = (x / maxCoordinate) * stage.width();
-      const scaledX = (x / maxCoordinate) * 2450;
+      const scaledX = (x / MAX_COORDINATE) * 2450;
       // const scaledY = (y / maxCoordinate) * stage.height();
-      const scaledY = (y / maxCoordinate) * 3800 + 170;
+      const scaledY = (y / MAX_COORDINATE) * 3800 + 170;
 
       // Draw a circle for the point
       const circle = new Konva.Circle({
         x: scaledX,
         y: stage.height() - scaledY,
-        radius: dotRadius,
+        radius: DOT_RADIUS,
         fill: point.name === 500 || point.name === 501 ? "purple" : (point.name >= 1 && point.name <= 58 ? "orange" : "greenyellow")
       });
 
@@ -410,9 +416,9 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj }) => {
         if (edgeEnd) {
           const [edgeX, edgeY] = edgeEnd.pos;
           // const scaledEdgeX = (edgeX / maxCoordinate) * stage.width();
-          const scaledEdgeX = (edgeX / maxCoordinate) * 2450;
+          const scaledEdgeX = (edgeX / MAX_COORDINATE) * 2450;
           // const scaledEdgeY = (edgeY / maxCoordinate) * stage.height();
-          const scaledEdgeY = (edgeY / maxCoordinate) * 3800 + 170;
+          const scaledEdgeY = (edgeY / MAX_COORDINATE) * 3800 + 170;
 
           const line = new Konva.Line({
             points: [
@@ -430,31 +436,57 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj }) => {
       });
     });
 
-    const newDot = new Konva.Circle({
-      x: newDotPosition1.x,
-      y: newDotPosition1.y,
-      radius: dotRadius+ 5,
-      fill: "green", // Choose a color for the new dot
-      draggable: true,
-      onDragEnd: (event: { target: any }) => {
-        const dot = event.target;
-        const dotX = dot.x();
-        const dotY = dot.y();
-        setNewDotPosition1({ x: dotX, y: dotY });
-      },
-    });
 
-    layer.add(newDot);
-    // Add the layer to the stage
     stage.add(layer);
-  }, [data, newDotPosition1]);
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   let animationFrameId: number;
+
+  //   const animate = () => {
+  //     setNewDotPosition((prevPosition) => ({
+  //       x: prevPosition.x + 10,
+  //       y: prevPosition.y + 1,
+  //     }));
+
+  //     animationFrameId = requestAnimationFrame(animate);
+  //   };
+
+  //   animationFrameId = requestAnimationFrame(animate);
+
+  //   return () => cancelAnimationFrame(animationFrameId);
+  // }, []);
 
   return (
-    <div id="coordinate-plane-container">
-      <Stage height={400} width={500}>
-        <Layer></Layer>
-      </Stage>
-    </div>
+    <>
+      <button
+        onClick={() =>
+          setDotPos1({
+            x: dotPos1.x + 10,
+            y: dotPos1.y + 1,
+          })
+        }
+      >
+        test
+      </button>
+      <div id="coordinate-plane-container">
+        <Stage width={window.innerWidth - 30} height={1000}>
+          <Layer ref={layerRef}>
+            <Circle
+              x={dotPos1.x}
+              y={dotPos1.y}
+              radius={30}
+              fill="yellow"
+              // onTransform={(event) => {
+              //   const { x, y } = event.target.attrs;
+              //   setNewDotPosition({x, y})
+              // }}
+            />
+          </Layer>
+        </Stage>
+      </div>
+    </>
   );
 };
 
