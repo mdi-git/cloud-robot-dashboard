@@ -84,8 +84,15 @@ const Real: React.FC = () => {
     BATTERYSTATUS: ["", "Using"],
     PERFIRMABLETASKCOUNT: ["", 0],
     ROBOTAT: ["AMR_LIFT1", "", ""],
-    ROBOTPOSITION: ["AMR_LIFT1", 0, 0]
-    
+    ROBOTPOSITION: [
+      "AMR_LIFT1",
+      robotSelector.AMR_LIFT1.ROBOTPOSITION[0] === ""
+        ? 0
+        : robotSelector.AMR_LIFT1.ROBOTPOSITION[0],
+      robotSelector.AMR_LIFT1.ROBOTPOSITION[1] === ""
+        ? 0
+        : robotSelector.AMR_LIFT1.ROBOTPOSITION[1],
+    ],
   });
 
   const [robotStatus, setRobotStatus] = useState<RobotStatusData>({
@@ -348,6 +355,9 @@ const Real: React.FC = () => {
           ROBOTPOSITION: [receivedData.ROBOTPOSITION[1], receivedData.ROBOTPOSITION[2]],
         };
         if(robotId === "AMR_LIFT1") setRobotPos([receivedData.ROBOTPOSITION[1], receivedData.ROBOTPOSITION[2]].map(Number))
+        if(robotId === "AMR_LIFT2") setRobotPos2([receivedData.ROBOTPOSITION[1], receivedData.ROBOTPOSITION[2]].map(Number))
+        if(robotId === "AMR_LIFT3") setRobotPos3([receivedData.ROBOTPOSITION[1], receivedData.ROBOTPOSITION[2]].map(Number))
+        if(robotId === "AMR_LIFT4") setRobotPos4([receivedData.ROBOTPOSITION[1], receivedData.ROBOTPOSITION[2]].map(Number))
       }
       dispatch(
         setRobotPosState({
@@ -361,38 +371,54 @@ const Real: React.FC = () => {
       })
   }, [receivedData.ROBOTPOSITION]);
 
-  useEffect(() => {
-    // setRobotStatus((prevRobotStatus) => {
+  // useEffect(() => {
+  //   // setRobotStatus((prevRobotStatus) => {
       
-    //   return { ...prevRobotStatus, ...temp };
-    // });
+  //   //   return { ...prevRobotStatus, ...temp };
+  //   // });
 
-    const temp: ObjectProps = {};
-      const robotId = receivedData.ROBOTAT[0];
-      if (robotId) {
-        temp[`${robotId}`] = {
-          ...robotSelector[`${robotId}`],
-          ROBOTAT: [receivedData.ROBOTAT[1], receivedData.ROBOTAT[2]],
-        };
-        if(robotId === "AMR_LIFT1") setRobot1(receivedData.ROBOTAT[1])
-      }
-      dispatch(
-        setRobotPosState({
-          ...robotSelector,
-          ...JSON.parse(JSON.stringify(temp))
-        })
-      )
-      console.log({
-        ...robotSelector,
-        ...JSON.parse(JSON.stringify(temp))
-      })
-  }, [receivedData.ROBOTAT]);
-  const [robot1, setRobot1] = useState<number|string>(robotSelector.AMR_LIFT1.ROBOTAT[0] === "" ? 4 : robotSelector.AMR_LIFT1.ROBOTAT[0]);
+  //   const temp: ObjectProps = {};
+  //     const robotId = receivedData.ROBOTAT[0];
+  //     if (robotId) {
+  //       temp[`${robotId}`] = {
+  //         ...robotSelector[`${robotId}`],
+  //         ROBOTAT: [receivedData.ROBOTAT[1], receivedData.ROBOTAT[2]],
+  //       };
+  //       if(robotId === "AMR_LIFT1") setRobot1(receivedData.ROBOTAT[1])
+  //     }
+  //     dispatch(
+  //       setRobotPosState({
+  //         ...robotSelector,
+  //         ...JSON.parse(JSON.stringify(temp))
+  //       })
+  //     )
+  //     console.log({
+  //       ...robotSelector,
+  //       ...JSON.parse(JSON.stringify(temp))
+  //     })
+  // }, [receivedData.ROBOTAT]);
+  // const [robot1, setRobot1] = useState<number|string>(robotSelector.AMR_LIFT1.ROBOTAT[0] === "" ? 4 : robotSelector.AMR_LIFT1.ROBOTAT[0]);
   const [robot1Pos, setRobotPos] = useState(robotSelector.AMR_LIFT1.ROBOTPOSITION.length !== 2 && robotSelector.AMR_LIFT1.ROBOTPOSITION[0] === "" ? [1, 1] : robotSelector.AMR_LIFT1.ROBOTPOSITION.map(el => Number(el)))
+
+  // const [robot2, setRobot2] = useState<number|string>(robotSelector.AMR_LIFT2.ROBOTAT[0] === "" ? 4 : robotSelector.AMR_LIFT2.ROBOTAT[0]);
+  const [robot2Pos, setRobotPos2] = useState(robotSelector.AMR_LIFT2.ROBOTPOSITION.length !== 2 && robotSelector.AMR_LIFT2.ROBOTPOSITION[0] === "" ? [1, 1] : robotSelector.AMR_LIFT2.ROBOTPOSITION.map(el => Number(el)))
+
+  // const [robo31, setRobot3] = useState<number|string>(robotSelector.AMR_LIFT3.ROBOTAT[0] === "" ? 4 : robotSelector.AMR_LIFT3.ROBOTAT[0]);
+  const [robot3Pos, setRobotPos3] = useState(robotSelector.AMR_LIFT3.ROBOTPOSITION.length !== 2 && robotSelector.AMR_LIFT3.ROBOTPOSITION[0] === "" ? [1, 1] : robotSelector.AMR_LIFT3.ROBOTPOSITION.map(el => Number(el)))
+
+  // const [robot4, setRobot4] = useState<number|string>(robotSelector.AMR_LIFT4.ROBOTAT[0] === "" ? 4 : robotSelector.AMR_LIFT4.ROBOTAT[0]);
+  const [robot4Pos, setRobotPos4] = useState(robotSelector.AMR_LIFT4.ROBOTPOSITION.length !== 2 && robotSelector.AMR_LIFT4.ROBOTPOSITION[0] === "" ? [1, 1] : robotSelector.AMR_LIFT4.ROBOTPOSITION.map(el => Number(el)))
   return (
-    <div style={{overflow: 'hidden', height: '875px'}}>
-      {JSON.stringify(robotSelector.AMR_LIFT1.ROBOTAT)}
-      <CoordinatePlane data={Coordinates} obj={ObjNamePos} robot1={robot1.toString() === "" ? "4" : robot1.toString()} robot1Pos={robot1Pos}/>
+    <div style={{ overflow: "hidden", height: "875px" }}>
+      {JSON.stringify(robotSelector.AMR_LIFT1.ROBOTPOSITION)} / {JSON.stringify(robotSelector.AMR_LIFT2.ROBOTPOSITION)} / {JSON.stringify(robotSelector.AMR_LIFT3.ROBOTPOSITION)} / {JSON.stringify(robotSelector.AMR_LIFT4.ROBOTPOSITION)}
+      <CoordinatePlane
+        data={Coordinates}
+        obj={ObjNamePos}
+        robot1Pos={robot1Pos}
+        robot2Pos={robot2Pos}
+        robot3Pos={robot3Pos}
+        robot4Pos={robot4Pos}
+      />
     </div>
   );
 }; 
