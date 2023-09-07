@@ -20,9 +20,10 @@ interface CoordinatePlaneProps {
   data: Point[];
   obj: ObjectProps;
   robot1: string; // robot1의 위치 Node 번호 (key)
+  robot1Pos: number[]
 }
 
-const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1 }) => {
+const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1, robot1Pos }) => {
   const [dotPos1, setDotPos1] = useState({
     x: (obj[robot1][0] / MAX_COORDINATE) * 2450,
     y: 1000 - (obj[robot1][1] / MAX_COORDINATE) * 3800 - 170,
@@ -32,6 +33,17 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1 }) 
     setDotPos1({ x: (obj[robot1][0] / MAX_COORDINATE) * 2450,
     y: 1000 - (obj[robot1][1] / MAX_COORDINATE) * 3800 - 170,})
   }, [robot1])
+
+
+  const [r1Pos, setR1Pos] = useState({
+    x: robot1Pos[0],
+    y: robot1Pos[1]
+  })
+
+  useEffect(() => {
+    setR1Pos({x: robot1Pos[0] / MAX_COORDINATE  * 2450, y: 1000 - (robot1Pos[1] / MAX_COORDINATE) * 3800 - 170})
+  }, [robot1Pos])
+
   const layerRef = useRef<Konva.Layer | null>(null);
 
   useEffect(() => {
@@ -474,8 +486,8 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1 }) 
         <Stage width={window.innerWidth - 30} height={1000}>
           <Layer ref={layerRef}>
             <Circle
-              x={dotPos1.x}
-              y={dotPos1.y}
+              x={r1Pos.x}
+              y={r1Pos.y}
               radius={30}
               fill="yellow"
               // onTransform={(event) => {

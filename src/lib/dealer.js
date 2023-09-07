@@ -26,9 +26,8 @@ function main() {
   receiver.on("message", function onMessage() {
     var args = Array.apply(null, arguments);
     var workload = args[1].toString("utf8");
-    console.log("dddddd", workload);
     workload = JSON.parse(workload)
-    console.log("=====", workload)
+    console.log("=====", atob(workload["Content"].toString('utf-8')))
     io.emit('getData', workload["Content"].toString('utf-8'));
   });
 

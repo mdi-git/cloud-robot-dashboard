@@ -4,26 +4,33 @@ import { persistReducer } from 'redux-persist'
 import storage from "redux-persist/lib/storage";
 
 import dataReducer from './features/dataSlice';
+import robotPosReducer from './features/robotPosSlice';
 
 const reducer = (state: any, action: PayloadAction<any>) => {
   return combineReducers({
     data: dataReducer,
+    robot: robotPosReducer
   })(state, action);
 };
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ['data']
+  whitelist: ['data', 'robot']
 }
 
 const persistedReducer = persistReducer(persistConfig, reducer)
 
 export function makeStore() {
-  return configureStore({
-    reducer: persistedReducer,
-    middleware: getDefaultMiddleware({serializableCheck: false})
-  })
+  try {
+    return configureStore({
+      reducer: persistedReducer,
+      middleware: getDefaultMiddleware({ serializableCheck: false }),
+    });
+  } catch (error) {
+    console.error('Error creating store:', error);
+    throw error;
+  }
 }
 
 const store = makeStore();
