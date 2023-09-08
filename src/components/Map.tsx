@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Konva from "konva";
 import { Stage, Layer, Circle, Line } from "react-konva";
+import { IFrame } from "konva/lib/types";
 
 const MAX_COORDINATE = 70;
 const DOT_RADIUS = 8;
@@ -27,6 +28,8 @@ interface CoordinatePlaneProps {
 }
 
 const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos, robot2Pos, robot3Pos, robot4Pos }) => {
+
+  
   // const [dotPos1, setDotPos1] = useState({
   //   x: (obj[robot1][0] / MAX_COORDINATE) * 2450,
   //   y: 1000 - (obj[robot1][1] / MAX_COORDINATE) * 3800 - 170,
@@ -44,7 +47,36 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos,
   })
 
   useEffect(() => {
-    setR1Pos({x: robot1Pos[0] / MAX_COORDINATE  * 2450, y: 1000 - (robot1Pos[1] / MAX_COORDINATE) * 3800 - 170})
+    const anim = new Konva.Animation((frame:IFrame | undefined) => {
+
+      const newX = Konva.Easings.EaseInOut(
+        frame!.time,
+        r1Pos.x,
+        (robot1Pos[0] / MAX_COORDINATE  * 2450) - r1Pos.x,
+        1000 // Animation duration in milliseconds (adjust as needed)
+      );
+
+      const newY = Konva.Easings.EaseInOut(
+        frame!.time,
+        r1Pos.y,
+        (1000 - (robot1Pos[1] / MAX_COORDINATE) * 3800 - 170) - r1Pos.y,
+        1000 // Animation duration in milliseconds (adjust as needed)
+      );
+
+      setR1Pos({ x: newX, y: newY });
+
+      if (frame!.time >= 1000) {
+        // Stop the animation when it's done
+        anim.stop();
+      }
+    }, layerRef.current);
+
+    anim.start();
+
+    // Clean up the animation when the component unmounts
+    return () => {
+      anim.stop();
+    };
   }, [robot1Pos])
 
   const [r2Pos, setR2Pos] = useState({
@@ -53,7 +85,36 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos,
   })
 
   useEffect(() => {
-    setR2Pos({x: robot2Pos[0] / MAX_COORDINATE  * 2450, y: 1000 - (robot2Pos[1] / MAX_COORDINATE) * 3800 - 170})
+    const anim = new Konva.Animation((frame:IFrame | undefined) => {
+
+      const newX = Konva.Easings.EaseInOut(
+        frame!.time,
+        r1Pos.x,
+        (robot2Pos[0] / MAX_COORDINATE  * 2450) - r1Pos.x,
+        1000 // Animation duration in milliseconds (adjust as needed)
+      );
+
+      const newY = Konva.Easings.EaseInOut(
+        frame!.time,
+        r1Pos.y,
+        (1000 - (robot2Pos[1] / MAX_COORDINATE) * 3800 - 170) - r1Pos.y,
+        1000 // Animation duration in milliseconds (adjust as needed)
+      );
+
+      setR2Pos({ x: newX, y: newY });
+
+      if (frame!.time >= 1000) {
+        // Stop the animation when it's done
+        anim.stop();
+      }
+    }, layerRef.current);
+
+    anim.start();
+
+    // Clean up the animation when the component unmounts
+    return () => {
+      anim.stop();
+    };
   }, [robot2Pos])
 
 
@@ -63,7 +124,36 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos,
   })
 
   useEffect(() => {
-    setR3Pos({x: robot3Pos[0] / MAX_COORDINATE  * 2450, y: 1000 - (robot3Pos[1] / MAX_COORDINATE) * 3800 - 170})
+    const anim = new Konva.Animation((frame:IFrame | undefined) => {
+
+      const newX = Konva.Easings.EaseInOut(
+        frame!.time,
+        r1Pos.x,
+        (robot3Pos[0] / MAX_COORDINATE  * 2450) - r1Pos.x,
+        1000 // Animation duration in milliseconds (adjust as needed)
+      );
+
+      const newY = Konva.Easings.EaseInOut(
+        frame!.time,
+        r1Pos.y,
+        (1000 - (robot3Pos[1] / MAX_COORDINATE) * 3800 - 170) - r1Pos.y,
+        1000 // Animation duration in milliseconds (adjust as needed)
+      );
+
+      setR3Pos({ x: newX, y: newY });
+
+      if (frame!.time >= 1000) {
+        // Stop the animation when it's done
+        anim.stop();
+      }
+    }, layerRef.current);
+
+    anim.start();
+
+    // Clean up the animation when the component unmounts
+    return () => {
+      anim.stop();
+    };
   }, [robot3Pos])
 
   const [r4Pos, setR4Pos] = useState({
@@ -72,17 +162,47 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos,
   })
 
   useEffect(() => {
-    setR4Pos({x: robot4Pos[0] / MAX_COORDINATE  * 2450, y: 1000 - (robot4Pos[1] / MAX_COORDINATE) * 3800 - 170})
+    const anim = new Konva.Animation((frame:IFrame | undefined) => {
+
+      const newX = Konva.Easings.EaseInOut(
+        frame!.time,
+        r1Pos.x,
+        (robot4Pos[0] / MAX_COORDINATE  * 2450) - r1Pos.x,
+        1000 // Animation duration in milliseconds (adjust as needed)
+      );
+
+      const newY = Konva.Easings.EaseInOut(
+        frame!.time,
+        r1Pos.y,
+        (1000 - (robot4Pos[1] / MAX_COORDINATE) * 3800 - 170) - r1Pos.y,
+        1000 // Animation duration in milliseconds (adjust as needed)
+      );
+
+      setR4Pos({ x: newX, y: newY });
+
+      if (frame!.time >= 1000) {
+        // Stop the animation when it's done
+        anim.stop();
+      }
+    }, layerRef.current);
+
+    anim.start();
+
+    // Clean up the animation when the component unmounts
+    return () => {
+      anim.stop();
+    };
   }, [robot4Pos])
 
 
   const layerRef = useRef<Konva.Layer | null>(null);
 
+
   useEffect(() => {
     if(layerRef.current) {
       const stage = new Konva.Stage({
       container: "coordinate-plane-container",
-      width: window.innerWidth - 30,
+      width: 1890,
       height: 1000,
     });
     const layer = layerRef.current
@@ -485,35 +605,8 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos,
     }
   }, []);
 
-  // useEffect(() => {
-  //   let animationFrameId: number;
-
-  //   const animate = () => {
-  //     setNewDotPosition((prevPosition) => ({
-  //       x: prevPosition.x + 10,
-  //       y: prevPosition.y + 1,
-  //     }));
-
-  //     animationFrameId = requestAnimationFrame(animate);
-  //   };
-
-  //   animationFrameId = requestAnimationFrame(animate);
-
-  //   return () => cancelAnimationFrame(animationFrameId);
-  // }, []);
-
   return (
     <>
-      {/* <button
-        onClick={() =>
-          setDotPos1({
-            x: dotPos1.x + 10,
-            y: dotPos1.y + 1,
-          })
-        }
-      >
-        test
-      </button> */}
       <div id="coordinate-plane-container">
         <Stage width={window.innerWidth - 30} height={1000}>
           <Layer ref={layerRef}>
