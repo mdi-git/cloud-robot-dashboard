@@ -27,7 +27,7 @@ function main() {
     var args = Array.apply(null, arguments);
     var workload = args[1].toString("utf8");
     workload = JSON.parse(workload)
-    console.log("=====", atob(workload["Content"].toString('utf-8')))
+    console.log(atob(workload["Content"].toString('utf-8')))
     io.emit('getData', workload["Content"].toString('utf-8'));
   });
 
