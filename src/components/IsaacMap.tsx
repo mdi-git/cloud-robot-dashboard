@@ -41,395 +41,447 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data }) => {
       });
       const layer = layerRef.current;
 
-      // // 우측 1번째
-      // {
-      //   const xAxis1 = new Konva.Line({
-      //     // x1, y1, x2, y2, x3, y3
-      //     points: [650, 50, stage.width() - 385, 50],
-      //     stroke: "red",
-      //   });
+      // TODO 네모 박스 추가하기... 
+      // 우측 1번째
+      {
+        const xAxis1 = new Konva.Line({
+          // x1, y1, x2, y2, x3, y3
+          points: [770, 50, stage.width() - 460, 50],
+          stroke: "red",
+        });
 
-      //   const xAxis2 = new Konva.Line({
-      //     points: [650, 160, stage.width() - 385, 160],
-      //     stroke: "orange",
-      //   });
+        const xAxis2 = new Konva.Line({
+          points: [770, 160, stage.width() - 460, 160],
+          stroke: "orange",
+        });
 
-      //   const xAxis3 = new Konva.Line({
-      //     points: [650, 95, stage.width() - 385, 95],
-      //     stroke: "red",
-      //   });
+        const xAxis3 = new Konva.Line({
+          points: [770, 95, stage.width() - 460, 95],
+          stroke: "red",
+        });
 
-      //   const xAxis4 = new Konva.Line({
-      //     points: [650, 115, stage.width() - 385, 115],
-      //     stroke: "red",
-      //   });
+        const xAxis4 = new Konva.Line({
+          points: [770, 115, stage.width() - 460, 115],
+          stroke: "red",
+        });
 
-      //   const yAxis1 = new Konva.Line({
-      //     points: [650, 50, 650, 160],
-      //     stroke: "blue",
-      //   });
+        const yAxis1 = new Konva.Line({
+          points: [770, 50, 770, 160],
+          stroke: "blue",
+        });
 
-      //   const yAxis2 = new Konva.Line({
-      //     points: [stage.width() - 385, 50, stage.width() - 385, 160],
-      //     stroke: "blue",
-      //   });
+        const yAxis2 = new Konva.Line({
+          points: [stage.width() - 460, 50, stage.width() - 460, 160],
+          stroke: "blue",
+        });
 
-      //   const point1 = new Konva.Circle({
-      //     x: 650,
-      //     y: 50,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
-      //   const point2 = new Konva.Circle({
-      //     x: 650,
-      //     y: 160,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
-      //   const point3 = new Konva.Circle({
-      //     x: 650,
-      //     y: 95,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
-      //   const point4 = new Konva.Circle({
-      //     x: 650,
-      //     y: 115,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
+        const point1 = new Konva.Circle({
+          x: 770,
+          y: 50,
+          fill: "blue",
+          radius: 4,
+        });
+        const point2 = new Konva.Circle({
+          x: 770,
+          y: 160,
+          fill: "blue",
+          radius: 4,
+        });
+        const point3 = new Konva.Circle({
+          x: 770,
+          y: 95,
+          fill: "blue",
+          radius: 4,
+        });
+        const point4 = new Konva.Circle({
+          x: 770,
+          y: 115,
+          fill: "blue",
+          radius: 4,
+        });
 
-      //   const point1x = new Konva.Circle({
-      //     x: stage.width() - 385,
-      //     y: 50,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
-      //   const point2x = new Konva.Circle({
-      //     x: stage.width() - 385,
-      //     y: 160,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
-      //   const point3x = new Konva.Circle({
-      //     x: stage.width() - 385,
-      //     y: 95,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
-      //   const point4x = new Konva.Circle({
-      //     x: stage.width() - 385,
-      //     y: 115,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
+        const point1x = new Konva.Circle({
+          x: stage.width() - 460,
+          y: 50,
+          fill: "blue",
+          radius: 4,
+        });
+        const point2x = new Konva.Circle({
+          x: stage.width() - 460,
+          y: 160,
+          fill: "blue",
+          radius: 4,
+        });
+        const point3x = new Konva.Circle({
+          x: stage.width() - 460,
+          y: 95,
+          fill: "blue",
+          radius: 4,
+        });
+        const point4x = new Konva.Circle({
+          x: stage.width() - 460,
+          y: 115,
+          fill: "blue",
+          radius: 4,
+        });
 
-      //   layer.add(xAxis1);
-      //   layer.add(xAxis2);
-      //   layer.add(xAxis3);
-      //   layer.add(xAxis4);
-      //   layer.add(yAxis1);
-      //   layer.add(yAxis2);
-      //   layer.add(point1);
-      //   layer.add(point2);
-      //   layer.add(point3);
-      //   layer.add(point4);
-      //   layer.add(point1x);
-      //   layer.add(point2x);
-      //   layer.add(point3x);
-      //   layer.add(point4x);
-      //   for (let i = 0; i < 8; i++) {
-      //     layer.add(
-      //       new Konva.Line({
-      //         points: [705 + 100 * i, 50, 705 + 100 * i, 160],
-      //         stroke: "blue",
-      //       })
-      //     );
-      //     layer.add(
-      //       new Konva.Circle({
-      //         x: 705 + 100 * i,
-      //         y: 50,
-      //         fill: "blue",
-      //         radius: 4,
-      //       })
-      //     );
-      //     layer.add(
-      //       new Konva.Circle({
-      //         x: 705 + 100 * i,
-      //         y: 160,
-      //         fill: "blue",
-      //         radius: 4,
-      //       })
-      //     );
-      //     layer.add(
-      //       new Konva.Circle({
-      //         x: 705 + 100 * i,
-      //         y: 95,
-      //         fill: "blue",
-      //         radius: 4,
-      //       })
-      //     );
-      //     layer.add(
-      //       new Konva.Circle({
-      //         x: 705 + 100 * i,
-      //         y: 115,
-      //         fill: "blue",
-      //         radius: 4,
-      //       })
-      //     );
-      //   }
-      // }
+        layer.add(xAxis1);
+        layer.add(xAxis2);
+        layer.add(xAxis3);
+        layer.add(xAxis4);
+        layer.add(yAxis1);
+        layer.add(yAxis2);
+        layer.add(point1);
+        layer.add(point2);
+        layer.add(point3);
+        layer.add(point4);
+        layer.add(point1x);
+        layer.add(point2x);
+        layer.add(point3x);
+        layer.add(point4x);
+        for (let i = 0; i < 4; i++) {
+          layer.add(
+            new Konva.Line({
+              points: [850 + 145 * i, 50, 850 + 145 * i, 160],
+              stroke: "blue",
+            })
+          );
+          layer.add(
+            new Konva.Circle({
+              x: 850 + 145 * i,
+              y: 50,
+              fill: "blue",
+              radius: 4,
+            })
+          );
+          layer.add(
+            new Konva.Circle({
+              x: 850 + 145 * i,
+              y: 160,
+              fill: "blue",
+              radius: 4,
+            })
+          );
+          layer.add(
+            new Konva.Circle({
+              x: 850 + 145 * i,
+              y: 95,
+              fill: "blue",
+              radius: 4,
+            })
+          );
+          layer.add(
+            new Konva.Circle({
+              x: 850 + 145 * i,
+              y: 115,
+              fill: "blue",
+              radius: 4,
+            })
+          );
+        }
+      }
 
-      // // 우측 2번째
-      // {
-      //   const xAxis1 = new Konva.Line({
-      //     // x1, y1, x2, y2, x3, y3
-      //     points: [650, 365, stage.width() - 385, 365],
-      //     stroke: "orange",
-      //   });
+      // 우측 2번째
+      {
+        const xAxis1 = new Konva.Line({
+          // x1, y1, x2, y2, x3, y3
+          points: [770, 340, stage.width() - 460, 340],
+          stroke: "red",
+        });
 
-      //   const xAxis2 = new Konva.Line({
-      //     points: [650, 415, stage.width() - 385, 415],
-      //     stroke: "orange",
-      //   });
+        const xAxis2 = new Konva.Line({
+          points: [770, 470, stage.width() - 460, 470],
+          stroke: "orange",
+        });
 
-      //   const xAxis3 = new Konva.Line({
-      //     points: [650, 440, stage.width() - 385, 440],
-      //     stroke: "orange",
-      //   });
+        const xAxis3 = new Konva.Line({
+          points: [770, 395, stage.width() - 460, 395],
+          stroke: "red",
+        });
 
-      //   const xAxis4 = new Konva.Line({
-      //     points: [650, 485, stage.width() - 385, 485],
-      //     stroke: "red",
-      //   });
+        const xAxis4 = new Konva.Line({
+          points: [770, 415, stage.width() - 460, 415],
+          stroke: "red",
+        });
 
-      //   const yAxis1 = new Konva.Line({
-      //     points: [650, 365, 650, 485],
-      //     stroke: "blue",
-      //   });
+        const yAxis1 = new Konva.Line({
+          points: [770, 340, 770, 470],
+          stroke: "blue",
+        });
 
-      //   const yAxis2 = new Konva.Line({
-      //     points: [stage.width() - 385, 365, stage.width() - 385, 485],
-      //     stroke: "blue",
-      //   });
+        const yAxis2 = new Konva.Line({
+          points: [stage.width() - 460, 340, stage.width() - 460, 470],
+          stroke: "blue",
+        });
 
-      //   const point1 = new Konva.Circle({
-      //     x: 650,
-      //     y: 365,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
-      //   const point2 = new Konva.Circle({
-      //     x: 650,
-      //     y: 415,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
-      //   const point3 = new Konva.Circle({
-      //     x: 650,
-      //     y: 440,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
-      //   const point4 = new Konva.Circle({
-      //     x: 650,
-      //     y: 485,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
+        const point1 = new Konva.Circle({
+          x: 770,
+          y: 340,
+          fill: "blue",
+          radius: 4,
+        });
+        const point2 = new Konva.Circle({
+          x: 770,
+          y: 470,
+          fill: "blue",
+          radius: 4,
+        });
+        const point3 = new Konva.Circle({
+          x: 770,
+          y: 415,
+          fill: "blue",
+          radius: 4,
+        });
+        const point4 = new Konva.Circle({
+          x: 770,
+          y: 395,
+          fill: "blue",
+          radius: 4,
+        });
 
-      //   const point1x = new Konva.Circle({
-      //     x: stage.width() - 385,
-      //     y: 365,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
-      //   const point2x = new Konva.Circle({
-      //     x: stage.width() - 385,
-      //     y: 415,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
-      //   const point3x = new Konva.Circle({
-      //     x: stage.width() - 385,
-      //     y: 440,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
-      //   const point4x = new Konva.Circle({
-      //     x: stage.width() - 385,
-      //     y: 485,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
+        const point1x = new Konva.Circle({
+          x: stage.width() - 460,
+          y: 340,
+          fill: "blue",
+          radius: 4,
+        });
+        const point2x = new Konva.Circle({
+          x: stage.width() - 460,
+          y: 470,
+          fill: "blue",
+          radius: 4,
+        });
+        const point3x = new Konva.Circle({
+          x: stage.width() - 460,
+          y: 415,
+          fill: "blue",
+          radius: 4,
+        });
+        const point4x = new Konva.Circle({
+          x: stage.width() - 460,
+          y: 395,
+          fill: "blue",
+          radius: 4,
+        });
 
-      //   layer.add(xAxis1);
-      //   layer.add(xAxis2);
-      //   layer.add(xAxis3);
-      //   layer.add(xAxis4);
-      //   layer.add(yAxis1);
-      //   layer.add(yAxis2);
-      //   layer.add(point1);
-      //   layer.add(point2);
-      //   layer.add(point3);
-      //   layer.add(point4);
-      //   layer.add(point1x);
-      //   layer.add(point2x);
-      //   layer.add(point3x);
-      //   layer.add(point4x);
-      //   for (let i = 0; i < 8; i++) {
-      //     layer.add(
-      //       new Konva.Line({
-      //         points: [700 + 100 * i, 365, 700 + 100 * i, 485],
-      //         stroke: "blue",
-      //       })
-      //     );
-      //     layer.add(
-      //       new Konva.Circle({
-      //         x: 700 + 100 * i,
-      //         y: 365,
-      //         fill: "blue",
-      //         radius: 4,
-      //       })
-      //     );
-      //     layer.add(
-      //       new Konva.Circle({
-      //         x: 700 + 100 * i,
-      //         y: 415,
-      //         fill: "blue",
-      //         radius: 4,
-      //       })
-      //     );
-      //     layer.add(
-      //       new Konva.Circle({
-      //         x: 700 + 100 * i,
-      //         y: 440,
-      //         fill: "blue",
-      //         radius: 4,
-      //       })
-      //     );
-      //     layer.add(
-      //       new Konva.Circle({
-      //         x: 700 + 100 * i,
-      //         y: 485,
-      //         fill: "blue",
-      //         radius: 4,
-      //       })
-      //     );
-      //   }
-      // }
+        layer.add(xAxis1);
+        layer.add(xAxis2);
+        layer.add(xAxis3);
+        layer.add(xAxis4);
+        layer.add(yAxis1);
+        layer.add(yAxis2);
+        layer.add(point1);
+        layer.add(point2);
+        layer.add(point3);
+        layer.add(point4);
+        layer.add(point1x);
+        layer.add(point2x);
+        layer.add(point3x);
+        layer.add(point4x);
+        for (let i = 0; i < 4; i++) {
+          layer.add(
+            new Konva.Line({
+              points: [850 + 145 * i, 340, 850 + 145 * i, 470],
+              stroke: "blue",
+            })
+          );
+          layer.add(
+            new Konva.Circle({
+              x: 850 + 145 * i,
+              y: 340,
+              fill: "blue",
+              radius: 4,
+            })
+          );
+          layer.add(
+            new Konva.Circle({
+              x: 850 + 145 * i,
+              y: 470,
+              fill: "blue",
+              radius: 4,
+            })
+          );
+          layer.add(
+            new Konva.Circle({
+              x: 850 + 145 * i,
+              y: 415,
+              fill: "blue",
+              radius: 4,
+            })
+          );
+          layer.add(
+            new Konva.Circle({
+              x: 850 + 145 * i,
+              y: 395,
+              fill: "blue",
+              radius: 4,
+            })
+          );
+        }
+      }
 
-      // // 우측 3번째
+      // 우측 3번째
 
-      // {
-      //   const xAxis1 = new Konva.Line({
-      //     // x1, y1, x2, y2, x3, y3
-      //     points: [650, 680, stage.width() - 385, 680],
-      //     stroke: "orange",
-      //   });
+      {
+        const xAxis1 = new Konva.Line({
+          // x1, y1, x2, y2, x3, y3
+          points: [770, 680, stage.width() - 460, 680],
+          stroke: "orange",
+        });
 
-      //   const xAxis2 = new Konva.Line({
-      //     points: [650, 720, stage.width() - 385, 720],
-      //     stroke: "red",
-      //   });
+        const xAxis2 = new Konva.Line({
+          points: [770, 720, stage.width() - 460, 720],
+          stroke: "red",
+        });
 
-      //   const yAxis1 = new Konva.Line({
-      //     points: [650, 680, 650, 720],
-      //     stroke: "blue",
-      //   });
+        const yAxis1 = new Konva.Line({
+          points: [770, 680, 770, 720],
+          stroke: "blue",
+        });
 
-      //   const yAxis2 = new Konva.Line({
-      //     points: [stage.width() - 385, 680, stage.width() - 385, 720],
-      //     stroke: "blue",
-      //   });
+        const yAxis2 = new Konva.Line({
+          points: [stage.width() - 460, 720, stage.width() - 460, 680],
+          stroke: "blue",
+        });
 
-      //   const point1 = new Konva.Circle({
-      //     x: 650,
-      //     y: 680,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
-      //   const point2 = new Konva.Circle({
-      //     x: stage.width() - 385,
-      //     y: 680,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
-      //   const point3 = new Konva.Circle({
-      //     x: 650,
-      //     y: 720,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
-      //   const point4 = new Konva.Circle({
-      //     x: stage.width() - 385,
-      //     y: 720,
-      //     fill: "blue",
-      //     radius: 4,
-      //   });
+        const point1 = new Konva.Circle({
+          x: 770,
+          y: 680,
+          fill: "blue",
+          radius: 4,
+        });
+        const point2 = new Konva.Circle({
+          x: stage.width() - 460,
+          y: 680,
+          fill: "blue",
+          radius: 4,
+        });
+        const point3 = new Konva.Circle({
+          x: 770,
+          y: 720,
+          fill: "blue",
+          radius: 4,
+        });
+        const point4 = new Konva.Circle({
+          x: stage.width() - 460,
+          y: 720,
+          fill: "blue",
+          radius: 4,
+        });
 
-      //   layer.add(xAxis1);
-      //   layer.add(xAxis2);
-      //   layer.add(yAxis1);
-      //   layer.add(yAxis2);
-      //   layer.add(point1);
-      //   layer.add(point2);
-      //   layer.add(point3);
-      //   layer.add(point4);
-      //   for (let i = 0; i < 8; i++) {
-      //     layer.add(
-      //       new Konva.Line({
-      //         points: [700 + 100 * i, 680, 700 + 100 * i, 720],
-      //         stroke: "blue",
-      //       })
-      //     );
-      //     layer.add(
-      //       new Konva.Circle({
-      //         x: 700 + 100 * i,
-      //         y: 680,
-      //         fill: "blue",
-      //         radius: 4,
-      //       })
-      //     );
-      //     layer.add(
-      //       new Konva.Circle({
-      //         x: 700 + 100 * i,
-      //         y: 720,
-      //         fill: "blue",
-      //         radius: 4,
-      //       })
-      //     );
-      //   }
-      // }
+        layer.add(xAxis1);
+        layer.add(xAxis2);
+        layer.add(yAxis1);
+        layer.add(yAxis2);
+        layer.add(point1);
+        layer.add(point2);
+        layer.add(point3);
+        layer.add(point4);
+        for (let i = 0; i < 4; i++) {
+          layer.add(
+            new Konva.Line({
+              points: [850 + 145 * i, 680, 850 + 145 * i, 720],
+              stroke: "blue",
+            })
+          );
+          layer.add(
+            new Konva.Circle({
+              x: 850 + 145 * i,
+              y: 680,
+              fill: "blue",
+              radius: 4,
+            })
+          );
+          layer.add(
+            new Konva.Circle({
+              x: 850 + 145 * i,
+              y: 720,
+              fill: "blue",
+              radius: 4,
+            })
+          );
+        }
+      }
 
-      // // 좌측 1번째
-      // {
-      //   const xAxis1 = new Konva.Line({
-      //     // x1, y1, x2, y2, x3, y3
-      //     points: [220, 170, 320, 170],
-      //     stroke: "orange",
-      //   });
+      // 좌측 1번째
+      {
+        const xAxis1 = new Konva.Line({
+          // x1, y1, x2, y2, x3, y3
+          points: [570, 140, 520, 140],
+          stroke: "orange",
+        });
 
-      //   const xAxis2 = new Konva.Line({
-      //     points: [220, 410, 320, 410],
-      //     stroke: "orange",
-      //   });
+        const xAxis2 = new Konva.Line({
+          points: [570, 390, 520, 390],
+          stroke: "orange",
+        });
 
-      //   const yAxis1 = new Konva.Line({
-      //     points: [220, 170, 220, 410],
-      //     stroke: "orange",
-      //   });
+        const xAxis3 = new Konva.Line({
+          points: [570, 260, 520, 260],
+          stroke: "orange",
+        });
 
-      //   const yAxis2 = new Konva.Line({
-      //     points: [320, 170, 320, 410],
-      //     stroke: "orange",
-      //   });
+        const yAxis1 = new Konva.Line({
+          points: [570, 140, 570, 390],
+          stroke: "orange",
+        });
 
-      //   layer.add(xAxis1);
-      //   layer.add(xAxis2);
-      //   layer.add(yAxis1);
-      //   layer.add(yAxis2);
-      // }
+        const yAxis2 = new Konva.Line({
+          points: [520, 140, 520, 390],
+          stroke: "orange",
+        });
+
+        const point1 = new Konva.Circle({
+          x: 570,
+          y: 140,
+          fill: "blue",
+          radius: 4,
+        });
+        const point2 = new Konva.Circle({
+          x: 520,
+          y: 140,
+          fill: "blue",
+          radius: 4,
+        });
+        const point3 = new Konva.Circle({
+          x: 520,
+          y: 260,
+          fill: "blue",
+          radius: 4,
+        });
+        const point4 = new Konva.Circle({
+          x: 570,
+          y: 390,
+          fill: "blue",
+          radius: 4,
+        });
+
+        const point5 = new Konva.Circle({
+          x: 570,
+          y: 260,
+          fill: "blue",
+          radius: 4,
+        });
+
+        const point6 = new Konva.Circle({
+          x: 520,
+          y: 390,
+          fill: "blue",
+          radius: 4,
+        });
+
+        layer.add(xAxis1);
+        layer.add(xAxis2);
+        layer.add(xAxis3);
+        layer.add(yAxis1);
+        layer.add(yAxis2);
+        layer.add(point1);
+        layer.add(point2);
+        layer.add(point3);
+        layer.add(point4);
+        layer.add(point5);
+        layer.add(point6);
+      }
 
       // // 좌측 2번째
       // {
