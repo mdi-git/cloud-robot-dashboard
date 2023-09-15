@@ -120,14 +120,14 @@ export default function Potenit() {
       dispatch(
         setDataState({
           ...selector,
-          real: JSON.stringify({ ...JSON.parse(selector.real), REMAININGTASKCOUNT: receivedData.REMAININGTASKCOUNT })
+          real: { ...selector.real, REMAININGTASKCOUNT: receivedData.REMAININGTASKCOUNT }
         })
       );
     } else {
       dispatch(
         setDataState({
           ...selector,
-          simulation: JSON.stringify({ ...JSON.parse(selector.simulation), REMAININGTASKCOUNT: receivedData.REMAININGTASKCOUNT })
+          simulation: { ...selector.simulation, REMAININGTASKCOUNT: receivedData.REMAININGTASKCOUNT }
         })
       );
     }
@@ -139,14 +139,14 @@ export default function Potenit() {
       dispatch(
         setDataState({
           ...selector,
-          real: JSON.stringify({ ...JSON.parse(selector.real), ONGOINGTASKCOUNT: receivedData.ONGOINGTASKCOUNT })
+          real: { ...selector.real, ONGOINGTASKCOUNT: receivedData.ONGOINGTASKCOUNT }
         })
       );
     } else {
       dispatch(
         setDataState({
           ...selector,
-          simulation: JSON.stringify({ ...JSON.parse(selector.simulation), ONGOINGTASKCOUNT: receivedData.ONGOINGTASKCOUNT })
+          simulation: { ...selector.simulation, ONGOINGTASKCOUNT: receivedData.ONGOINGTASKCOUNT }
         })
       );
     }
@@ -159,14 +159,14 @@ export default function Potenit() {
       dispatch(
         setDataState({
           ...selector,
-          real: JSON.stringify({ ...JSON.parse(selector.real), COMPLETEDTASKCOUNT: receivedData.COMPLETEDTASKCOUNT })
+          real: { ...selector.real, COMPLETEDTASKCOUNT: receivedData.COMPLETEDTASKCOUNT }
         })
       );
     } else {
       dispatch(
         setDataState({
           ...selector,
-          simulation: JSON.stringify({ ...JSON.parse(selector.simulation), COMPLETEDTASKCOUNT: receivedData.COMPLETEDTASKCOUNT })
+          simulation: { ...selector.simulation, COMPLETEDTASKCOUNT: receivedData.COMPLETEDTASKCOUNT }
         })
       );
     }
@@ -180,14 +180,14 @@ export default function Potenit() {
       dispatch(
         setDataState({
           ...selector,
-          real: JSON.stringify({ ...JSON.parse(selector.real), NEWTASKCOUNT: receivedData.NEWTASKCOUNT })
+          real: { ...selector.real, NEWTASKCOUNT: receivedData.NEWTASKCOUNT }
         })
       );
     } else {
       dispatch(
         setDataState({
           ...selector,
-          simulation: JSON.stringify({ ...JSON.parse(selector.simulation), NEWTASKCOUNT: receivedData.NEWTASKCOUNT })
+          simulation: { ...selector.simulation, NEWTASKCOUNT: receivedData.NEWTASKCOUNT }
         })
       );
     }
@@ -200,14 +200,14 @@ export default function Potenit() {
       dispatch(
         setDataState({
           ...selector,
-          real: JSON.stringify({ ...JSON.parse(selector.real), CUMULATIVETASKSPEED: receivedData.CUMULATIVETASKSPEED })
+          real: { ...selector.real, CUMULATIVETASKSPEED: receivedData.CUMULATIVETASKSPEED }
         })
       );
     } else {
       dispatch(
         setDataState({
           ...selector,
-          simulation: JSON.stringify({ ...JSON.parse(selector.simulation), CUMULATIVETASKSPEED: receivedData.CUMULATIVETASKSPEED })
+          simulation: { ...selector.simulation, CUMULATIVETASKSPEED: receivedData.CUMULATIVETASKSPEED }
         })
       );
     }
@@ -220,14 +220,14 @@ export default function Potenit() {
       dispatch(
         setDataState({
           ...selector,
-          real: JSON.stringify({ ...JSON.parse(selector.real), AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED })
+          real: { ...selector.real, AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED }
         })
       );
     } else {
       dispatch(
         setDataState({
           ...selector,
-          simulation: JSON.stringify({ ...JSON.parse(selector.simulation), AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED })
+          simulation: { ...selector.simulation, AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED }
         })
       );
     }
@@ -390,8 +390,8 @@ export default function Potenit() {
         <div className="w-full">
           <div className="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3 mb-3">
             <p className="font-bold text-lg">포테닛 물류센터 용 대시보드</p>
-            {/* {JSON.stringify(JSON.parse(selector.potenitChart))} <br/> */}
-            {JSON.stringify(JSON.parse(selector.real))}
+           
+            {JSON.stringify(selector.real)}
           </div>
           <div className="flex justify-around">
             <div className="basis-1/3 mr-3 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-4 dark:bg-gray-800 dark:border-gray-700">
@@ -400,7 +400,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {JSON.parse(selector.real).REMAININGTASKCOUNT[1]}
+                  {selector.real.REMAININGTASKCOUNT[1]}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -413,7 +413,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {JSON.parse(selector.real).ONGOINGTASKCOUNT[1]}
+                  {selector.real.ONGOINGTASKCOUNT[1]}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -426,7 +426,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {JSON.parse(selector.real).COMPLETEDTASKCOUNT[1]}
+                  {selector.real.COMPLETEDTASKCOUNT[1]}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -441,7 +441,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {JSON.parse(selector.real).NEWTASKCOUNT[1]}
+                  {selector.real.NEWTASKCOUNT[1]}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -454,7 +454,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {JSON.parse(selector.real).CUMULATIVETASKSPEED[1]}
+                  {selector.real.CUMULATIVETASKSPEED[1]}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -467,7 +467,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {JSON.parse(selector.real).AVERAGETASKSPEED[1]}
+                  {selector.real.AVERAGETASKSPEED[1]}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   (속도)
@@ -511,15 +511,6 @@ export default function Potenit() {
                     },
                   ]}
                 />
-                {/* <div className="mt-4 font-bold">
-                  배터리 잔량에 따른 수행 가능 작업 수
-                </div>
-                <div>
-                  {JSON.parse(selector.potenitChart)["AMR_LIFT1"].PERFIRMABLETASKCOUNT
-                    ? JSON.parse(selector.potenitChart)["AMR_LIFT1"].PERFIRMABLETASKCOUNT
-                    : 0}
-                  건
-                </div> */}
               </div>
               <div className="w-full">
                 <div className="font-bold">AMR_Lift2</div>
@@ -552,15 +543,6 @@ export default function Potenit() {
                     },
                   ]}
                 />
-                {/* <div className="mt-4 font-bold">
-                  배터리 잔량에 따른 수행 가능 작업 수
-                </div>
-                <div>
-                  {JSON.parse(selector.potenitChart)["AMR_LIFT2"].PERFIRMABLETASKCOUNT
-                    ? JSON.parse(selector.potenitChart)["AMR_LIFT2"].PERFIRMABLETASKCOUNT
-                    : 0}
-                  건
-                </div> */}
               </div>
               <div className="w-full">
                 <div className="font-bold">AMR_Lift3</div>
@@ -593,15 +575,6 @@ export default function Potenit() {
                     },
                   ]}
                 />
-                {/* <div className="mt-4 font-bold">
-                  배터리 잔량에 따른 수행 가능 작업 수
-                </div>
-                <div>
-                  {JSON.parse(selector.potenitChart)["AMR_LIFT3"].PERFIRMABLETASKCOUNT
-                    ? JSON.parse(selector.potenitChart)["AMR_LIFT3"].PERFIRMABLETASKCOUNT
-                    : 0}
-                  건
-                </div> */}
               </div>
               <div className="w-full">
                 <div className="font-bold">AMR_Lift4</div>
@@ -634,15 +607,6 @@ export default function Potenit() {
                     },
                   ]}
                 />
-                {/* <div className="mt-4 font-bold">
-                  배터리 잔량에 따른 수행 가능 작업 수
-                </div>
-                <div>
-                  {JSON.parse(selector.potenitChart)["AMR_LIFT4"].PERFIRMABLETASKCOUNT
-                    ? JSON.parse(selector.potenitChart)["AMR_LIFT4"].PERFIRMABLETASKCOUNT
-                    : 0}
-                  건
-                </div> */}
               </div>
               <div className="w-full">
                 <div className="font-bold">PALLETIZER1</div>
