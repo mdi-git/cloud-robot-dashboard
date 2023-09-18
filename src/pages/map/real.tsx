@@ -100,18 +100,13 @@ const Real: React.FC = () => {
   });
 
   const [robotStatus, setRobotStatus] = useState<RobotStatusData>({
-    AMR_LIFT1: {},
-    AMR_LIFT2: {},
-    AMR_LIFT3: {},
-    AMR_LIFT4: {},
-    PALLETIZER1: {},
-    ...JSON.parse(selector.potenitChart),
+    ...selector.potenitChart,
   });
 
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   useEffect(() => {
     setReceivedData({ ...receivedData });
-    setRobotStatus({ ...robotStatus, ...JSON.parse(selector.potenitChart) });
+    setRobotStatus({ ...robotStatus, ...selector.potenitChart });
     setTimeout(() => {
       setIsLoading(false)
     }, 1000)
@@ -137,20 +132,20 @@ const Real: React.FC = () => {
       dispatch(
         setDataState({
           ...selector,
-          real: JSON.stringify({
-            ...JSON.parse(selector.real),
+          real: {
+            ...selector.real,
             REMAININGTASKCOUNT: receivedData.REMAININGTASKCOUNT,
-          }),
+          },
         })
       );
     } else {
       dispatch(
         setDataState({
           ...selector,
-          simulation: JSON.stringify({
-            ...JSON.parse(selector.simulation),
+          simulation: {
+            ...selector.simulation,
             REMAININGTASKCOUNT: receivedData.REMAININGTASKCOUNT,
-          }),
+          },
         })
       );
     }
@@ -162,20 +157,20 @@ const Real: React.FC = () => {
       dispatch(
         setDataState({
           ...selector,
-          real: JSON.stringify({
-            ...JSON.parse(selector.real),
+          real: {
+            ...selector.real,
             ONGOINGTASKCOUNT: receivedData.ONGOINGTASKCOUNT,
-          }),
+          },
         })
       );
     } else {
       dispatch(
         setDataState({
           ...selector,
-          simulation: JSON.stringify({
-            ...JSON.parse(selector.simulation),
+          simulation: {
+            ...selector.simulation,
             ONGOINGTASKCOUNT: receivedData.ONGOINGTASKCOUNT,
-          }),
+          },
         })
       );
     }
@@ -187,20 +182,20 @@ const Real: React.FC = () => {
       dispatch(
         setDataState({
           ...selector,
-          real: JSON.stringify({
-            ...JSON.parse(selector.real),
+          real: {
+            ...selector.real,
             COMPLETEDTASKCOUNT: receivedData.COMPLETEDTASKCOUNT,
-          }),
+          },
         })
       );
     } else {
       dispatch(
         setDataState({
           ...selector,
-          simulation: JSON.stringify({
-            ...JSON.parse(selector.simulation),
+          simulation: {
+            ...selector.simulation,
             COMPLETEDTASKCOUNT: receivedData.COMPLETEDTASKCOUNT,
-          }),
+          },
         })
       );
     }
@@ -212,20 +207,20 @@ const Real: React.FC = () => {
       dispatch(
         setDataState({
           ...selector,
-          real: JSON.stringify({
-            ...JSON.parse(selector.real),
+          real: {
+            ...selector.real,
             NEWTASKCOUNT: receivedData.NEWTASKCOUNT,
-          }),
+          },
         })
       );
     } else {
       dispatch(
         setDataState({
           ...selector,
-          simulation: JSON.stringify({
-            ...JSON.parse(selector.simulation),
+          simulation: {
+            ...selector.simulation,
             NEWTASKCOUNT: receivedData.NEWTASKCOUNT,
-          }),
+          },
         })
       );
     }
@@ -237,20 +232,20 @@ const Real: React.FC = () => {
       dispatch(
         setDataState({
           ...selector,
-          real: JSON.stringify({
-            ...JSON.parse(selector.real),
+          real: {
+            ...selector.real,
             CUMULATIVETASKSPEED: receivedData.CUMULATIVETASKSPEED,
-          }),
+          },
         })
       );
     } else {
       dispatch(
         setDataState({
           ...selector,
-          simulation: JSON.stringify({
-            ...JSON.parse(selector.simulation),
+          simulation: {
+            ...selector.simulation,
             CUMULATIVETASKSPEED: receivedData.CUMULATIVETASKSPEED,
-          }),
+          },
         })
       );
     }
@@ -262,20 +257,20 @@ const Real: React.FC = () => {
       dispatch(
         setDataState({
           ...selector,
-          real: JSON.stringify({
-            ...JSON.parse(selector.real),
+          real: {
+            ...selector.real,
             AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED,
-          }),
+          },
         })
       );
     } else {
       dispatch(
         setDataState({
           ...selector,
-          simulation: JSON.stringify({
-            ...JSON.parse(selector.simulation),
+          simulation: {
+            ...selector.simulation,
             AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED,
-          }),
+          },
         })
       );
     }
@@ -294,10 +289,10 @@ const Real: React.FC = () => {
       dispatch(
         setDataState({
           ...selector,
-          potenitChart: JSON.stringify({
-            ...JSON.parse(selector.potenitChart),
+          potenitChart: {
+            ...selector.potenitChart,
             ...temp,
-          }),
+          },
         })
       );
       return { ...prevRobotStatus, ...temp };
@@ -317,10 +312,10 @@ const Real: React.FC = () => {
       dispatch(
         setDataState({
           ...selector,
-          potenitChart: JSON.stringify({
-            ...JSON.parse(selector.potenitChart),
+          potenitChart: {
+            ...selector.potenitChart,
             ...temp,
-          }),
+          },
         })
       );
       return { ...prevRobotStatus, ...temp };
@@ -340,10 +335,10 @@ const Real: React.FC = () => {
       dispatch(
         setDataState({
           ...selector,
-          potenitChart: JSON.stringify({
-            ...JSON.parse(selector.potenitChart),
+          potenitChart: {
+            ...selector.potenitChart,
             ...temp,
-          }),
+          },
         })
       );
       return { ...prevRobotStatus, ...temp };
@@ -363,10 +358,10 @@ const Real: React.FC = () => {
       dispatch(
         setDataState({
           ...selector,
-          potenitChart: JSON.stringify({
-            ...JSON.parse(selector.potenitChart),
+          potenitChart: {
+            ...selector.potenitChart,
             ...temp,
-          }),
+          },
         })
       );
       return { ...prevRobotStatus, ...temp };
@@ -386,10 +381,10 @@ const Real: React.FC = () => {
       dispatch(
         setDataState({
           ...selector,
-          potenitChart: JSON.stringify({
-            ...JSON.parse(selector.potenitChart),
+          potenitChart: {
+            ...selector.potenitChart,
             ...temp,
-          }),
+          },
         })
       );
       return { ...prevRobotStatus, ...temp };

@@ -9,12 +9,9 @@ interface ObjType {
   CUMULATIVETASKSPEED : [type: "real" | "simulation", count: number];
   AVERAGETASKSPEED : [type: "real" | "simulation", count: number];
 }
-
 interface DataType {
   real: ObjType;
   simulation: ObjType;
-  potenitChart: string;
-
 }
 // Initial state
 export const initialState: DataType = {
@@ -34,8 +31,6 @@ export const initialState: DataType = {
     CUMULATIVETASKSPEED: ["simulation", 0],
     AVERAGETASKSPEED: ["simulation", 0],
   },
-  potenitChart:
-    '{"AMR_LIFT1":{},"AMR_LIFT2":{},"AMR_LIFT3":{},"AMR_LIFT4":{},"PALLETIZER1":{}}',
 };
 // Actual Slice
 export const dataSlice = createSlice({

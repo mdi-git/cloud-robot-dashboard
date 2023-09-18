@@ -5,18 +5,20 @@ import storage from "redux-persist/lib/storage";
 
 import dataReducer from './features/dataSlice';
 import robotPosReducer from './features/robotPosSlice';
+import potenitReducer from './features/potenitSlice';
 
 const reducer = (state: any, action: PayloadAction<any>) => {
   return combineReducers({
     data: dataReducer,
-    robot: robotPosReducer
+    robot: robotPosReducer,
+    potenit: potenitReducer,
   })(state, action);
 };
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ['data', 'robot']
+  whitelist: ['data', 'robot', 'potenit']
 }
 
 const persistedReducer = persistReducer(persistConfig, reducer)

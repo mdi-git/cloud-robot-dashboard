@@ -14,6 +14,9 @@ interface DataType {
   AMR_LIFT2: ObjType,
   AMR_LIFT3: ObjType,
   AMR_LIFT4: ObjType,
+  AMR_LIFT5: ObjType,
+  AMR_LIFT6: ObjType,
+  AMR_LIFT7: ObjType,
   // PALLETIZER1: ObjType,
 }
 // Initial state
@@ -22,6 +25,9 @@ export const initialState: DataType = {
   AMR_LIFT2: {ROBOTAT: ["", ""], ROBOTPOSITION: ["", ""]},
   AMR_LIFT3: {ROBOTAT: ["", ""], ROBOTPOSITION: ["", ""]},
   AMR_LIFT4: {ROBOTAT: ["", ""], ROBOTPOSITION: ["", ""]},
+  AMR_LIFT5: {ROBOTAT: ["", ""], ROBOTPOSITION: ["", ""]},
+  AMR_LIFT6: {ROBOTAT: ["", ""], ROBOTPOSITION: ["", ""]},
+  AMR_LIFT7: {ROBOTAT: ["", ""], ROBOTPOSITION: ["", ""]},
   // PALLETIZER1: {ROBOTAT: ["", ""], ROBOTPOSITION: ["", ""]},
   
 };
