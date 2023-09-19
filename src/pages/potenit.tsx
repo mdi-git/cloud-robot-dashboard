@@ -14,7 +14,6 @@ export default function Potenit() {
         <div className="w-full">
           <div className="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3 mb-3">
             <p className="font-bold text-lg">포테닛 물류센터 용 대시보드</p>
-            {JSON.stringify(potenitSelector)}
           </div>
           <div className="flex justify-around">
             <div className="basis-1/3 mr-3 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-4 dark:bg-gray-800 dark:border-gray-700">

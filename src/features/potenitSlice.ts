@@ -7,8 +7,6 @@ interface RobotData {
   BATTERYREMAIN: number;
   BATTERYSTATUS: "Using" | "Charging";
   PERFIRMABLETASKCOUNT: number;
-  ROBOTAT: [current: string, go: string];
-  ROBOTPOSITION: [x: number | string, y: number | string];
 }
 
 interface ChartType {
@@ -31,8 +29,6 @@ export const initialState: ChartType = {
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
-    ROBOTAT: ["", ""],
-    ROBOTPOSITION: [-100, -100],
   },
   AMR_LIFT2: {
     TASKPROGRESS: "1/4",
@@ -40,8 +36,6 @@ export const initialState: ChartType = {
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
-    ROBOTAT: ["", ""],
-    ROBOTPOSITION: [-100, -100],
   },
   AMR_LIFT3: {
     TASKPROGRESS: "1/4",
@@ -49,8 +43,6 @@ export const initialState: ChartType = {
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
-    ROBOTAT: ["", ""],
-    ROBOTPOSITION: [-100, -100],
   },
   AMR_LIFT4: {
     TASKPROGRESS: "1/4",
@@ -58,8 +50,6 @@ export const initialState: ChartType = {
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
-    ROBOTAT: ["", ""],
-    ROBOTPOSITION: [-100, -100],
   },
   AMR_LIFT5: {
     TASKPROGRESS: "1/4",
@@ -67,8 +57,6 @@ export const initialState: ChartType = {
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
-    ROBOTAT: ["", ""],
-    ROBOTPOSITION: [-100, -100],
   },
   AMR_LIFT6: {
     TASKPROGRESS: "1/4",
@@ -76,8 +64,6 @@ export const initialState: ChartType = {
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
-    ROBOTAT: ["", ""],
-    ROBOTPOSITION: [-100, -100],
   },
   AMR_LIFT7: {
     TASKPROGRESS: "1/4",
@@ -85,8 +71,6 @@ export const initialState: ChartType = {
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
-    ROBOTAT: ["", ""],
-    ROBOTPOSITION: [-100, -100],
   },
 
   PALLETIZER1: {
@@ -95,8 +79,8 @@ export const initialState: ChartType = {
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
-    ROBOTAT: ["", ""],
-    ROBOTPOSITION: [0, 0],
+    // ROBOTAT: ["", ""],
+    // ROBOTPOSITION: [0, 0],
   },
   PALLETIZER2: {
     TASKPROGRESS: "1/4",
@@ -104,17 +88,17 @@ export const initialState: ChartType = {
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
-    ROBOTAT: ["", ""],
-    ROBOTPOSITION: [0, 0],
+    // ROBOTAT: ["", ""],
+    // ROBOTPOSITION: [0, 0],
   },
   PALLETIZER3: {
     TASKPROGRESS: "1/4",
-    ROBOTTASKSTATUS: ["MoveToLocation", "progress"],
+    ROBOTTASKSTATUS: ["-", "progress"],
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
-    ROBOTAT: ["", ""],
-    ROBOTPOSITION: [0, 0],
+    // ROBOTAT: ["", ""],
+    // ROBOTPOSITION: [0, 0],
   },
 };
 // Actual Slice
