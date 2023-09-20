@@ -129,7 +129,7 @@ const SocketComponent = ({}) => {
           ...selector,
           real: {
             ...selector.real,
-            REMAININGTASKCOUNT: receivedData.REMAININGTASKCOUNT,
+            REMAININGTASKCOUNT: receivedData.REMAININGTASKCOUNT[1],
           },
         })
       );
@@ -139,7 +139,7 @@ const SocketComponent = ({}) => {
           ...selector,
           simulation: {
             ...selector.simulation,
-            REMAININGTASKCOUNT: receivedData.REMAININGTASKCOUNT,
+            REMAININGTASKCOUNT: receivedData.REMAININGTASKCOUNT[1],
           },
         })
       );
@@ -154,7 +154,7 @@ const SocketComponent = ({}) => {
           ...selector,
           real: {
             ...selector.real,
-            ONGOINGTASKCOUNT: receivedData.ONGOINGTASKCOUNT,
+            ONGOINGTASKCOUNT: receivedData.ONGOINGTASKCOUNT[1],
           },
         })
       );
@@ -164,7 +164,7 @@ const SocketComponent = ({}) => {
           ...selector,
           simulation: {
             ...selector.simulation,
-            ONGOINGTASKCOUNT: receivedData.ONGOINGTASKCOUNT,
+            ONGOINGTASKCOUNT: receivedData.ONGOINGTASKCOUNT[1],
           },
         })
       );
@@ -179,7 +179,7 @@ const SocketComponent = ({}) => {
           ...selector,
           real: {
             ...selector.real,
-            COMPLETEDTASKCOUNT: receivedData.COMPLETEDTASKCOUNT,
+            COMPLETEDTASKCOUNT: receivedData.COMPLETEDTASKCOUNT[1],
           },
         })
       );
@@ -189,7 +189,7 @@ const SocketComponent = ({}) => {
           ...selector,
           simulation: {
             ...selector.simulation,
-            COMPLETEDTASKCOUNT: receivedData.COMPLETEDTASKCOUNT,
+            COMPLETEDTASKCOUNT: receivedData.COMPLETEDTASKCOUNT[1],
           },
         })
       );
@@ -202,7 +202,7 @@ const SocketComponent = ({}) => {
       dispatch(
         setDataState({
           ...selector,
-          real: { ...selector.real, NEWTASKCOUNT: receivedData.NEWTASKCOUNT },
+          real: { ...selector.real, NEWTASKCOUNT: receivedData.NEWTASKCOUNT[1] },
         })
       );
     } else {
@@ -211,7 +211,7 @@ const SocketComponent = ({}) => {
           ...selector,
           simulation: {
             ...selector.simulation,
-            NEWTASKCOUNT: receivedData.NEWTASKCOUNT,
+            NEWTASKCOUNT: receivedData.NEWTASKCOUNT[1],
           },
         })
       );
@@ -226,7 +226,7 @@ const SocketComponent = ({}) => {
           ...selector,
           real: {
             ...selector.real,
-            CUMULATIVETASKSPEED: receivedData.CUMULATIVETASKSPEED,
+            CUMULATIVETASKSPEED: receivedData.CUMULATIVETASKSPEED[1],
           },
         })
       );
@@ -236,7 +236,7 @@ const SocketComponent = ({}) => {
           ...selector,
           simulation: {
             ...selector.simulation,
-            CUMULATIVETASKSPEED: receivedData.CUMULATIVETASKSPEED,
+            CUMULATIVETASKSPEED: receivedData.CUMULATIVETASKSPEED[1],
           },
         })
       );
@@ -251,7 +251,7 @@ const SocketComponent = ({}) => {
           ...selector,
           real: {
             ...selector.real,
-            AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED,
+            AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED[1],
           },
         })
       );
@@ -261,7 +261,7 @@ const SocketComponent = ({}) => {
           ...selector,
           simulation: {
             ...selector.simulation,
-            AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED,
+            AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED[1],
           },
         })
       );

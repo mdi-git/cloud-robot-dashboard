@@ -2,12 +2,12 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { createSlice } from '@reduxjs/toolkit';
 
 interface ObjType {
-  REMAININGTASKCOUNT: [type: "real" | "simulation", count: number];
-  ONGOINGTASKCOUNT : [type: "real" | "simulation", count: number];
-  COMPLETEDTASKCOUNT : [type: "real" | "simulation", count: number];
-  NEWTASKCOUNT : [type: "real" | "simulation", count: number];
-  CUMULATIVETASKSPEED : [type: "real" | "simulation", count: number];
-  AVERAGETASKSPEED : [type: "real" | "simulation", count: number];
+  REMAININGTASKCOUNT: number;
+  ONGOINGTASKCOUNT : number;
+  COMPLETEDTASKCOUNT : number;
+  NEWTASKCOUNT : number;
+  CUMULATIVETASKSPEED : number;
+  AVERAGETASKSPEED : number;
 }
 interface DataType {
   real: ObjType;
@@ -16,20 +16,20 @@ interface DataType {
 // Initial state
 export const initialState: DataType = {
   real: {
-    REMAININGTASKCOUNT: ["real", 0],
-    ONGOINGTASKCOUNT: ["real", 0],
-    COMPLETEDTASKCOUNT: ["real", 0],
-    NEWTASKCOUNT: ["real", 0],
-    CUMULATIVETASKSPEED: ["real", 0],
-    AVERAGETASKSPEED: ["real", 0],
+    REMAININGTASKCOUNT: 0,
+    ONGOINGTASKCOUNT: 0,
+    COMPLETEDTASKCOUNT: 0,
+    NEWTASKCOUNT: 0,
+    CUMULATIVETASKSPEED: 0,
+    AVERAGETASKSPEED: 0,
   },
   simulation: {
-    REMAININGTASKCOUNT: ["simulation", 0],
-    ONGOINGTASKCOUNT: ["simulation", 0],
-    COMPLETEDTASKCOUNT: ["simulation", 0],
-    NEWTASKCOUNT: ["simulation", 0],
-    CUMULATIVETASKSPEED: ["simulation", 0],
-    AVERAGETASKSPEED: ["simulation", 0],
+    REMAININGTASKCOUNT:  0,
+    ONGOINGTASKCOUNT:  0,
+    COMPLETEDTASKCOUNT:  0,
+    NEWTASKCOUNT:  0,
+    CUMULATIVETASKSPEED:  0,
+    AVERAGETASKSPEED:  0,
   },
 };
 // Actual Slice

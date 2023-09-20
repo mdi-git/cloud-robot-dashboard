@@ -75,7 +75,7 @@ export const initialState: ChartType = {
 
   PALLETIZER1: {
     TASKPROGRESS: "1/4",
-    ROBOTTASKSTATUS: ["MoveToLocation", "progress"],
+    ROBOTTASKSTATUS: ["-", "progress"],
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
@@ -84,7 +84,7 @@ export const initialState: ChartType = {
   },
   PALLETIZER2: {
     TASKPROGRESS: "1/4",
-    ROBOTTASKSTATUS: ["MoveToLocation", "progress"],
+    ROBOTTASKSTATUS: ["-", "progress"],
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,

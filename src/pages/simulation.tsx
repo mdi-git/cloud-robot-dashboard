@@ -22,7 +22,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {selector.simulation.REMAININGTASKCOUNT[1]}
+                  {selector.simulation.REMAININGTASKCOUNT}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -35,7 +35,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {selector.simulation.ONGOINGTASKCOUNT[1]}
+                  {selector.simulation.ONGOINGTASKCOUNT}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -48,7 +48,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {selector.simulation.COMPLETEDTASKCOUNT[1]}
+                  {selector.simulation.COMPLETEDTASKCOUNT}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -63,7 +63,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {selector.simulation.NEWTASKCOUNT[1]}
+                  {selector.simulation.NEWTASKCOUNT}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -76,7 +76,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {selector.simulation.CUMULATIVETASKSPEED[1]}
+                  {selector.simulation.CUMULATIVETASKSPEED}
                 </span>
                 <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                   건
@@ -89,7 +89,7 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {selector.simulation.AVERAGETASKSPEED[1].toLocaleString()}
+                  {selector.simulation.AVERAGETASKSPEED.toLocaleString()}
                 </span>
                 <span className="ml-1 text-m font-normal text-gray-500 dark:text-gray-400">
                   mm/s
