@@ -116,6 +116,7 @@ const SocketComponent = ({}) => {
     socket.on("getData", (data) => {
       setReceivedData((prevReceivedData) => {
         const tempData = getKeyValueObject(atob(data));
+        console.log(tempData)
         return { ...prevReceivedData, ...tempData };
       });
     });
@@ -375,11 +376,6 @@ const SocketComponent = ({}) => {
   }, [receivedData.PERFIRMABLETASKCOUNT]);
 
   useEffect(() => {
-    // setRobotStatus((prevRobotStatus) => {
-
-    //   return { ...prevRobotStatus, ...temp };
-    // });
-
     const temp: ObjectProps = {};
     const robotId = receivedData.ROBOTPOSITION[0];
     if (robotId) {
@@ -391,6 +387,7 @@ const SocketComponent = ({}) => {
         ],
       };
     }
+    console.log(temp, robotSelector)
     dispatch(
       setRobotPosState({
         ...robotSelector,

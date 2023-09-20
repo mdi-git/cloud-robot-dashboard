@@ -79,8 +79,6 @@ export const initialState: ChartType = {
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
-    // ROBOTAT: ["", ""],
-    // ROBOTPOSITION: [0, 0],
   },
   PALLETIZER2: {
     TASKPROGRESS: "1/4",
@@ -88,8 +86,6 @@ export const initialState: ChartType = {
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
-    // ROBOTAT: ["", ""],
-    // ROBOTPOSITION: [0, 0],
   },
   PALLETIZER3: {
     TASKPROGRESS: "1/4",
@@ -97,8 +93,6 @@ export const initialState: ChartType = {
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
-    // ROBOTAT: ["", ""],
-    // ROBOTPOSITION: [0, 0],
   },
 };
 // Actual Slice

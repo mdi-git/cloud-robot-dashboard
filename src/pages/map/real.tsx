@@ -2,216 +2,19 @@
 import React, { useState, useEffect } from "react";
 import CoordinatePlane from "@/components/Map";
 import { Coordinates, ObjNamePos } from "../../components/mapPos";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { io } from "socket.io-client";
-import { setDataState } from "@/features/dataSlice";
-import { setRobotPosState } from "@/features/robotPosSlice";
-interface RobotData {
-  REMAININGTASKCOUNT: [robotType: "real" | "simulation", count: number];
-  ONGOINGTASKCOUNT: [robotType: "real" | "simulation", count: number];
-  COMPLETEDTASKCOUNT: [robotType: "real" | "simulation", count: number];
-  NEWTASKCOUNT: [robotType: "real" | "simulation", count: number];
-  CUMULATIVETASKSPEED: [robotType: "real" | "simulation", count: number];
-  AVERAGETASKSPEED: [robotType: "real" | "simulation", count: number];
-  TASKPROGRESS: [robotId: string, progress: string];
-  ROBOTTASKSTATUS: [
-    robotId: string,
-    taskId: string,
-    taskName: string,
-    status: "start" | "progress" | "pause" | "complete"
-  ];
-  BATTERYREMAIN: [robotId: string, BATTERYSTATUS: number];
-  BATTERYSTATUS: [robotId: string, BATTERYSTATUS: "Using" | "Charging"];
-  PERFIRMABLETASKCOUNT: [robotId: string, count: number];
-  ROBOTAT: [
-    robotId: "AMR_LIFT1" | "AMR_LIFT2" | "AMR_LIFT3" | "AMR_LIFT4",
-    current: string,
-    go: string
-  ];
-  ROBOTPOSITION: [
-    robotId: "AMR_LIFT1" | "AMR_LIFT2" | "AMR_LIFT3" | "AMR_LIFT4",
-    x: number | string,
-    y: number | string
-  ];
-}
+import { useAppSelector } from "@/hooks";
+import SocketComponent from "@/components/SocketComponent";
 
-interface RobotStatusData {
-  [key: string]: any;
-}
-
-interface ObjectProps {
-  [key: string]: any;
-}
-
-function getKeyValueObject(str: string) {
-  let match = str.match(/\((\w+) (.+?)\)/);
-
-  if (match) {
-    let [, key, values] = match;
-    let parsedValues: (string | number)[] | number;
-
-    if (/"([^"]+)"/.test(values)) {
-      parsedValues =
-        values
-          .split(" ")
-          .map((match) =>
-            isNaN(parseFloat(match)) ? match.slice(1, -1) : parseFloat(match)
-          ) || [];
-    } else {
-      parsedValues = parseFloat(values);
-    }
-
-    let output: { [key: string]: (string | number)[] | number } = {
-      [key.toUpperCase()]: parsedValues,
-    };
-    return output;
-  } else {
-    console.log("No valid input found.");
-    return {};
-  }
-}
 const Real: React.FC = () => {
-  const selector = useAppSelector((state) => state.data);
   const robotSelector = useAppSelector((state) => state.robot);
-  const dispatch = useAppDispatch();
-
-  const [receivedData, setReceivedData] = useState<RobotData>({
-    REMAININGTASKCOUNT: ["real", 0],
-    ONGOINGTASKCOUNT: ["real", 0],
-    COMPLETEDTASKCOUNT: ["real", 0],
-    NEWTASKCOUNT: ["real", 0],
-    CUMULATIVETASKSPEED: ["real", 0],
-    AVERAGETASKSPEED: ["real", 0],
-    TASKPROGRESS: ["", ""],
-    ROBOTTASKSTATUS: ["", "", "", "progress"],
-    BATTERYREMAIN: ["", 0],
-    BATTERYSTATUS: ["", "Using"],
-    PERFIRMABLETASKCOUNT: ["", 0],
-    ROBOTAT: ["AMR_LIFT1", "", ""],
-    ROBOTPOSITION: [
-      "AMR_LIFT1",
-      robotSelector.AMR_LIFT1.ROBOTPOSITION[0] === ""
-        ? 0
-        : robotSelector.AMR_LIFT1.ROBOTPOSITION[0],
-      robotSelector.AMR_LIFT1.ROBOTPOSITION[1] === ""
-        ? 0
-        : robotSelector.AMR_LIFT1.ROBOTPOSITION[1],
-    ],
-  });
-
-  const [robotStatus, setRobotStatus] = useState<RobotStatusData>({
-    ...robotSelector,
-  });
-
+  
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   useEffect(() => {
-    setReceivedData({ ...receivedData });
-    setRobotStatus({ ...robotStatus, ...robotSelector });
     setTimeout(() => {
       setIsLoading(false)
-    }, 1000)
+    }, 2000)
   }, []);
 
-  useEffect(() => {
-    // setRobotStatus((prevRobotStatus) => {
-
-    //   return { ...prevRobotStatus, ...temp };
-    // });
-
-    const temp: ObjectProps = {};
-    const robotId = receivedData.ROBOTPOSITION[0];
-    if (robotId) {
-      temp[`${robotId}`] = {
-        ...robotSelector[`${robotId}`],
-        ROBOTPOSITION: [
-          receivedData.ROBOTPOSITION[1],
-          receivedData.ROBOTPOSITION[2],
-        ],
-      };
-      if (robotId === "AMR_LIFT1") {
-        if(receivedData.ROBOTPOSITION[1] != robot1Pos[0] && receivedData.ROBOTPOSITION[2] != robot1Pos[1]) {
-          setRobotPos(
-            [receivedData.ROBOTPOSITION[1], receivedData.ROBOTPOSITION[2]].map(
-              Number
-            )
-          );
-        }
-      }
-       
-        
-      if (robotId === "AMR_LIFT2") {
-        if(receivedData.ROBOTPOSITION[1] != robot2Pos[0] && receivedData.ROBOTPOSITION[2] != robot2Pos[1]) {
-          setRobotPos2(
-            [receivedData.ROBOTPOSITION[1], receivedData.ROBOTPOSITION[2]].map(
-              Number
-            )
-          );
-        }
-      }
-      
-        
-      if (robotId === "AMR_LIFT3") {
-        if(receivedData.ROBOTPOSITION[1] != robot3Pos[0] && receivedData.ROBOTPOSITION[2] != robot3Pos[1]) {
-          setRobotPos3(
-            [receivedData.ROBOTPOSITION[1], receivedData.ROBOTPOSITION[2]].map(
-              Number
-            )
-          );
-        }
-      }
-      if (robotId === "AMR_LIFT4") {
-        if(receivedData.ROBOTPOSITION[1] != robot4Pos[0] && receivedData.ROBOTPOSITION[2] != robot4Pos[1]) {
-          setRobotPos4(
-            [receivedData.ROBOTPOSITION[1], receivedData.ROBOTPOSITION[2]].map(
-              Number
-            )
-          );
-        }
-      }
-    }
-    dispatch(
-      setRobotPosState({
-        ...robotSelector,
-        ...JSON.parse(JSON.stringify(temp)),
-      })
-    );
-    console.log({
-      ...robotSelector,
-      ...JSON.parse(JSON.stringify(temp)),
-    });
-  }, [receivedData.ROBOTPOSITION]);
-
- useState<number|string>(robotSelector.AMR_LIFT1.ROBOTAT[0] === "" ? 4 : robotSelector.AMR_LIFT1.ROBOTAT[0]);
-  const [robot1Pos, setRobotPos] = useState(
-    // robotSelector.AMR_LIFT1.ROBOTPOSITION.length !== 2 &&
-      robotSelector.AMR_LIFT1.ROBOTPOSITION[0] === ""
-      ? [1, 1]
-      : robotSelector.AMR_LIFT1.ROBOTPOSITION.map((el) => Number(el))
-  );
-
-  // const [robot2, setRobot2] = useState<number|string>(robotSelector.AMR_LIFT2.ROBOTAT[0] === "" ? 4 : robotSelector.AMR_LIFT2.ROBOTAT[0]);
-  const [robot2Pos, setRobotPos2] = useState(
-    // robotSelector.AMR_LIFT2.ROBOTPOSITION.length !== 2 &&
-      robotSelector.AMR_LIFT2.ROBOTPOSITION[0] === ""
-      ? [1, 1]
-      : robotSelector.AMR_LIFT2.ROBOTPOSITION.map((el) => Number(el))
-  );
-
-  // const [robo31, setRobot3] = useState<number|string>(robotSelector.AMR_LIFT3.ROBOTAT[0] === "" ? 4 : robotSelector.AMR_LIFT3.ROBOTAT[0]);
-  const [robot3Pos, setRobotPos3] = useState(
-    // robotSelector.AMR_LIFT3.ROBOTPOSITION.length !== 2 &&
-      robotSelector.AMR_LIFT3.ROBOTPOSITION[0] === ""
-      ? [1, 1]
-      : robotSelector.AMR_LIFT3.ROBOTPOSITION.map((el) => Number(el))
-  );
-
-  // const [robot4, setRobot4] = useState<number|string>(robotSelector.AMR_LIFT4.ROBOTAT[0] === "" ? 4 : robotSelector.AMR_LIFT4.ROBOTAT[0]);
-  const [robot4Pos, setRobotPos4] = useState(
-    // robotSelector.AMR_LIFT4.ROBOTPOSITION.length !== 2 &&
-      robotSelector.AMR_LIFT4.ROBOTPOSITION[0] === ""
-      ? [1, 1]
-      : robotSelector.AMR_LIFT4.ROBOTPOSITION.map((el) => Number(el))
-  );
   return (
     <>
       {isLoading && (
@@ -240,8 +43,11 @@ const Real: React.FC = () => {
           </div>
         </div>
       )}
-
+      <SocketComponent />
       <div style={{ overflow: "hidden", height: "875px" }}>
+        {/* 
+        // TODO legend 추가하기
+        */}
         {JSON.stringify(robotSelector.AMR_LIFT1.ROBOTPOSITION)} /{" "}
         {JSON.stringify(robotSelector.AMR_LIFT2.ROBOTPOSITION)} /{" "}
         {JSON.stringify(robotSelector.AMR_LIFT3.ROBOTPOSITION)} /{" "}
@@ -249,10 +55,10 @@ const Real: React.FC = () => {
         <CoordinatePlane
           data={Coordinates}
           obj={ObjNamePos}
-          robot1Pos={robot1Pos}
-          robot2Pos={robot2Pos}
-          robot3Pos={robot3Pos}
-          robot4Pos={robot4Pos}
+          robot1Pos={robotSelector.AMR_LIFT1.ROBOTPOSITION.map(Number)}
+          robot2Pos={robotSelector.AMR_LIFT2.ROBOTPOSITION.map(Number)}
+          robot3Pos={robotSelector.AMR_LIFT3.ROBOTPOSITION.map(Number)}
+          robot4Pos={robotSelector.AMR_LIFT4.ROBOTPOSITION.map(Number)}
         />
       </div>
     </>
