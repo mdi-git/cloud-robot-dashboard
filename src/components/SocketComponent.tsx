@@ -116,7 +116,6 @@ const SocketComponent = ({}) => {
     socket.on("getData", (data) => {
       setReceivedData((prevReceivedData) => {
         const tempData = getKeyValueObject(atob(data));
-        console.log(tempData)
         return { ...prevReceivedData, ...tempData };
       });
     });

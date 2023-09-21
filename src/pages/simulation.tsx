@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 
 export default function Potenit() {
   const selector = useAppSelector((state) => state.data);
-  const robotSelector = useAppSelector((state) => state.robot);
   const potenitSelector = useAppSelector((state: { potenit: any; }) => state.potenit);
 
   return (
