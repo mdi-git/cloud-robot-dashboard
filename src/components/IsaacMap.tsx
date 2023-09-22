@@ -21,15 +21,129 @@ interface CoordinatePlaneProps {
   data: Point[];
   // obj: ObjectProps;
   // robot1: string; // robot1의 위치 Node 번호 (key)
-  // robot1Pos: number[];
-  // robot2Pos: number[];
-  // robot3Pos: number[];
-  // robot4Pos: number[];
+  robot5Pos: number[];
+  robot6Pos: number[];
+  robot7Pos: number[];
 }
 
-const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data }) => {
+const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robot6Pos, robot7Pos }) => {
 
   const layerRef = useRef<Konva.Layer | null>(null);
+
+  const [r5Pos, setr5Pos] = useState({
+    x: robot5Pos[0],
+    y: robot5Pos[1]
+  })
+
+  useEffect(() => {
+    const anim = new Konva.Animation((frame:IFrame | undefined) => {
+
+      const newX = Konva.Easings.EaseInOut(
+        frame!.time,
+        r5Pos.x,
+        (robot5Pos[0] / MAX_COORDINATE  * 2450) - r5Pos.x,
+        1000 // Animation duration in milliseconds (adjust as needed)
+      );
+
+      const newY = Konva.Easings.EaseInOut(
+        frame!.time,
+        r5Pos.y,
+        (1000 - (robot5Pos[1] / MAX_COORDINATE) * 3800 - 170) - r5Pos.y,
+        1000 // Animation duration in milliseconds (adjust as needed)
+      );
+
+      setr5Pos({ x: newX, y: newY });
+
+      if (frame!.time >= 1000) {
+        // Stop the animation when it's done
+        anim.stop();
+      }
+    }, layerRef.current);
+
+    anim.start();
+
+    // Clean up the animation when the component unmounts
+    return () => {
+      anim.stop();
+    };
+  }, [robot5Pos])
+
+  const [r6Pos, setr6Pos] = useState({
+    x: robot6Pos[0],
+    y: robot6Pos[1]
+  })
+
+  useEffect(() => {
+    const anim = new Konva.Animation((frame:IFrame | undefined) => {
+
+      const newX = Konva.Easings.EaseInOut(
+        frame!.time,
+        r6Pos.x,
+        (robot6Pos[0] / MAX_COORDINATE  * 2450) - r6Pos.x,
+        1000 // Animation duration in milliseconds (adjust as needed)
+      );
+
+      const newY = Konva.Easings.EaseInOut(
+        frame!.time,
+        r6Pos.y,
+        (1000 - (robot6Pos[1] / MAX_COORDINATE) * 3800 - 170) - r6Pos.y,
+        1000 // Animation duration in milliseconds (adjust as needed)
+      );
+
+      setr6Pos({ x: newX, y: newY });
+
+      if (frame!.time >= 1000) {
+        // Stop the animation when it's done
+        anim.stop();
+      }
+    }, layerRef.current);
+
+    anim.start();
+
+    // Clean up the animation when the component unmounts
+    return () => {
+      anim.stop();
+    };
+  }, [robot6Pos])
+
+
+  const [r7Pos, setr7Pos] = useState({
+    x: robot7Pos[0],
+    y: robot7Pos[1]
+  })
+
+  useEffect(() => {
+    const anim = new Konva.Animation((frame:IFrame | undefined) => {
+
+      const newX = Konva.Easings.EaseInOut(
+        frame!.time,
+        r7Pos.x,
+        (robot7Pos[0] / MAX_COORDINATE  * 2450) - r7Pos.x,
+        1000 // Animation duration in milliseconds (adjust as needed)
+      );
+
+      const newY = Konva.Easings.EaseInOut(
+        frame!.time,
+        r7Pos.y,
+        (1000 - (robot7Pos[1] / MAX_COORDINATE) * 3800 - 170) - r7Pos.y,
+        1000 // Animation duration in milliseconds (adjust as needed)
+      );
+
+      setr7Pos({ x: newX, y: newY });
+
+      if (frame!.time >= 1000) {
+        // Stop the animation when it's done
+        anim.stop();
+      }
+    }, layerRef.current);
+
+    anim.start();
+
+    // Clean up the animation when the component unmounts
+    return () => {
+      anim.stop();
+    };
+  }, [robot7Pos])
 
 
   useEffect(() => {
@@ -589,10 +703,10 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data }) => {
       <div id="coordinate-plane-container">
         <Stage width={window.innerWidth - 30} height={1000}>
           <Layer ref={layerRef}>
-            {/* <Circle x={r1Pos.x} y={r1Pos.y} radius={30} fill="red" />
-            <Circle x={r2Pos.x} y={r2Pos.y} radius={30} fill="orange" />
-            <Circle x={r3Pos.x} y={r3Pos.y} radius={30} fill="yellow" />
-            <Circle x={r4Pos.x} y={r4Pos.y} radius={30} fill="green" /> */}
+            <Circle x={r5Pos.x} y={r5Pos.y} radius={30} fill="red" />
+            <Circle x={r6Pos.x} y={r6Pos.y} radius={30} fill="orange" />
+            <Circle x={r7Pos.x} y={r7Pos.y} radius={30} fill="yellow" />
+            {/* <Circle x={r4Pos.x} y={r4Pos.y} radius={30} fill="green" /> */}
           </Layer>
         </Stage>
       </div>
