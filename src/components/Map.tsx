@@ -3,7 +3,7 @@ import Konva from "konva";
 import { Stage, Layer, Circle, Line } from "react-konva";
 import { IFrame } from "konva/lib/types";
 
-const MAX_COORDINATE = 70;
+
 const DOT_RADIUS = 8;
 
 
@@ -29,18 +29,6 @@ interface CoordinatePlaneProps {
 
 const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos, robot2Pos, robot3Pos, robot4Pos }) => {
 
-  
-  // const [dotPos1, setDotPos1] = useState({
-  //   x: (obj[robot1][0] / MAX_COORDINATE) * 2450,
-  //   y: 1000 - (obj[robot1][1] / MAX_COORDINATE) * 3800 - 170,
-  // });
-
-  // useEffect(() => {
-  //   setDotPos1({ x: (obj[robot1][0] / MAX_COORDINATE) * 2450,
-  //   y: 1000 - (obj[robot1][1] / MAX_COORDINATE) * 3800 - 170,})
-  // }, [robot1])
-
-
   const [r1Pos, setR1Pos] = useState({
     x: robot1Pos[0],
     y: robot1Pos[1]
@@ -52,14 +40,14 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos,
       const newX = Konva.Easings.EaseInOut(
         frame!.time,
         r1Pos.x,
-        (robot1Pos[0] / MAX_COORDINATE  * 2450) - r1Pos.x,
+        (robot1Pos[0] * 35) - r1Pos.x,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
       const newY = Konva.Easings.EaseInOut(
         frame!.time,
         r1Pos.y,
-        (1000 - (robot1Pos[1] / MAX_COORDINATE) * 3800 - 170) - r1Pos.y,
+        (1000 - (robot1Pos[1] * 54) - 170) - r1Pos.y,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
@@ -90,14 +78,14 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos,
       const newX = Konva.Easings.EaseInOut(
         frame!.time,
         r2Pos.x,
-        (robot2Pos[0] / MAX_COORDINATE  * 2450) - r2Pos.x,
+        (robot2Pos[0] * 35) - r2Pos.x,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
       const newY = Konva.Easings.EaseInOut(
         frame!.time,
         r2Pos.y,
-        (1000 - (robot2Pos[1] / MAX_COORDINATE) * 3800 - 170) - r2Pos.y,
+        (1000 - (robot2Pos[1] * 54) - 170) - r2Pos.y,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
@@ -129,14 +117,14 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos,
       const newX = Konva.Easings.EaseInOut(
         frame!.time,
         r3Pos.x,
-        (robot3Pos[0] / MAX_COORDINATE  * 2450) - r3Pos.x,
+        (robot3Pos[0] * 35) - r3Pos.x,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
       const newY = Konva.Easings.EaseInOut(
         frame!.time,
         r3Pos.y,
-        (1000 - (robot3Pos[1] / MAX_COORDINATE) * 3800 - 170) - r3Pos.y,
+        (1000 - (robot3Pos[1] * 54) - 170) - r3Pos.y,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
@@ -167,14 +155,14 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos,
       const newX = Konva.Easings.EaseInOut(
         frame!.time,
         r4Pos.x,
-        (robot4Pos[0] / MAX_COORDINATE  * 2450) - r4Pos.x,
+        (robot4Pos[0] * 35) - r4Pos.x,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
       const newY = Konva.Easings.EaseInOut(
         frame!.time,
         r4Pos.y,
-        (1000 - (robot4Pos[1] / MAX_COORDINATE) * 3800 - 170) - r4Pos.y,
+        (1000 - (robot4Pos[1] * 54) - 170) - r4Pos.y,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
@@ -632,9 +620,9 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos,
 
         // Scale the coordinates to fit within the screen
         // const scaledX = (x / maxCoordinate) * stage.width();
-        const scaledX = (x / MAX_COORDINATE) * 2450;
+        const scaledX = x * 35;
         // const scaledY = (y / maxCoordinate) * stage.height();
-        const scaledY = (y / MAX_COORDINATE) * 3800 + 170;
+        const scaledY = (y * 54) + 170;
 
         // Draw a circle for the point
         const circle = new Konva.Circle({
@@ -674,9 +662,9 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos,
           if (edgeEnd) {
             const [edgeX, edgeY] = edgeEnd.pos;
             // const scaledEdgeX = (edgeX / maxCoordinate) * stage.width();
-            const scaledEdgeX = (edgeX / MAX_COORDINATE) * 2450;
+            const scaledEdgeX = edgeX * 35;
             // const scaledEdgeY = (edgeY / maxCoordinate) * stage.height();
-            const scaledEdgeY = (edgeY / MAX_COORDINATE) * 3800 + 170;
+            const scaledEdgeY = (edgeY * 54) + 170;
 
             const line = new Konva.Line({
               points: [

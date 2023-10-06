@@ -3,7 +3,6 @@ import Konva from "konva";
 import { Stage, Layer, Circle, Line } from "react-konva";
 import { IFrame } from "konva/lib/types";
 
-const MAX_COORDINATE = 70;
 const DOT_RADIUS = 8;
 
 
@@ -41,14 +40,14 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
       const newX = Konva.Easings.EaseInOut(
         frame!.time,
         r5Pos.x,
-        (robot5Pos[0] / MAX_COORDINATE  * 2450) - r5Pos.x,
+        (robot5Pos[0] *  49) - 100 - r5Pos.x,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
       const newY = Konva.Easings.EaseInOut(
         frame!.time,
         r5Pos.y,
-        (1000 - (robot5Pos[1] / MAX_COORDINATE) * 3800 - 170) - r5Pos.y,
+        (1000 - (robot5Pos[1] * 57 ) - 170) - r5Pos.y,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
@@ -79,14 +78,14 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
       const newX = Konva.Easings.EaseInOut(
         frame!.time,
         r6Pos.x,
-        (robot6Pos[0] / MAX_COORDINATE  * 2450) - r6Pos.x,
+        (robot6Pos[0] *  49) - 100 - r6Pos.x,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
       const newY = Konva.Easings.EaseInOut(
         frame!.time,
         r6Pos.y,
-        (1000 - (robot6Pos[1] / MAX_COORDINATE) * 3800 - 170) - r6Pos.y,
+        (1000 - (robot6Pos[1] * 57 ) - 170) - r6Pos.y,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
@@ -118,14 +117,14 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
       const newX = Konva.Easings.EaseInOut(
         frame!.time,
         r7Pos.x,
-        (robot7Pos[0] / MAX_COORDINATE  * 2450) - r7Pos.x,
+        (robot7Pos[0] *  49) - 100 - r7Pos.x,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
       const newY = Konva.Easings.EaseInOut(
         frame!.time,
         r7Pos.y,
-        (1000 - (robot7Pos[1] / MAX_COORDINATE) * 3800 - 170) - r7Pos.y,
+        (1000 - (robot7Pos[1] * 57 ) - 170) - r7Pos.y,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
@@ -632,9 +631,9 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
 
         // Scale the coordinates to fit within the screen
         // const scaledX = (x / maxCoordinate) * stage.width();
-        const scaledX = (x / MAX_COORDINATE) * 3400 - 100;
+        const scaledX = (x * 49) - 100;
         // const scaledY = (y / maxCoordinate) * stage.height();
-        const scaledY = (y / MAX_COORDINATE) * 4000 + 170;
+        const scaledY = (y * 57) + 170;
 
         // Draw a circle for the point
         const circle = new Konva.Circle({
@@ -674,9 +673,9 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
           if (edgeEnd) {
             const [edgeX, edgeY] = edgeEnd.pos;
             // const scaledEdgeX = (edgeX / maxCoordinate) * stage.width();
-            const scaledEdgeX = (edgeX / MAX_COORDINATE) * 3400 - 100;
+            const scaledEdgeX = (edgeX * 49) - 100;
             // const scaledEdgeY = (edgeY / maxCoordinate) * stage.height();
-            const scaledEdgeY = (edgeY / MAX_COORDINATE) * 4000 + 170;
+            const scaledEdgeY = (edgeY * 57) + 170;
 
             const line = new Konva.Line({
               points: [
