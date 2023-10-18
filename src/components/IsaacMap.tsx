@@ -40,7 +40,7 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
       const newX = Konva.Easings.EaseInOut(
         frame!.time,
         r5Pos.x,
-        (robot5Pos[0] *  49) - 100 - r5Pos.x,
+        ((robot5Pos[0] *  49)  - 100) - r5Pos.x,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
@@ -78,7 +78,7 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
       const newX = Konva.Easings.EaseInOut(
         frame!.time,
         r6Pos.x,
-        (robot6Pos[0] *  49) - 100 - r6Pos.x,
+        ((robot6Pos[0] *  49) - 100) - r6Pos.x,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
@@ -117,7 +117,7 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
       const newX = Konva.Easings.EaseInOut(
         frame!.time,
         r7Pos.x,
-        (robot7Pos[0] *  49) - 100 - r7Pos.x,
+        ((robot7Pos[0] *  49) - 100) - r7Pos.x,
         1000 // Animation duration in milliseconds (adjust as needed)
       );
 
@@ -154,7 +154,6 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
       });
       const layer = layerRef.current;
 
-      // TODO 네모 박스 추가하기... 
       // 우측 1번째
       {
         const xAxis1 = new Konva.Line({
