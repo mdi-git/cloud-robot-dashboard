@@ -35,37 +35,14 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
   })
 
   useEffect(() => {
-    const anim = new Konva.Animation((frame:IFrame | undefined) => {
-
-      const newX = Konva.Easings.EaseInOut(
-        frame!.time,
-        r5Pos.x,
-        ((robot5Pos[0] *  49)  - 100) - r5Pos.x,
-        1000 // Animation duration in milliseconds (adjust as needed)
-      );
-
-      const newY = Konva.Easings.EaseInOut(
-        frame!.time,
-        r5Pos.y,
-        (1000 - (robot5Pos[1] * 57 ) - 170) - r5Pos.y,
-        1000 // Animation duration in milliseconds (adjust as needed)
-      );
-
-      setr5Pos({ x: newX, y: newY });
-
-      if (frame!.time >= 1000) {
-        // Stop the animation when it's done
-        anim.stop();
-      }
-    }, layerRef.current);
-
-    anim.start();
-
-    // Clean up the animation when the component unmounts
-    return () => {
-      anim.stop();
-    };
-  }, [robot5Pos])
+    // Calculate the new position without animation
+    const newX = (robot5Pos[0] * 49) - 100;
+    const newY = 1000 - (robot5Pos[1] * 57) - 170;
+  
+    // Set the new position directly
+    setr5Pos({ x: newX, y: newY });
+  }, [robot5Pos]);
+  
 
   const [r6Pos, setr6Pos] = useState({
     x: robot6Pos[0],
@@ -73,37 +50,14 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
   })
 
   useEffect(() => {
-    const anim = new Konva.Animation((frame:IFrame | undefined) => {
-
-      const newX = Konva.Easings.EaseInOut(
-        frame!.time,
-        r6Pos.x,
-        ((robot6Pos[0] *  49) - 100) - r6Pos.x,
-        1000 // Animation duration in milliseconds (adjust as needed)
-      );
-
-      const newY = Konva.Easings.EaseInOut(
-        frame!.time,
-        r6Pos.y,
-        (1000 - (robot6Pos[1] * 57 ) - 170) - r6Pos.y,
-        1000 // Animation duration in milliseconds (adjust as needed)
-      );
-
-      setr6Pos({ x: newX, y: newY });
-
-      if (frame!.time >= 1000) {
-        // Stop the animation when it's done
-        anim.stop();
-      }
-    }, layerRef.current);
-
-    anim.start();
-
-    // Clean up the animation when the component unmounts
-    return () => {
-      anim.stop();
-    };
-  }, [robot6Pos])
+    // Calculate the new position without animation
+    const newX = (robot6Pos[0] * 49) - 100;
+    const newY = 1000 - (robot6Pos[1] * 57) - 170;
+  
+    // Set the new position directly
+    setr6Pos({ x: newX, y: newY });
+  }, [robot6Pos]);
+  
 
 
   const [r7Pos, setr7Pos] = useState({
@@ -112,37 +66,13 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
   })
 
   useEffect(() => {
-    const anim = new Konva.Animation((frame:IFrame | undefined) => {
-
-      const newX = Konva.Easings.EaseInOut(
-        frame!.time,
-        r7Pos.x,
-        ((robot7Pos[0] *  49) - 100) - r7Pos.x,
-        1000 // Animation duration in milliseconds (adjust as needed)
-      );
-
-      const newY = Konva.Easings.EaseInOut(
-        frame!.time,
-        r7Pos.y,
-        (1000 - (robot7Pos[1] * 57 ) - 170) - r7Pos.y,
-        1000 // Animation duration in milliseconds (adjust as needed)
-      );
-
-      setr7Pos({ x: newX, y: newY });
-
-      if (frame!.time >= 1000) {
-        // Stop the animation when it's done
-        anim.stop();
-      }
-    }, layerRef.current);
-
-    anim.start();
-
-    // Clean up the animation when the component unmounts
-    return () => {
-      anim.stop();
-    };
-  }, [robot7Pos])
+    // Calculate the new position without animation
+    const newX = (robot7Pos[0] * 49) - 100;
+    const newY = 1000 - (robot7Pos[1] * 57) - 170;
+  
+    // Set the new position directly
+    setr7Pos({ x: newX, y: newY });
+  }, [robot7Pos]);
 
 
   useEffect(() => {
