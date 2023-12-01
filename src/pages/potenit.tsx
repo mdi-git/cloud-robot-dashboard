@@ -89,10 +89,10 @@ export default function Potenit() {
               </h5>
               <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                 <span className="text-5xl font-extrabold tracking-tight">
-                  {selector.real.AVERAGETASKSPEED.toLocaleString()}
+                  {selector.real.AVERAGETASKSPEED.toFixed(0)}
                 </span>
                 <span className="ml-1 text-m font-normal text-gray-500 dark:text-gray-400">
-                  mm/s
+                  건
                 </span>
               </div>
             </div>

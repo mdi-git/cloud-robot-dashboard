@@ -525,34 +525,63 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
         layer.add(point6);
       }
 
-      // // 좌측 2번째
-      // {
-      //   const xAxis1 = new Konva.Line({
-      //     // x1, y1, x2, y2, x3, y3
-      //     points: [210, 535, 350, 535],
-      //     stroke: "orange",
-      //   });
+      // 좌측 2번째 (하) palletizer
+      {
+        const xAxis1 = new Konva.Line({
+          // x1, y1, x2, y2, x3, y3
+          points: [180, 600, 320, 600],
+          stroke: "black",
+        });
 
-      //   const xAxis2 = new Konva.Line({
-      //     points: [210, 690, 350, 690],
-      //     stroke: "orange",
-      //   });
+        const xAxis2 = new Konva.Line({
+          points: [180, 690, 320, 690],
+          stroke: "black",
+        });
 
-      //   const yAxis1 = new Konva.Line({
-      //     points: [210, 535, 210, 690],
-      //     stroke: "orange",
-      //   });
+        const yAxis1 = new Konva.Line({
+          points: [180, 600, 180, 690],
+          stroke: "black",
+        });
 
-      //   const yAxis2 = new Konva.Line({
-      //     points: [350, 535, 350, 690],
-      //     stroke: "orange",
-      //   });
+        const yAxis2 = new Konva.Line({
+          points: [320, 600, 320, 690],
+          stroke: "black",
+        });
 
-      //   layer.add(xAxis1);
-      //   layer.add(xAxis2);
-      //   layer.add(yAxis1);
-      //   layer.add(yAxis2);
-      // }
+        layer.add(xAxis1);
+        layer.add(xAxis2);
+        layer.add(yAxis1);
+        layer.add(yAxis2);
+      }
+
+      // 좌측 3번째 (상) palletizer
+      {
+        const xAxis1 = new Konva.Line({
+          // x1, y1, x2, y2, x3, y3
+          points: [80, 120, 320, 120],
+          stroke: "black",
+        });
+
+        const xAxis2 = new Konva.Line({
+          points: [80, 240, 320, 240],
+          stroke: "black",
+        });
+
+        const yAxis1 = new Konva.Line({
+          points: [80, 120, 80, 240],
+          stroke: "black",
+        });
+
+        const yAxis2 = new Konva.Line({
+          points: [320, 120, 320, 240],
+          stroke: "black",
+        });
+
+        layer.add(xAxis1);
+        layer.add(xAxis2);
+        layer.add(yAxis1);
+        layer.add(yAxis2);
+      }
 
       // Draw points and edges
       data.forEach((point) => {
