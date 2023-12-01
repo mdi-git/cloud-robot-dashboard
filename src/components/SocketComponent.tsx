@@ -108,7 +108,7 @@ const SocketComponent = ({}) => {
       ...JSON.parse(JSON.stringify(potenitSelector)),
     });
 
-    const socket = io("http://localhost:3001", { transports: ["websocket"] });
+    const socket = io("http://localhost:3002", { transports: ["websocket"] });
     socket.on("connect", () => {
       console.log("소켓 생성!");
     });
