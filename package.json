@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "start:socket": "node src/lib/amq.js",
+    "start-project": "yarn start && yarn start:socket"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
