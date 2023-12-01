@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { io } from "socket.io-client"
 
@@ -18,8 +19,12 @@ function HomePage() {
   
   return (
     <div>
-      <h1>테스트 페이지</h1>
-      <h1>Received Data: {receivedData}</h1>
+      <h1>클라우드 로봇</h1>
+      <div><Link href="/potenit">포테닛 물류센터 용 대시보드</Link></div>
+      <div><Link href="/simulation">가상 물류 로봇 용 대시보드</Link></div>
+      <div><Link href="/hitek">코리아하이텍 제조 로봇 용 대시보드</Link></div>
+      <div><Link href="/map/real">SmartLogisticsCenter</Link></div>
+      <div><Link href="/map/isaac">VirtualSmartLogisticsCenter</Link></div>
     </div>
   );
 }
