@@ -5,12 +5,12 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", // Remove trailing slash
+    origin: "http://localhost:3001", // Remove trailing slash
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
-const port = 3001;
+const port = 3002;
 const stompit = require("stompit");
 
 function main() {
