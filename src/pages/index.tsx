@@ -20,11 +20,11 @@ function HomePage() {
   return (
     <div>
       <h1>클라우드 로봇</h1>
-      <div><Link href="/potenit">포테닛 물류센터 용 대시보드</Link></div>
-      <div><Link href="/simulation">가상 물류 로봇 용 대시보드</Link></div>
-      <div><Link href="/hitek">코리아하이텍 제조 로봇 용 대시보드</Link></div>
-      <div><Link href="/map/real">SmartLogisticsCenter</Link></div>
-      <div><Link href="/map/isaac">VirtualSmartLogisticsCenter</Link></div>
+      <div><Link href="/potenit" target='_blank'>포테닛 물류센터 용 대시보드</Link></div>
+      <div><Link href="/simulation" target='_blank'>가상 물류 로봇 용 대시보드</Link></div>
+      <div><Link href="/hitek" target='_blank'>코리아하이텍 제조 로봇 용 대시보드</Link></div>
+      <div><Link href="/map/real" target='_blank'>SmartLogisticsCenter</Link></div>
+      <div><Link href="/map/isaac" target='_blank'>VirtualSmartLogisticsCenter</Link></div>
     </div>
   );
 }
