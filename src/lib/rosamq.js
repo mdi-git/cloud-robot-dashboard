@@ -16,16 +16,16 @@ const port = 3002;
 let h1 = "localhost";
 let h1p = 8887;
 let h2 = "localhost";
-let h2p = 9999;
+let h2p = 9997;
 let sv= "localhost";
 let svp = 3001;
 
-//argv.forEach(function (val, index, array) { // 0, 1번은
+argv.forEach(function (val, index, array) { // 0, 1번은
     // 0: /Users/luke/.nvm/versions/node/v16.18.1/bin/node
     // 1: /Users/luke/StudioProjects/cloud-robot-dashboard/src/lib/rosamq.js
     // 2: 192.168.0.1
     // 3: 9999
-    //console.log(index + ': ' + val);
+    console.log(index + ': ' + val);
     // [
     //     '/Users/luke/.nvm/versions/node/v16.18.1/bin/node',
     //     '/Users/luke/StudioProjects/cloud-robot-dashboard/src/lib/rosamq.js',
@@ -34,7 +34,7 @@ let svp = 3001;
     // ]
     //console.log(array);
     
-//});
+});
 
 // .env 파일로부터 환경변수 값을 읽어와서 사용한다.
 dotenv.config();
@@ -46,10 +46,10 @@ if(argv.length>7){
     sv= argv[6];
     svp= argv[7];
 } else if(argv.length>5){
-    h1= argv[6];
-    h1p= argv[7];
-    h2= argv[6];
-    h2p= argv[7];
+    h1= argv[2];
+    h1p= argv[3];
+    h2= argv[4];
+    h2p= argv[5];
 }
 
 const server = http.createServer(app);
@@ -152,8 +152,8 @@ function main() {
 }
 
 
-
 main();
+
 
 //
 // @todo ros

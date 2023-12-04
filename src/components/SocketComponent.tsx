@@ -10,6 +10,7 @@ let socksrv = "localhost";
 let socksrvp = 3002;
 
 if(process.env.SOCK!=null){
+  console.log("SOCK:"+process.env.SOCK+" / "+socksrvp);
   socksrv = process.env.SOCK;
 }
 
