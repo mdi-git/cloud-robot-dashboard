@@ -4,6 +4,15 @@ import { setRobotPosState } from "@/features/robotPosSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import 'dotenv/config'
+
+let socksrv = "localhost";
+let socksrvp = 3002;
+
+if(process.env.SOCK!=null){
+  socksrv = process.env.SOCK;
+}
+
 interface RobotData {
   REMAININGTASKCOUNT: [robotType: "real" | "simulation", count: number];
   ONGOINGTASKCOUNT: [robotType: "real" | "simulation", count: number];
@@ -108,7 +117,7 @@ const SocketComponent = ({}) => {
       ...JSON.parse(JSON.stringify(potenitSelector)),
     });
 
-    const socket = io("http://localhost:3002", { transports: ["websocket"] });
+    const socket = io("http://"+socksrv+":"+socksrvp, { transports: ["websocket"] });
     socket.on("connect", () => {
       console.log("소켓 생성!");
     });
