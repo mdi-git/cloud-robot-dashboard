@@ -78,7 +78,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     <>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <div className="p-12">
+          <div className="pt-12 pr-12 pl-12">
             <Component {...pageProps} />
           </div>
         </PersistGate>

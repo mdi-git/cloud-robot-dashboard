@@ -10,7 +10,7 @@ export default function Isaac() {
   return (
     <>
       <SocketComponent />
-      <div style={{ overflow: "hidden", height: "875px" }}>
+      <div style={{ overflow: "hidden", height: "875px" }} className="bg-slate-800">
         {JSON.stringify(robotSelector.AMR_LIFT7.ROBOTAT)} /{" "}
         {JSON.stringify(robotSelector.AMR_LIFT7.ROBOTPOSITION)}
         <CoordinatePlane

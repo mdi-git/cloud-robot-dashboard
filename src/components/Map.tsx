@@ -553,7 +553,7 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos,
             text: point.name.toString(),
             fontSize: 15,
             lineHeight: 1.2,
-            fill: "black",
+            fill: "white",
           })
         );
         // Add the circle to the layer

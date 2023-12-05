@@ -44,7 +44,7 @@ const Real: React.FC = () => {
         </div>
       )}
       <SocketComponent />
-      <div style={{ overflow: "hidden", height: "875px" }}>
+      <div style={{ overflow: "hidden", height: "875px" }} className="bg-slate-800">
         {/* 
         // TODO legend 추가하기
         */}

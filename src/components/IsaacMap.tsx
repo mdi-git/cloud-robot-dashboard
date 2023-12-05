@@ -530,22 +530,22 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
         const xAxis1 = new Konva.Line({
           // x1, y1, x2, y2, x3, y3
           points: [180, 600, 320, 600],
-          stroke: "black",
+          stroke: "#eee",
         });
 
         const xAxis2 = new Konva.Line({
           points: [180, 690, 320, 690],
-          stroke: "black",
+          stroke: "#eee",
         });
 
         const yAxis1 = new Konva.Line({
           points: [180, 600, 180, 690],
-          stroke: "black",
+          stroke: "#eee",
         });
 
         const yAxis2 = new Konva.Line({
           points: [320, 600, 320, 690],
-          stroke: "black",
+          stroke: "#eee",
         });
 
         layer.add(xAxis1);
@@ -559,22 +559,22 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
         const xAxis1 = new Konva.Line({
           // x1, y1, x2, y2, x3, y3
           points: [80, 120, 320, 120],
-          stroke: "black",
+          stroke: "#eee",
         });
 
         const xAxis2 = new Konva.Line({
           points: [80, 240, 320, 240],
-          stroke: "black",
+          stroke: "#eee",
         });
 
         const yAxis1 = new Konva.Line({
           points: [80, 120, 80, 240],
-          stroke: "black",
+          stroke: "#eee",
         });
 
         const yAxis2 = new Konva.Line({
           points: [320, 120, 320, 240],
-          stroke: "black",
+          stroke: "#eee",
         });
 
         layer.add(xAxis1);
@@ -618,7 +618,7 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
             text: point.name.toString(),
             fontSize: 15,
             lineHeight: 1.2,
-            fill: "black",
+            fill: "white",
           })
         );
         // Add the circle to the layer
