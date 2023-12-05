@@ -5,6 +5,7 @@ import {
   Cell,
   Tooltip,
   Legend,
+  Label,
 } from "recharts";
 import { useState, useEffect } from "react";
 
@@ -27,7 +28,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ data }) => {
   return (
     <>
       {isClient && (
-        <ResponsiveContainer width="100%" height={230} minWidth={200}>
+        <ResponsiveContainer width="100%" height={230} minWidth={100}>
           <PieChart>
             <Pie
               data={propData}
@@ -37,6 +38,12 @@ const DonutChart: React.FC<DonutChartProps> = ({ data }) => {
               outerRadius="80%"
               fill="#8884d8"
             >
+              <Label
+                value={data[1].value}
+                position="center"
+                className="label-top"
+                fontSize="27px"
+              />
               {data.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
