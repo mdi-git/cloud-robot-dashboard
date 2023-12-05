@@ -2,6 +2,8 @@ import ChartComponent from "@/components/DonutChart";
 import { Line } from "rc-progress";
 import SocketComponent from "@/components/SocketComponent";
 import { useAppSelector } from "@/hooks";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faArrowUpRightFromSquare} from "@fortawesome/free-solid-svg-icons"
 
 function Dashboard() {
   const selector = useAppSelector((state) => state.data);
@@ -19,7 +21,9 @@ function Dashboard() {
         <div className="flex text-center basis-5/12 mr-3">
           <div className="w-full">
             <div className="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3 mb-3">
-              <p className="font-bold text-lg">포테닛 물류센터 용</p>
+              <p className="font-bold text-lg">포테닛 물류센터 용
+              <a href="/map/real" target="_blank" className="text-blue-700" style={{textDecoration: 'none', color: 'rgb(29 78 216)'}}> <FontAwesomeIcon icon={faArrowUpRightFromSquare} /></a>
+              </p>
             </div>
             <div className="flex justify-around">
               <div className="basis-1/3 mr-3 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-4 dark:bg-gray-800 dark:border-gray-700">
@@ -345,7 +349,9 @@ function Dashboard() {
         <div className="flex text-center basis-5/12 mr-3">
           <div className="w-full">
             <div className="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3 mb-3">
-              <p className="font-bold text-lg">가상 물류 로봇 용</p>
+              <p className="font-bold text-lg">가상 물류 로봇 용
+              <a href="/map/isaac" target="_blank" className="text-blue-700" style={{textDecoration: 'none', color: 'rgb(29 78 216)'}}> <FontAwesomeIcon icon={faArrowUpRightFromSquare} /></a>
+              </p>
             </div>
             <div className="flex justify-around">
               <div className="basis-1/3 mr-3 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-4 dark:bg-gray-800 dark:border-gray-700">

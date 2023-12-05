@@ -11,6 +11,9 @@
     "start-project": "yarn start && yarn start:socket"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "20.5.0",
     "@types/rc-progress": "^2.4.3",
@@ -25,6 +28,7 @@
     "delay": "^6.0.0",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "fontawesome": "^5.6.3",
     "http": "^0.0.1-security",
     "js-yaml": "^4.1.0",
     "json-parser": "^3.1.2",
