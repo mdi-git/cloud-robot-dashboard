@@ -12,6 +12,7 @@ interface ObjType {
 interface DataType {
   real: ObjType;
   simulation: ObjType;
+  hitek: {ASSEMBLEDITEMCOUNT: number}
 }
 // Initial state
 export const initialState: DataType = {
@@ -31,6 +32,9 @@ export const initialState: DataType = {
     CUMULATIVETASKSPEED:  0,
     AVERAGETASKSPEED:  0,
   },
+  hitek: {
+    ASSEMBLEDITEMCOUNT: 0,
+  }
 };
 // Actual Slice
 export const dataSlice = createSlice({

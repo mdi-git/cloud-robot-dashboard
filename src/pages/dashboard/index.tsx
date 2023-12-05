@@ -1,12 +1,15 @@
 import ChartComponent from "@/components/DonutChart";
+import { Line } from "rc-progress";
+import SocketComponent from "@/components/SocketComponent";
 import { useAppSelector } from "@/hooks";
+
 function Dashboard() {
   const selector = useAppSelector((state) => state.data);
-  const robotSelector = useAppSelector((state) => state.robot);
   const potenitSelector = useAppSelector((state) => state.potenit);
 
   return (
     <>
+      <SocketComponent />
       <div className="w-full">
         <div className="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3 mb-3">
           <p className="font-bold text-lg text-center">대시보드</p>
@@ -82,7 +85,7 @@ function Dashboard() {
                     {selector.real.CUMULATIVETASKSPEED}
                   </span>
                   <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
-                    건
+                    건/m
                   </span>
                 </div>
               </div>
@@ -95,7 +98,7 @@ function Dashboard() {
                     {selector.real.AVERAGETASKSPEED.toFixed(0)}
                   </span>
                   <span className="ml-1 text-m font-normal text-gray-500 dark:text-gray-400">
-                    건
+                    건/m
                   </span>
                 </div>
               </div>
@@ -106,22 +109,37 @@ function Dashboard() {
               </div>
               <div className="flex justify-around">
                 <div className="w-full">
-                  <div className="font-bold">AMR_Lift1</div>
+                  <div className="font-bold mb-3">AMR_Lift1</div>
                   <div>
-                    진행도{" "}
-                    {potenitSelector.AMR_LIFT1.TASKPROGRESS
-                      ? potenitSelector.AMR_LIFT1.TASKPROGRESS +
-                        `(${
-                          eval(potenitSelector.AMR_LIFT1.TASKPROGRESS) * 100
-                        }%)`
-                      : "-/-"}
+                    진행도 {eval(potenitSelector.AMR_LIFT1.TASKPROGRESS) * 100}%
+                    <Line
+                      className="m-auto mt-1 w-4/5 "
+                      percent={
+                        potenitSelector.AMR_LIFT1.TASKPROGRESS
+                          ? eval(potenitSelector.AMR_LIFT1.TASKPROGRESS) * 100
+                          : 0
+                      }
+                      strokeWidth={7}
+                      strokeColor={colorByProgress(
+                        potenitSelector.AMR_LIFT1.TASKPROGRESS
+                      )}
+                    />
                   </div>
-                  <div className="mt-3 font-bold">현재 진행중인 작업</div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
+                  <div className="mt-5 font-bold">현재 진행중인 작업</div>
                   <div className="break-words">
-                    {potenitSelector.AMR_LIFT1.ROBOTTASKSTATUS
-                      ? `${potenitSelector.AMR_LIFT1.ROBOTTASKSTATUS[0]} / ${potenitSelector.AMR_LIFT1.ROBOTTASKSTATUS[1]}`
-                      : "-"}{" "}
+                    {potenitSelector.AMR_LIFT1.ROBOTTASKSTATUS ? (
+                      <div>
+                        {potenitSelector.AMR_LIFT1.ROBOTTASKSTATUS[0]}
+                        <div>
+                          {potenitSelector.AMR_LIFT1.ROBOTTASKSTATUS[1]}
+                        </div>
+                      </div>
+                    ) : (
+                      "-"
+                    )}{" "}
                   </div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
                   <div className="mt-4">배터리 상황</div>
                   <ChartComponent
                     data={[
@@ -140,22 +158,37 @@ function Dashboard() {
                   />
                 </div>
                 <div className="w-full">
-                  <div className="font-bold">AMR_Lift2</div>
+                  <div className="font-bold mb-3">AMR_Lift2</div>
                   <div>
-                    진행도{" "}
-                    {potenitSelector.AMR_LIFT2.TASKPROGRESS
-                      ? potenitSelector.AMR_LIFT2.TASKPROGRESS +
-                        `(${
-                          eval(potenitSelector.AMR_LIFT2.TASKPROGRESS) * 100
-                        }%)`
-                      : "-/-"}
+                    진행도 {eval(potenitSelector.AMR_LIFT2.TASKPROGRESS) * 100}%
+                    <Line
+                      className="m-auto mt-1 w-4/5 "
+                      percent={
+                        potenitSelector.AMR_LIFT2.TASKPROGRESS
+                          ? eval(potenitSelector.AMR_LIFT2.TASKPROGRESS) * 100
+                          : 0
+                      }
+                      strokeWidth={7}
+                      strokeColor={colorByProgress(
+                        potenitSelector.AMR_LIFT2.TASKPROGRESS
+                      )}
+                    />
                   </div>
-                  <div className="mt-3 font-bold">현재 진행중인 작업</div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
+                  <div className="mt-5 font-bold">현재 진행중인 작업</div>
                   <div>
-                    {potenitSelector.AMR_LIFT2.ROBOTTASKSTATUS
-                      ? `${potenitSelector.AMR_LIFT2.ROBOTTASKSTATUS[0]} / ${potenitSelector.AMR_LIFT2.ROBOTTASKSTATUS[1]}`
-                      : "-"}{" "}
+                    {potenitSelector.AMR_LIFT2.ROBOTTASKSTATUS ? (
+                      <div>
+                        {potenitSelector.AMR_LIFT2.ROBOTTASKSTATUS[0]}
+                        <div>
+                          {potenitSelector.AMR_LIFT2.ROBOTTASKSTATUS[1]}
+                        </div>
+                      </div>
+                    ) : (
+                      "-"
+                    )}{" "}
                   </div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
                   <div className="mt-4">배터리 상황</div>
                   <ChartComponent
                     data={[
@@ -174,22 +207,37 @@ function Dashboard() {
                   />
                 </div>
                 <div className="w-full">
-                  <div className="font-bold">AMR_Lift3</div>
+                  <div className="font-bold mb-3">AMR_Lift3</div>
                   <div>
-                    진행도{" "}
-                    {potenitSelector.AMR_LIFT3.TASKPROGRESS
-                      ? potenitSelector.AMR_LIFT3.TASKPROGRESS +
-                        `(${
-                          eval(potenitSelector.AMR_LIFT3.TASKPROGRESS) * 100
-                        }%)`
-                      : "-/-"}
+                    진행도 {eval(potenitSelector.AMR_LIFT3.TASKPROGRESS) * 100}%
+                    <Line
+                      className="m-auto mt-1 w-4/5 "
+                      percent={
+                        potenitSelector.AMR_LIFT3.TASKPROGRESS
+                          ? eval(potenitSelector.AMR_LIFT3.TASKPROGRESS) * 100
+                          : 0
+                      }
+                      strokeWidth={7}
+                      strokeColor={colorByProgress(
+                        potenitSelector.AMR_LIFT3.TASKPROGRESS
+                      )}
+                    />
                   </div>
-                  <div className="mt-3 font-bold">현재 진행중인 작업</div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
+                  <div className="mt-5 font-bold">현재 진행중인 작업</div>
                   <div>
-                    {potenitSelector.AMR_LIFT3.ROBOTTASKSTATUS
-                      ? `${potenitSelector.AMR_LIFT3.ROBOTTASKSTATUS[0]} / ${potenitSelector.AMR_LIFT3.ROBOTTASKSTATUS[1]}`
-                      : "-"}{" "}
+                    {potenitSelector.AMR_LIFT3.ROBOTTASKSTATUS ? (
+                      <div>
+                        {potenitSelector.AMR_LIFT3.ROBOTTASKSTATUS[0]}
+                        <div>
+                          {potenitSelector.AMR_LIFT3.ROBOTTASKSTATUS[1]}
+                        </div>
+                      </div>
+                    ) : (
+                      "-"
+                    )}{" "}
                   </div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
                   <div className="mt-4">배터리 상황</div>
                   <ChartComponent
                     data={[
@@ -208,22 +256,37 @@ function Dashboard() {
                   />
                 </div>
                 <div className="w-full">
-                  <div className="font-bold">AMR_Lift4</div>
+                  <div className="font-bold mb-3">AMR_Lift4</div>
                   <div>
-                    진행도{" "}
-                    {potenitSelector.AMR_LIFT4.TASKPROGRESS
-                      ? potenitSelector.AMR_LIFT4.TASKPROGRESS +
-                        `(${
-                          eval(potenitSelector.AMR_LIFT4.TASKPROGRESS) * 100
-                        }%)`
-                      : "-/-"}
+                    진행도 {eval(potenitSelector.AMR_LIFT4.TASKPROGRESS) * 100}%
+                    <Line
+                      className="m-auto mt-1 w-4/5 "
+                      percent={
+                        potenitSelector.AMR_LIFT4.TASKPROGRESS
+                          ? eval(potenitSelector.AMR_LIFT4.TASKPROGRESS) * 100
+                          : 0
+                      }
+                      strokeWidth={7}
+                      strokeColor={colorByProgress(
+                        potenitSelector.AMR_LIFT4.TASKPROGRESS
+                      )}
+                    />
                   </div>
-                  <div className="mt-3 font-bold">현재 진행중인 작업</div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
+                  <div className="mt-5 font-bold">현재 진행중인 작업</div>
                   <div>
-                    {potenitSelector.AMR_LIFT4.ROBOTTASKSTATUS
-                      ? `${potenitSelector.AMR_LIFT4.ROBOTTASKSTATUS[0]} / ${potenitSelector.AMR_LIFT4.ROBOTTASKSTATUS[1]}`
-                      : "-"}{" "}
+                    {potenitSelector.AMR_LIFT4.ROBOTTASKSTATUS ? (
+                      <div>
+                        {potenitSelector.AMR_LIFT4.ROBOTTASKSTATUS[0]}
+                        <div>
+                          {potenitSelector.AMR_LIFT4.ROBOTTASKSTATUS[1]}
+                        </div>
+                      </div>
+                    ) : (
+                      "-"
+                    )}{" "}
                   </div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
                   <div className="mt-4">배터리 상황</div>
                   <ChartComponent
                     data={[
@@ -242,22 +305,38 @@ function Dashboard() {
                   />
                 </div>
                 <div className="w-full">
-                  <div className="font-bold">PALLETIZER1</div>
+                  <div className="font-bold mb-3">PALLETIZER1</div>
                   <div>
                     진행도{" "}
-                    {potenitSelector.PALLETIZER1.TASKPROGRESS
-                      ? potenitSelector.PALLETIZER1.TASKPROGRESS +
-                        `(${
-                          eval(potenitSelector.PALLETIZER1.TASKPROGRESS) * 100
-                        }%)`
-                      : "-/-"}
+                    {eval(potenitSelector.PALLETIZER1.TASKPROGRESS) * 100}%
+                    <Line
+                      className="m-auto mt-1 w-4/5 "
+                      percent={
+                        potenitSelector.PALLETIZER1.TASKPROGRESS
+                          ? eval(potenitSelector.PALLETIZER1.TASKPROGRESS) * 100
+                          : 0
+                      }
+                      strokeWidth={7}
+                      strokeColor={colorByProgress(
+                        potenitSelector.PALLETIZER1.TASKPROGRESS
+                      )}
+                    />
                   </div>
-                  <div className="mt-3 font-bold">현재 진행중인 작업</div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
+                  <div className="mt-5 font-bold">현재 진행중인 작업</div>
                   <div>
-                    {potenitSelector.PALLETIZER1.ROBOTTASKSTATUS
-                      ? `${potenitSelector.PALLETIZER1.ROBOTTASKSTATUS[0]} / ${potenitSelector.PALLETIZER1.ROBOTTASKSTATUS[1]} `
-                      : "-"}{" "}
+                    {potenitSelector.PALLETIZER1.ROBOTTASKSTATUS ? (
+                      <div>
+                        {potenitSelector.PALLETIZER1.ROBOTTASKSTATUS[0]}
+                        <div>
+                          {potenitSelector.PALLETIZER1.ROBOTTASKSTATUS[1]}
+                        </div>
+                      </div>
+                    ) : (
+                      "-"
+                    )}{" "}
                   </div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
                 </div>
               </div>
             </div>
@@ -332,7 +411,7 @@ function Dashboard() {
                     {selector.simulation.CUMULATIVETASKSPEED}
                   </span>
                   <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
-                    건
+                    건/m
                   </span>
                 </div>
               </div>
@@ -345,7 +424,7 @@ function Dashboard() {
                     {selector.simulation.AVERAGETASKSPEED.toFixed(0)}
                   </span>
                   <span className="ml-1 text-m font-normal text-gray-500 dark:text-gray-400">
-                    mm/s
+                    건/m
                   </span>
                 </div>
               </div>
@@ -356,22 +435,37 @@ function Dashboard() {
               </div>
               <div className="flex justify-around">
                 <div className="w-full">
-                  <div className="font-bold">AMR_Lift5</div>
+                  <div className="font-bold mb-3">AMR_Lift5</div>
                   <div>
-                    진행도{" "}
-                    {potenitSelector.AMR_LIFT5.TASKPROGRESS
-                      ? potenitSelector.AMR_LIFT5.TASKPROGRESS +
-                        `(${
-                          eval(potenitSelector.AMR_LIFT5.TASKPROGRESS) * 100
-                        }%)`
-                      : "-/-"}
+                    진행도 {eval(potenitSelector.AMR_LIFT5.TASKPROGRESS) * 100}%
+                    <Line
+                      className="m-auto mt-1 w-4/5 "
+                      percent={
+                        potenitSelector.AMR_LIFT5.TASKPROGRESS
+                          ? eval(potenitSelector.AMR_LIFT5.TASKPROGRESS) * 100
+                          : 0
+                      }
+                      strokeWidth={7}
+                      strokeColor={colorByProgress(
+                        potenitSelector.AMR_LIFT5.TASKPROGRESS
+                      )}
+                    />
                   </div>
-                  <div className="mt-3 font-bold">현재 진행중인 작업</div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
+                  <div className="mt-5 font-bold">현재 진행중인 작업</div>
                   <div>
-                    {potenitSelector.AMR_LIFT5.ROBOTTASKSTATUS
-                      ? `${potenitSelector.AMR_LIFT5.ROBOTTASKSTATUS[0]} / ${potenitSelector.AMR_LIFT5.ROBOTTASKSTATUS[1]}`
-                      : "-"}{" "}
+                    {potenitSelector.AMR_LIFT5.ROBOTTASKSTATUS ? (
+                      <div>
+                        {potenitSelector.AMR_LIFT5.ROBOTTASKSTATUS[0]}
+                        <div>
+                          {potenitSelector.AMR_LIFT5.ROBOTTASKSTATUS[1]}
+                        </div>
+                      </div>
+                    ) : (
+                      "-"
+                    )}{" "}
                   </div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
                   <div className="mt-4">배터리 상황</div>
                   <ChartComponent
                     data={[
@@ -390,22 +484,37 @@ function Dashboard() {
                   />
                 </div>
                 <div className="w-full">
-                  <div className="font-bold">AMR_Lift6</div>
+                  <div className="font-bold mb-3">AMR_Lift6</div>
                   <div>
-                    진행도{" "}
-                    {potenitSelector.AMR_LIFT6.TASKPROGRESS
-                      ? potenitSelector.AMR_LIFT6.TASKPROGRESS +
-                        `(${
-                          eval(potenitSelector.AMR_LIFT6.TASKPROGRESS) * 100
-                        }%)`
-                      : "-/-"}
+                    진행도 {eval(potenitSelector.AMR_LIFT6.TASKPROGRESS) * 100}%
+                    <Line
+                      className="m-auto mt-1 w-4/5 "
+                      percent={
+                        potenitSelector.AMR_LIFT6.TASKPROGRESS
+                          ? eval(potenitSelector.AMR_LIFT6.TASKPROGRESS) * 100
+                          : 0
+                      }
+                      strokeWidth={7}
+                      strokeColor={colorByProgress(
+                        potenitSelector.AMR_LIFT6.TASKPROGRESS
+                      )}
+                    />
                   </div>
-                  <div className="mt-3 font-bold">현재 진행중인 작업</div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
+                  <div className="mt-5 font-bold">현재 진행중인 작업</div>
                   <div>
-                    {potenitSelector.AMR_LIFT6.ROBOTTASKSTATUS
-                      ? `${potenitSelector.AMR_LIFT6.ROBOTTASKSTATUS[0]} / ${potenitSelector.AMR_LIFT6.ROBOTTASKSTATUS[1]}`
-                      : "-"}{" "}
+                    {potenitSelector.AMR_LIFT6.ROBOTTASKSTATUS ? (
+                      <div>
+                        {potenitSelector.AMR_LIFT6.ROBOTTASKSTATUS[0]}
+                        <div>
+                          {potenitSelector.AMR_LIFT6.ROBOTTASKSTATUS[1]}
+                        </div>
+                      </div>
+                    ) : (
+                      "-"
+                    )}{" "}
                   </div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
                   <div className="mt-4">배터리 상황</div>
                   <ChartComponent
                     data={[
@@ -424,22 +533,37 @@ function Dashboard() {
                   />
                 </div>
                 <div className="w-full">
-                  <div className="font-bold">AMR_Lift7</div>
+                  <div className="font-bold mb-3">AMR_Lift7</div>
                   <div>
-                    진행도{" "}
-                    {potenitSelector.AMR_LIFT7.TASKPROGRESS
-                      ? potenitSelector.AMR_LIFT7.TASKPROGRESS +
-                        `(${
-                          eval(potenitSelector.AMR_LIFT7.TASKPROGRESS) * 100
-                        }%)`
-                      : "-/-"}
+                    진행도 {eval(potenitSelector.AMR_LIFT7.TASKPROGRESS) * 100}%
+                    <Line
+                      className="m-auto mt-1 w-4/5 "
+                      percent={
+                        potenitSelector.AMR_LIFT7.TASKPROGRESS
+                          ? eval(potenitSelector.AMR_LIFT7.TASKPROGRESS) * 100
+                          : 0
+                      }
+                      strokeWidth={7}
+                      strokeColor={colorByProgress(
+                        potenitSelector.AMR_LIFT7.TASKPROGRESS
+                      )}
+                    />
                   </div>
-                  <div className="mt-3 font-bold">현재 진행중인 작업</div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
+                  <div className="mt-5 font-bold">현재 진행중인 작업</div>
                   <div>
-                    {potenitSelector.AMR_LIFT7.ROBOTTASKSTATUS
-                      ? `${potenitSelector.AMR_LIFT7.ROBOTTASKSTATUS[0]} / ${potenitSelector.AMR_LIFT7.ROBOTTASKSTATUS[1]}`
-                      : "-"}{" "}
+                    {potenitSelector.AMR_LIFT7.ROBOTTASKSTATUS ? (
+                      <div>
+                        {potenitSelector.AMR_LIFT7.ROBOTTASKSTATUS[0]}
+                        <div>
+                          {potenitSelector.AMR_LIFT7.ROBOTTASKSTATUS[1]}
+                        </div>
+                      </div>
+                    ) : (
+                      "-"
+                    )}{" "}
                   </div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
                   <div className="mt-4">배터리 상황</div>
                   <ChartComponent
                     data={[
@@ -458,40 +582,72 @@ function Dashboard() {
                   />
                 </div>
                 <div className="w-full">
-                  <div className="font-bold">PALLETIZER2</div>
+                  <div className="font-bold mb-3">PALLETIZER2</div>
                   <div>
                     진행도{" "}
-                    {potenitSelector.PALLETIZER2.TASKPROGRESS
-                      ? potenitSelector.PALLETIZER2.TASKPROGRESS +
-                        `(${
-                          eval(potenitSelector.PALLETIZER2.TASKPROGRESS) * 100
-                        }%)`
-                      : "-/-"}
+                    {eval(potenitSelector.PALLETIZER2.TASKPROGRESS) * 100}%
+                    <Line
+                      className="m-auto mt-1 w-4/5 "
+                      percent={
+                        potenitSelector.PALLETIZER2.TASKPROGRESS
+                          ? eval(potenitSelector.PALLETIZER2.TASKPROGRESS) * 100
+                          : 0
+                      }
+                      strokeWidth={7}
+                      strokeColor={colorByProgress(
+                        potenitSelector.PALLETIZER2.TASKPROGRESS
+                      )}
+                    />
                   </div>
-                  <div className="mt-3 font-bold">현재 진행중인 작업</div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
+                  <div className="mt-5 font-bold">현재 진행중인 작업</div>
                   <div>
-                    {potenitSelector.PALLETIZER2.ROBOTTASKSTATUS
-                      ? `${potenitSelector.PALLETIZER2.ROBOTTASKSTATUS[0]} / ${potenitSelector.PALLETIZER2.ROBOTTASKSTATUS[1]} `
-                      : "-"}{" "}
+                    {potenitSelector.PALLETIZER2.ROBOTTASKSTATUS ? (
+                      <div>
+                        {potenitSelector.PALLETIZER2.ROBOTTASKSTATUS[0]}
+                        <div>
+                          {potenitSelector.PALLETIZER2.ROBOTTASKSTATUS[1]}
+                        </div>
+                      </div>
+                    ) : (
+                      "-"
+                    )}{" "}
                   </div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
                 </div>
                 <div className="w-full">
-                  <div className="font-bold">PALLETIZER3</div>
+                  <div className="font-bold mb-3">PALLETIZER3</div>
                   <div>
                     진행도{" "}
-                    {potenitSelector.PALLETIZER3.TASKPROGRESS
-                      ? potenitSelector.PALLETIZER3.TASKPROGRESS +
-                        `(${
-                          eval(potenitSelector.PALLETIZER3.TASKPROGRESS) * 100
-                        }%)`
-                      : "-/-"}
+                    {eval(potenitSelector.PALLETIZER3.TASKPROGRESS) * 100}%
+                    <Line
+                      className="m-auto mt-1 w-4/5 "
+                      percent={
+                        potenitSelector.PALLETIZER3.TASKPROGRESS
+                          ? eval(potenitSelector.PALLETIZER3.TASKPROGRESS) * 100
+                          : 0
+                      }
+                      strokeWidth={7}
+                      strokeColor={colorByProgress(
+                        potenitSelector.PALLETIZER3.TASKPROGRESS
+                      )}
+                    />
                   </div>
-                  <div className="mt-3 font-bold">현재 진행중인 작업</div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
+                  <div className="mt-5 font-bold">현재 진행중인 작업</div>
                   <div>
-                    {potenitSelector.PALLETIZER3.ROBOTTASKSTATUS
-                      ? `${potenitSelector.PALLETIZER3.ROBOTTASKSTATUS[0]} / ${potenitSelector.PALLETIZER3.ROBOTTASKSTATUS[1]} `
-                      : "-"}{" "}
+                    {potenitSelector.PALLETIZER3.ROBOTTASKSTATUS ? (
+                      <div>
+                        {potenitSelector.PALLETIZER3.ROBOTTASKSTATUS[0]}
+                        <div>
+                          {potenitSelector.PALLETIZER3.ROBOTTASKSTATUS[1]}
+                        </div>
+                      </div>
+                    ) : (
+                      "-"
+                    )}{" "}
                   </div>
+                  <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
                 </div>
               </div>
             </div>
@@ -509,7 +665,7 @@ function Dashboard() {
                 </h5>
                 <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                   <span className="text-5xl font-extrabold tracking-tight">
-                    {selector.simulation.REMAININGTASKCOUNT}
+                    {selector.hitek.ASSEMBLEDITEMCOUNT}
                   </span>
                   <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                     건
@@ -535,7 +691,74 @@ function Dashboard() {
             <div className="mt-8 bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3 mb-3">
               <p className="font-bold">로봇 현황표</p>
             </div>
-            <div>
+            <div className="flex justify-around">
+              <div className="w-full">
+                <div className="font-bold mb-3">협동 로봇</div>
+                <div>
+                  진행도 {eval(potenitSelector.UR.TASKPROGRESS) * 100}%
+                  <Line
+                    className="m-auto mt-1 w-5/12 "
+                    percent={
+                      potenitSelector.UR.TASKPROGRESS
+                        ? eval(potenitSelector.UR.TASKPROGRESS) * 100
+                        : 0
+                    }
+                    strokeWidth={7}
+                    strokeColor={colorByProgress(
+                      potenitSelector.UR.TASKPROGRESS
+                    )}
+                  />
+                </div>
+                <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
+                <div className="mt-5 font-bold">현재 진행중인 작업</div>
+                <div className="break-words">
+                  {potenitSelector.UR.ROBOTTASKSTATUS ? (
+                    <div>
+                      {potenitSelector.UR.ROBOTTASKSTATUS[0]}
+                      <div>{potenitSelector.UR.ROBOTTASKSTATUS[1]}</div>
+                    </div>
+                  ) : (
+                    "-"
+                  )}{" "}
+                </div>
+                <hr className="mt-3 mb-1 w-4/5 m-auto h-px border-indigo-900" />
+                <hr className="mb-3 w-4/5 m-auto h-px border-indigo-900" />
+              </div>
+            </div>
+            <div className="flex justify-around">
+              <div className="w-full">
+                <div className="font-bold mb-3">산업 로봇</div>
+                <div>
+                  진행도 {eval(potenitSelector.Epson.TASKPROGRESS) * 100}%
+                  <Line
+                    className="m-auto mt-1 w-5/12 "
+                    percent={
+                      potenitSelector.Epson.TASKPROGRESS
+                        ? eval(potenitSelector.Epson.TASKPROGRESS) * 100
+                        : 0
+                    }
+                    strokeWidth={7}
+                    strokeColor={colorByProgress(
+                      potenitSelector.Epson.TASKPROGRESS
+                    )}
+                  />
+                </div>
+                <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
+                <div className="mt-5 font-bold">현재 진행중인 작업</div>
+                <div className="break-words">
+                  {potenitSelector.Epson.ROBOTTASKSTATUS ? (
+                    <div>
+                      {potenitSelector.Epson.ROBOTTASKSTATUS[0]}
+                      <div>{potenitSelector.Epson.ROBOTTASKSTATUS[1]}</div>
+                    </div>
+                  ) : (
+                    "-"
+                  )}{" "}
+                </div>
+                <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
+              </div>
+            </div>
+            {/* <div>
               <div className="">
                 <div className="p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-4 dark:bg-gray-800 dark:border-gray-700">
                   <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
@@ -566,7 +789,7 @@ function Dashboard() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -575,3 +798,20 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
+const colorByProgress = (value: string) => {
+  if (value === "1/4") {
+    return "#f87171";
+  }
+  if (value === "2/4") {
+    return "#fdba74";
+  }
+  if (value === "3/4") {
+    return "#86efac";
+  }
+  if (value === "4/4") {
+    return "#38bdf8";
+  }
+
+  return "#06b6d4";
+};

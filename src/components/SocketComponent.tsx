@@ -4,13 +4,13 @@ import { setRobotPosState } from "@/features/robotPosSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import 'dotenv/config'
+import "dotenv/config";
 
 let socksrv = "localhost";
 let socksrvp = 3002;
 
-if(process.env.SOCK!=null){
-  console.log("SOCK:"+process.env.SOCK+" / "+socksrvp);
+if (process.env.SOCK != null) {
+  console.log("SOCK:" + process.env.SOCK + " / " + socksrvp);
   socksrv = process.env.SOCK;
 }
 
@@ -41,6 +41,7 @@ interface RobotData {
     x: number | string,
     y: number | string
   ];
+  ASSEMBLEDITEMCOUNT: number;
 }
 
 interface RobotStatusData {
@@ -99,6 +100,7 @@ const SocketComponent = ({}) => {
     PERFIRMABLETASKCOUNT: ["", 0],
     ROBOTAT: ["AMR_LIFT1", "", ""],
     ROBOTPOSITION: ["AMR_LIFT1", 0, 0],
+    ASSEMBLEDITEMCOUNT: 0,
   });
 
   const [robotStatus, setRobotStatus] = useState<RobotStatusData>({
@@ -107,9 +109,10 @@ const SocketComponent = ({}) => {
     AMR_LIFT3: {},
     AMR_LIFT4: {},
     PALLETIZER1: {},
+    UR: {},
+    Epson: {},
     ...JSON.parse(JSON.stringify(potenitSelector)),
   });
-
 
   useEffect(() => {
     setReceivedData({ ...receivedData });
@@ -118,18 +121,35 @@ const SocketComponent = ({}) => {
       ...JSON.parse(JSON.stringify(potenitSelector)),
     });
 
-    const socket = io("http://"+socksrv+":"+socksrvp, { transports: ["websocket"] });
+    const socket = io("http://" + socksrv + ":" + socksrvp, {
+      transports: ["websocket"],
+    });
     socket.on("connect", () => {
       console.log("소켓 생성!");
     });
 
     socket.on("getData", (data) => {
+      console.log(atob(data));
       setReceivedData((prevReceivedData) => {
         const tempData = getKeyValueObject(atob(data));
         return { ...prevReceivedData, ...tempData };
       });
     });
   }, []);
+
+  // for Korea Hitek
+  useEffect(() => {
+    console.log('ASSEMBLEDITEMCOUNT', receivedData.ASSEMBLEDITEMCOUNT)
+    dispatch(
+      setDataState({
+        ...selector,
+        hitek: {
+          ...selector.hitek,
+          ASSEMBLEDITEMCOUNT: receivedData.ASSEMBLEDITEMCOUNT,
+        },
+      })
+    );
+  }, [receivedData.ASSEMBLEDITEMCOUNT]);
 
   useEffect(() => {
     const isReal = receivedData.REMAININGTASKCOUNT[0] === "real";
@@ -212,7 +232,10 @@ const SocketComponent = ({}) => {
       dispatch(
         setDataState({
           ...selector,
-          real: { ...selector.real, NEWTASKCOUNT: receivedData.NEWTASKCOUNT[1] },
+          real: {
+            ...selector.real,
+            NEWTASKCOUNT: receivedData.NEWTASKCOUNT[1],
+          },
         })
       );
     } else {
@@ -289,13 +312,13 @@ const SocketComponent = ({}) => {
         };
 
         dispatch(
-            setPotenitState({
-              ...potenitSelector,
-              ...temp,
-            })
-          );
+          setPotenitState({
+            ...potenitSelector,
+            ...temp,
+          })
+        );
       }
-     
+
       return { ...prevRobotStatus, ...temp };
     });
   }, [receivedData.TASKPROGRESS]);
@@ -307,14 +330,17 @@ const SocketComponent = ({}) => {
       if (robotId) {
         temp[`${robotId}`] = {
           ...prevRobotStatus[robotId],
-          ROBOTTASKSTATUS: [receivedData.ROBOTTASKSTATUS[2], receivedData.ROBOTTASKSTATUS[3]],
+          ROBOTTASKSTATUS: [
+            receivedData.ROBOTTASKSTATUS[2],
+            receivedData.ROBOTTASKSTATUS[3],
+          ],
         };
         dispatch(
-            setPotenitState({
-              ...potenitSelector,
-              ...temp,
-            })
-          );
+          setPotenitState({
+            ...potenitSelector,
+            ...temp,
+          })
+        );
       }
 
       return { ...prevRobotStatus, ...temp };
@@ -331,13 +357,13 @@ const SocketComponent = ({}) => {
           BATTERYREMAIN: receivedData.BATTERYREMAIN[1],
         };
         dispatch(
-            setPotenitState({
-              ...potenitSelector,
-              ...temp,
-            })
-          );
+          setPotenitState({
+            ...potenitSelector,
+            ...temp,
+          })
+        );
       }
-     
+
       return { ...prevRobotStatus, ...temp };
     });
   }, [receivedData.BATTERYREMAIN]);
@@ -352,13 +378,13 @@ const SocketComponent = ({}) => {
           BATTERYSTATUS: receivedData.BATTERYSTATUS[1],
         };
         dispatch(
-            setPotenitState({
-              ...potenitSelector,
-              ...temp,
-            })
-          );
+          setPotenitState({
+            ...potenitSelector,
+            ...temp,
+          })
+        );
       }
-      
+
       return { ...prevRobotStatus, ...temp };
     });
   }, [receivedData.BATTERYSTATUS]);
@@ -373,13 +399,13 @@ const SocketComponent = ({}) => {
           PERFIRMABLETASKCOUNT: receivedData.PERFIRMABLETASKCOUNT[1],
         };
         dispatch(
-            setPotenitState({
-              ...potenitSelector,
-              ...temp,
-            })
-          );
+          setPotenitState({
+            ...potenitSelector,
+            ...temp,
+          })
+        );
       }
-     
+
       return { ...prevRobotStatus, ...temp };
     });
   }, [receivedData.PERFIRMABLETASKCOUNT]);
@@ -396,7 +422,7 @@ const SocketComponent = ({}) => {
         ],
       };
     }
-    console.log(temp, robotSelector)
+    console.log(temp, robotSelector);
     dispatch(
       setRobotPosState({
         ...robotSelector,
@@ -427,7 +453,7 @@ const SocketComponent = ({}) => {
     );
   }, [receivedData.ROBOTAT]);
 
-  return (<></>)
+  return <></>;
 };
 
 export default SocketComponent;

@@ -9,6 +9,11 @@ interface RobotData {
   PERFIRMABLETASKCOUNT: number;
 }
 
+interface HitekData {
+  TASKPROGRESS: string;
+  ROBOTTASKSTATUS: [taskName: string, status: "start" | "progress" | "pause" | "complete"];
+}
+
 interface ChartType {
   AMR_LIFT1: RobotData;
   AMR_LIFT2: RobotData;
@@ -20,6 +25,8 @@ interface ChartType {
   PALLETIZER1: RobotData;
   PALLETIZER2: RobotData;
   PALLETIZER3: RobotData;
+  UR: HitekData;
+  Epson: HitekData;
 }
 // Initial state
 export const initialState: ChartType = {
@@ -93,6 +100,20 @@ export const initialState: ChartType = {
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
+  },
+  UR: {
+    TASKPROGRESS: "1/4",
+    ROBOTTASKSTATUS: ["-", "progress"],
+    // BATTERYREMAIN: 0,
+    // BATTERYSTATUS: "Using",
+    // PERFIRMABLETASKCOUNT: 0,
+  },
+  Epson: {
+    TASKPROGRESS: "1/4",
+    ROBOTTASKSTATUS: ["-", "progress"],
+    // BATTERYREMAIN: 0,
+    // BATTERYSTATUS: "Using",
+    // PERFIRMABLETASKCOUNT: 0,
   },
 };
 // Actual Slice
