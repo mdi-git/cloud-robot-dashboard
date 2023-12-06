@@ -609,7 +609,7 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
         //   })
         // );
 
-        // layer.add(p2);
+        layer.add(p2);
         // layer.add(label1);
 
         const p3 = new Konva.Rect({
