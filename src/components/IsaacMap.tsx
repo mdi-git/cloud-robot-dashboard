@@ -81,6 +81,7 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
         container: "coordinate-plane-container",
         width: 1890,
         height: 1000,
+        
       });
       const layer = layerRef.current;
 
@@ -583,6 +584,61 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
         layer.add(yAxis2);
       }
 
+      {
+        const p2 = new Konva.Rect({
+          x: 200,
+          y: 160,
+          width: 35,
+          height: 35,
+          fill: '#aaa',
+          stroke: '#aaa'
+        })
+        
+        const label1 = new Konva.Label({
+          x: 210,
+          y: 170,
+          draggable: true,
+        });
+
+        // label1.add(
+        //   new Konva.Text({
+        //     text: 'P2',
+        //     fontSize: 15,
+        //     lineHeight: 1.2,
+        //     fill: "#000",
+        //   })
+        // );
+
+        // layer.add(p2);
+        // layer.add(label1);
+
+        const p3 = new Konva.Rect({
+          x: 200,
+          y: 640,
+          width: 35,
+          height: 35,
+          fill: '#aaa',
+          stroke: '#aaa'
+        })
+
+        // const label2 = new Konva.Label({
+        //   x: 210,
+        //   y: 650,
+        //   draggable: true,
+        // });
+
+        // label2.add(
+        //   new Konva.Text({
+        //     text: 'P3',
+        //     fontSize: 15,
+        //     lineHeight: 1.2,
+        //     fill: "#000",
+        //   })
+        // );
+
+        layer.add(p3);
+        // layer.add(label2);
+      }
       // Draw points and edges
       data.forEach((point) => {
         const [x, y] = point.pos;

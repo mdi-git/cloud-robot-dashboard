@@ -517,6 +517,35 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos,
         layer.add(yAxis1);
         layer.add(yAxis2);
       }
+      // 팔레타이저
+      {
+
+        const p1 = new Konva.Rect({
+          x: 190,
+          y: 600,
+          width: 35,
+          height: 35,
+          fill: '#aaa',
+          stroke: '#aaa'
+        })
+        // const label1 = new Konva.Label({
+        //   x: 200,
+        //   y: 610,
+        //   draggable: true,
+        // });
+
+        // label1.add(
+        //   new Konva.Text({
+        //     text: "P1",
+        //     fontSize: 15,
+        //     lineHeight: 1.2,
+        //     fill: "#000",
+        //   })
+        // );
+
+        layer.add(p1);
+        // layer.add(label1);
+      }
 
       // Draw points and edges
       data.forEach((point) => {

@@ -48,10 +48,11 @@ const Real: React.FC = () => {
         {/* 
         // TODO legend 추가하기
         */}
-        {JSON.stringify(robotSelector.AMR_LIFT1.ROBOTPOSITION)} /{" "}
+        <h1 className="text-lg p-3"><span className="bg-slate-600 rounded text-white-800 pr-3 pl-3 pb-1 pt-1">포테닛 물류센터</span></h1>
+        {/* {JSON.stringify(robotSelector.AMR_LIFT1.ROBOTPOSITION)} /{" "}
         {JSON.stringify(robotSelector.AMR_LIFT2.ROBOTPOSITION)} /{" "}
         {JSON.stringify(robotSelector.AMR_LIFT3.ROBOTPOSITION)} /{" "}
-        {JSON.stringify(robotSelector.AMR_LIFT4.ROBOTPOSITION)}
+        {JSON.stringify(robotSelector.AMR_LIFT4.ROBOTPOSITION)} */}
         <CoordinatePlane
           data={Coordinates}
           obj={ObjNamePos}
