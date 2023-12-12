@@ -649,18 +649,18 @@ function publish_ros(line){
         action_status_value11.motion_status.status = 1;        
         action_status11.publish(action_status_value1);
 
-        // pose_value11.pose.pose.position.x = 113.5;
-        // pose_value11.pose.pose.position.y = 68;
-        // robot_pose11.publish(pose_value11);
+        pose_value11.pose.pose.position.x = 113.5;
+        pose_value11.pose.pose.position.y = 68;
+        robot_pose11.publish(pose_value11);
 
       } else if(lsp[1].endsWith("INBOT_01")){
         action_status_value12.status_id = (lsp[4]=='start'?1:(lsp[4]=='progress'?3:(lsp[4]=='complete'?5:0)));
         action_status_value12.motion_status.status = 1;        
         action_status12.publish(action_status_value12);
 
-        // pose_value12.pose.pose.position.x = 113.5;
-        // pose_value12.pose.pose.position.y = 32;
-        // robot_pose12.publish(pose_value12);
+        pose_value12.pose.pose.position.x = 113.5;
+        pose_value12.pose.pose.position.y = 32;
+        robot_pose12.publish(pose_value12);
 
       } 
 
@@ -669,15 +669,15 @@ function publish_ros(line){
         var tps = lsp[2].split("/")
         var tp = tps[0]*25;
  
-      //  if(lsp[1].endsWith("COBOT_01")){
-      //    pose_value11.pose.pose.position.x = 113.5;
-      //    pose_value11.pose.pose.position.y = 68;
-      //    robot_pose11.publish(pose_value11);
-      //  } else if(lsp[1].endsWith("INBOT_01")){
-      //    pose_value12.pose.pose.position.x = 113.5;
-      //    pose_value12.pose.pose.position.y = 32;
-      //    robot_pose12.publish(pose_value12);
-      //  } 
+       if(lsp[1].endsWith("COBOT_01")){
+         pose_value11.pose.pose.position.x = 113.5;
+         pose_value11.pose.pose.position.y = 68;
+         robot_pose11.publish(pose_value11);
+       } else if(lsp[1].endsWith("INBOT_01")){
+         pose_value12.pose.pose.position.x = 113.5;
+         pose_value12.pose.pose.position.y = 32;
+         robot_pose12.publish(pose_value12);
+       } 
  
      } 
 
