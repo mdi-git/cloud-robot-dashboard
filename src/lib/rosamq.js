@@ -123,6 +123,7 @@ function main() {
                 console.log("cmd: " + cmd);
                 console.log("data: " + data);
                 io.emit("getData", json.Content.toString("utf-8"));
+                publish_ros(decode);
               });
             });
         

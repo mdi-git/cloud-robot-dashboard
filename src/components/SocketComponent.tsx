@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import "dotenv/config";
 
-let socksrv = "localhost";
+// let socksrv = "localhost";
+let socksrv = "13.124.24.230";
 let socksrvp = 3002;
 
 if (process.env.SOCK != null) {
