@@ -36,8 +36,8 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
 
   useEffect(() => {
     // Calculate the new position without animation
-    const newX = (robot5Pos[0] * 49) - 100;
-    const newY = 1000 - (robot5Pos[1] * 57) - 170;
+    const newX = (robot5Pos[0] * 66) - 210;
+    const newY = 1000 - (robot5Pos[1] * 65) - 140;
   
     // Set the new position directly
     setr5Pos({ x: newX, y: newY });
@@ -51,8 +51,8 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
 
   useEffect(() => {
     // Calculate the new position without animation
-    const newX = (robot6Pos[0] * 49) - 100;
-    const newY = 1000 - (robot6Pos[1] * 57) - 170;
+    const newX = (robot6Pos[0] * 66) - 210;
+    const newY = 1000 - (robot6Pos[1] * 65) - 140;
   
     // Set the new position directly
     setr6Pos({ x: newX, y: newY });
@@ -67,8 +67,8 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
 
   useEffect(() => {
     // Calculate the new position without animation
-    const newX = (robot7Pos[0] * 49) - 100;
-    const newY = 1000 - (robot7Pos[1] * 57) - 170;
+    const newX = (robot7Pos[0] * 66) - 210;
+    const newY = 1000 - (robot7Pos[1] * 65) - 140;
   
     // Set the new position directly
     setr7Pos({ x: newX, y: newY });
@@ -85,26 +85,35 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
       });
       const layer = layerRef.current;
 
+      // var background = new Konva.Rect({
+      //   x: 0,
+      //   y: 0,
+      //   width: stage.width(),
+      //   height: stage.height(),
+      //   fill: '#6B7280'
+      // });
+      // layer.add(background);
+
       // 우측 1번째
       {
         const xAxis1 = new Konva.Line({
           // x1, y1, x2, y2, x3, y3
-          points: [770, 50, stage.width() - 460, 50],
+          points: [770, 50, stage.width() - 435, 50],
           stroke: "red",
         });
 
         const xAxis2 = new Konva.Line({
-          points: [770, 160, stage.width() - 460, 160],
+          points: [770, 160, stage.width() - 435, 160],
           stroke: "orange",
         });
 
         const xAxis3 = new Konva.Line({
-          points: [770, 95, stage.width() - 460, 95],
+          points: [770, 95, stage.width() - 435, 95],
           stroke: "red",
         });
 
         const xAxis4 = new Konva.Line({
-          points: [770, 115, stage.width() - 460, 115],
+          points: [770, 115, stage.width() - 435, 115],
           stroke: "red",
         });
 
@@ -114,7 +123,7 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
         });
 
         const yAxis2 = new Konva.Line({
-          points: [stage.width() - 460, 50, stage.width() - 460, 160],
+          points: [stage.width() - 435, 50, stage.width() - 435, 160],
           stroke: "blue",
         });
 
@@ -144,25 +153,25 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
         });
 
         const point1x = new Konva.Circle({
-          x: stage.width() - 460,
+          x: stage.width() - 435,
           y: 50,
           fill: "blue",
           radius: 4,
         });
         const point2x = new Konva.Circle({
-          x: stage.width() - 460,
+          x: stage.width() - 435,
           y: 160,
           fill: "blue",
           radius: 4,
         });
         const point3x = new Konva.Circle({
-          x: stage.width() - 460,
+          x: stage.width() - 435,
           y: 95,
           fill: "blue",
           radius: 4,
         });
         const point4x = new Konva.Circle({
-          x: stage.width() - 460,
+          x: stage.width() - 435,
           y: 115,
           fill: "blue",
           radius: 4,
@@ -185,13 +194,13 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
         for (let i = 0; i < 4; i++) {
           layer.add(
             new Konva.Line({
-              points: [850 + 145 * i, 50, 850 + 145 * i, 160],
+              points: [820 + 165 * i, 50, 820 + 165 * i, 160],
               stroke: "blue",
             })
           );
           layer.add(
             new Konva.Circle({
-              x: 850 + 145 * i,
+              x: 820 + 165 * i,
               y: 50,
               fill: "blue",
               radius: 4,
@@ -199,7 +208,7 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
           );
           layer.add(
             new Konva.Circle({
-              x: 850 + 145 * i,
+              x: 820 + 165 * i,
               y: 160,
               fill: "blue",
               radius: 4,
@@ -207,7 +216,7 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
           );
           layer.add(
             new Konva.Circle({
-              x: 850 + 145 * i,
+              x: 820 + 165 * i,
               y: 95,
               fill: "blue",
               radius: 4,
@@ -215,7 +224,7 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
           );
           layer.add(
             new Konva.Circle({
-              x: 850 + 145 * i,
+              x: 820 + 165 * i,
               y: 115,
               fill: "blue",
               radius: 4,
@@ -228,81 +237,81 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
       {
         const xAxis1 = new Konva.Line({
           // x1, y1, x2, y2, x3, y3
-          points: [770, 340, stage.width() - 460, 340],
+          points: [770, 360, stage.width() - 435, 360],
           stroke: "red",
         });
 
         const xAxis2 = new Konva.Line({
-          points: [770, 470, stage.width() - 460, 470],
+          points: [770, 480, stage.width() - 435, 480],
           stroke: "orange",
         });
 
         const xAxis3 = new Konva.Line({
-          points: [770, 395, stage.width() - 460, 395],
+          points: [770, 405, stage.width() - 435, 405],
           stroke: "red",
         });
 
         const xAxis4 = new Konva.Line({
-          points: [770, 415, stage.width() - 460, 415],
+          points: [770, 425, stage.width() - 435, 425],
           stroke: "red",
         });
 
         const yAxis1 = new Konva.Line({
-          points: [770, 340, 770, 470],
+          points: [770, 360, 770, 480],
           stroke: "blue",
         });
 
         const yAxis2 = new Konva.Line({
-          points: [stage.width() - 460, 340, stage.width() - 460, 470],
+          points: [stage.width() - 435, 360, stage.width() - 435, 480],
           stroke: "blue",
         });
 
         const point1 = new Konva.Circle({
           x: 770,
-          y: 340,
+          y: 360,
           fill: "blue",
           radius: 4,
         });
         const point2 = new Konva.Circle({
           x: 770,
-          y: 470,
+          y: 480,
           fill: "blue",
           radius: 4,
         });
         const point3 = new Konva.Circle({
           x: 770,
-          y: 415,
+          y: 425,
           fill: "blue",
           radius: 4,
         });
         const point4 = new Konva.Circle({
           x: 770,
-          y: 395,
+          y: 405,
           fill: "blue",
           radius: 4,
         });
 
         const point1x = new Konva.Circle({
-          x: stage.width() - 460,
-          y: 340,
+          x: stage.width() - 435,
+          y: 360,
           fill: "blue",
           radius: 4,
         });
         const point2x = new Konva.Circle({
-          x: stage.width() - 460,
-          y: 470,
+          x: stage.width() - 435,
+          y: 480,
           fill: "blue",
           radius: 4,
         });
         const point3x = new Konva.Circle({
-          x: stage.width() - 460,
-          y: 415,
+          x: stage.width() - 435,
+          y: 425,
           fill: "blue",
           radius: 4,
         });
         const point4x = new Konva.Circle({
-          x: stage.width() - 460,
-          y: 395,
+          x: stage.width() - 435,
+          y: 405,
           fill: "blue",
           radius: 4,
         });
@@ -324,38 +333,38 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
         for (let i = 0; i < 4; i++) {
           layer.add(
             new Konva.Line({
-              points: [850 + 145 * i, 340, 850 + 145 * i, 470],
+              points: [820 + 165 * i, 360, 820 + 165 * i, 480],
               stroke: "blue",
             })
           );
           layer.add(
             new Konva.Circle({
-              x: 850 + 145 * i,
-              y: 340,
+              x: 820 + 165 * i,
+              y: 360,
               fill: "blue",
               radius: 4,
             })
           );
           layer.add(
             new Konva.Circle({
-              x: 850 + 145 * i,
-              y: 470,
+              x: 820 + 165 * i,
+              y: 480,
               fill: "blue",
               radius: 4,
             })
           );
           layer.add(
             new Konva.Circle({
-              x: 850 + 145 * i,
-              y: 415,
+              x: 820 + 165 * i,
+              y: 425,
               fill: "blue",
               radius: 4,
             })
           );
           layer.add(
             new Konva.Circle({
-              x: 850 + 145 * i,
-              y: 395,
+              x: 820 + 165 * i,
+              y: 405,
               fill: "blue",
               radius: 4,
             })
@@ -368,46 +377,46 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
       {
         const xAxis1 = new Konva.Line({
           // x1, y1, x2, y2, x3, y3
-          points: [770, 680, stage.width() - 460, 680],
+          points: [770, 670, stage.width() - 435, 670],
           stroke: "orange",
         });
 
         const xAxis2 = new Konva.Line({
-          points: [770, 720, stage.width() - 460, 720],
+          points: [770, 700, stage.width() - 435, 700],
           stroke: "red",
         });
 
         const yAxis1 = new Konva.Line({
-          points: [770, 680, 770, 720],
+          points: [770, 670, 770, 700],
           stroke: "blue",
         });
 
         const yAxis2 = new Konva.Line({
-          points: [stage.width() - 460, 720, stage.width() - 460, 680],
+          points: [stage.width() - 435, 700, stage.width() - 435, 670],
           stroke: "blue",
         });
 
         const point1 = new Konva.Circle({
           x: 770,
-          y: 680,
+          y: 670,
           fill: "blue",
           radius: 4,
         });
         const point2 = new Konva.Circle({
-          x: stage.width() - 460,
-          y: 680,
+          x: stage.width() - 435,
+          y: 670,
           fill: "blue",
           radius: 4,
         });
         const point3 = new Konva.Circle({
           x: 770,
-          y: 720,
+          y: 700,
           fill: "blue",
           radius: 4,
         });
         const point4 = new Konva.Circle({
-          x: stage.width() - 460,
-          y: 720,
+          x: stage.width() - 435,
+          y: 700,
           fill: "blue",
           radius: 4,
         });
@@ -423,22 +432,22 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
         for (let i = 0; i < 4; i++) {
           layer.add(
             new Konva.Line({
-              points: [850 + 145 * i, 680, 850 + 145 * i, 720],
+              points: [820 + 165 * i, 670, 820 + 165 * i, 700],
               stroke: "blue",
             })
           );
           layer.add(
             new Konva.Circle({
-              x: 850 + 145 * i,
-              y: 680,
+              x: 820 + 165 * i,
+              y: 670,
               fill: "blue",
               radius: 4,
             })
           );
           layer.add(
             new Konva.Circle({
-              x: 850 + 145 * i,
-              y: 720,
+              x: 820 + 165 * i,
+              y: 700,
               fill: "blue",
               radius: 4,
             })
@@ -645,9 +654,9 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
 
         // Scale the coordinates to fit within the screen
         // const scaledX = (x / maxCoordinate) * stage.width();
-        const scaledX = (x * 49) - 100;
+        const scaledX = (x * 66) - 210;
         // const scaledY = (y / maxCoordinate) * stage.height();
-        const scaledY = (y * 57) + 170;
+        const scaledY = (y * 65) + 140;
 
         // Draw a circle for the point
         const circle = new Konva.Circle({
@@ -687,9 +696,9 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
           if (edgeEnd) {
             const [edgeX, edgeY] = edgeEnd.pos;
             // const scaledEdgeX = (edgeX / maxCoordinate) * stage.width();
-            const scaledEdgeX = (edgeX * 49) - 100;
+            const scaledEdgeX = (edgeX * 66) - 210;
             // const scaledEdgeY = (edgeY / maxCoordinate) * stage.height();
-            const scaledEdgeY = (edgeY * 57) + 170;
+            const scaledEdgeY = (edgeY * 65) + 140;
 
             const line = new Konva.Line({
               points: [
@@ -716,9 +725,9 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
       <div id="coordinate-plane-container">
         <Stage width={window.innerWidth - 30} height={1000}>
           <Layer ref={layerRef}>
-            <Circle x={r5Pos.x} y={r5Pos.y} radius={30} fill="red" />
+            {/* <Circle x={r5Pos.x} y={r5Pos.y} radius={30} fill="red" />
             <Circle x={r6Pos.x} y={r6Pos.y} radius={30} fill="orange" />
-            <Circle x={r7Pos.x} y={r7Pos.y} radius={30} fill="yellow" />
+            <Circle x={r7Pos.x} y={r7Pos.y} radius={30} fill="yellow" /> */}
             {/* <Circle x={r4Pos.x} y={r4Pos.y} radius={30} fill="green" /> */}
           </Layer>
         </Stage>
