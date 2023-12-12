@@ -725,9 +725,9 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
       <div id="coordinate-plane-container">
         <Stage width={window.innerWidth - 30} height={1000}>
           <Layer ref={layerRef}>
-            {/* <Circle x={r5Pos.x} y={r5Pos.y} radius={30} fill="red" />
+            <Circle x={r5Pos.x} y={r5Pos.y} radius={30} fill="red" />
             <Circle x={r6Pos.x} y={r6Pos.y} radius={30} fill="orange" />
-            <Circle x={r7Pos.x} y={r7Pos.y} radius={30} fill="yellow" /> */}
+            <Circle x={r7Pos.x} y={r7Pos.y} radius={30} fill="yellow" />
             {/* <Circle x={r4Pos.x} y={r4Pos.y} radius={30} fill="green" /> */}
           </Layer>
         </Stage>
