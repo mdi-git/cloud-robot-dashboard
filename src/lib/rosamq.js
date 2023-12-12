@@ -503,6 +503,27 @@ function publish_ros(line){
 
         }
 
+        pose_value8.pose.pose.position.x = b1+a1*4.5;
+        pose_value8.pose.pose.position.y = d1+c1*3.8;
+        robot_pose8.publish(pose_value8);        
+             
+        pose_value9.pose.pose.position.x = b2+a2*4.5;
+        pose_value9.pose.pose.position.y = d2+c2*11.4;
+        robot_pose9.publish(pose_value9);
+
+        pose_value10.pose.pose.position.x = b2+a2*4.5;
+        pose_value10.pose.pose.position.y = d2+c2*3;
+        robot_pose10.publish(pose_value10);
+
+
+        pose_value11.pose.pose.position.x = 113.5;
+        pose_value11.pose.pose.position.y = 68;
+        robot_pose11.publish(pose_value11);
+
+        pose_value12.pose.pose.position.x = 113.5;
+        pose_value12.pose.pose.position.y = 32;
+        robot_pose12.publish(pose_value12);
+
     } else if(line.startsWith("batteryRemain")){
 
        if(lsp[1].endsWith("AMR_RL01")){
@@ -597,9 +618,9 @@ function publish_ros(line){
 
         console.log("action_status_value8 : %o",action_status_value8);
         
-        pose_value8.pose.pose.position.x = b1+a1*4.5;
-        pose_value8.pose.pose.position.y = d1+c1*3;
-        robot_pose8.publish(pose_value8);
+        // pose_value8.pose.pose.position.x = b1+a1*4.5;
+        // pose_value8.pose.pose.position.y = d1+c1*3.8;
+        // robot_pose8.publish(pose_value8);
         
       } else if(lsp[1].endsWith("PLTZ_V01")){
         action_status_value9.status_id = (lsp[4]=='start'?1:(lsp[4]=='progress'?3:(lsp[4]=='complete'?5:0)));
@@ -608,9 +629,9 @@ function publish_ros(line){
 
         console.log("action_status_value9 : %o",action_status_value9);
         
-        pose_value9.pose.pose.position.x = b2+a2*4.5;
-        pose_value9.pose.pose.position.y = d2+c2*8.4;
-        robot_pose9.publish(pose_value9);
+        // pose_value9.pose.pose.position.x = b2+a2*4.5;
+        // pose_value9.pose.pose.position.y = d2+c2*11.4;
+        // robot_pose9.publish(pose_value9);
 
       } else if(lsp[1].endsWith("PLTZ_V02")){
         action_status_value10.status_id = (lsp[4]=='start'?1:(lsp[4]=='progress'?3:(lsp[4]=='complete'?5:0)));
@@ -619,27 +640,27 @@ function publish_ros(line){
 
         console.log("action_status10 : %o",action_status10);
         
-        pose_value10.pose.pose.position.x = b2+a2*4.5;
-        pose_value10.pose.pose.position.y = d2+c2*3;
-        robot_pose10.publish(pose_value10);
+        // pose_value10.pose.pose.position.x = b2+a2*4.5;
+        // pose_value10.pose.pose.position.y = d2+c2*3;
+        // robot_pose10.publish(pose_value10);
 
       } else if(lsp[1].endsWith("COBOT_01")){
         action_status_value11.status_id = (lsp[4]=='start'?1:(lsp[4]=='progress'?3:(lsp[4]=='complete'?5:0)));
         action_status_value11.motion_status.status = 1;        
         action_status11.publish(action_status_value1);
 
-        pose_value11.pose.pose.position.x = 113.5;
-        pose_value11.pose.pose.position.y = 68;
-        robot_pose11.publish(pose_value11);
+        // pose_value11.pose.pose.position.x = 113.5;
+        // pose_value11.pose.pose.position.y = 68;
+        // robot_pose11.publish(pose_value11);
 
       } else if(lsp[1].endsWith("INBOT_01")){
         action_status_value12.status_id = (lsp[4]=='start'?1:(lsp[4]=='progress'?3:(lsp[4]=='complete'?5:0)));
         action_status_value12.motion_status.status = 1;        
         action_status12.publish(action_status_value12);
 
-        pose_value12.pose.pose.position.x = 113.5;
-        pose_value12.pose.pose.position.y = 32;
-        robot_pose12.publish(pose_value12);
+        // pose_value12.pose.pose.position.x = 113.5;
+        // pose_value12.pose.pose.position.y = 32;
+        // robot_pose12.publish(pose_value12);
 
       } 
 
@@ -648,15 +669,15 @@ function publish_ros(line){
         var tps = lsp[2].split("/")
         var tp = tps[0]*25;
  
-       if(lsp[1].endsWith("COBOT_01")){
-         pose_value11.pose.pose.position.x = 113.5;
-         pose_value11.pose.pose.position.y = 68;
-         robot_pose11.publish(pose_value11);
-       } else if(lsp[1].endsWith("INBOT_01")){
-         pose_value12.pose.pose.position.x = 113.5;
-         pose_value12.pose.pose.position.y = 32;
-         robot_pose12.publish(pose_value12);
-       } 
+      //  if(lsp[1].endsWith("COBOT_01")){
+      //    pose_value11.pose.pose.position.x = 113.5;
+      //    pose_value11.pose.pose.position.y = 68;
+      //    robot_pose11.publish(pose_value11);
+      //  } else if(lsp[1].endsWith("INBOT_01")){
+      //    pose_value12.pose.pose.position.x = 113.5;
+      //    pose_value12.pose.pose.position.y = 32;
+      //    robot_pose12.publish(pose_value12);
+      //  } 
  
      } 
 
