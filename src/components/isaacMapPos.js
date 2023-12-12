@@ -164,7 +164,7 @@ export const Coordinates = [
   {
     name: 1139,
     type: 0,
-    pos: [17.45 , 4.56],
+    pos: [17.45, 4.5],
     edge: [1140, 1039, 1025, 1138],
   },
   {
