@@ -415,10 +415,16 @@ function publish_ros(line){
     let b1=0.05;
     let c1=5.4;
     let d1=17.2;
-    let a2=3.71;
-    let b2=-7.62;
-    let c2=4.35;
-    let d2=12.7;
+
+    let a2=5;
+    let b2=-11.85;
+    let c2=4.93;
+    let d2=10.6;
+    
+    // let a2=3.71;
+    // let b2=-7.62;
+    // let c2=4.35;
+    // let d2=12.7;
 
     line = replaceAll(line,"(","");
     line = replaceAll(line,")","");
@@ -503,16 +509,16 @@ function publish_ros(line){
 
         }
 
-        pose_value8.pose.pose.position.x = b1+a1*4.5;
-        pose_value8.pose.pose.position.y = d1+c1*3.8;
+        pose_value8.pose.pose.position.x = b1+a1*5.7;
+        pose_value8.pose.pose.position.y = d1+c1*4.6;
         robot_pose8.publish(pose_value8);        
              
-        pose_value9.pose.pose.position.x = b2+a2*4.5;
-        pose_value9.pose.pose.position.y = d2+c2*11.4;
+        pose_value9.pose.pose.position.x = b2+a2*6.5;
+        pose_value9.pose.pose.position.y = d2+c2*11.1;
         robot_pose9.publish(pose_value9);
 
-        pose_value10.pose.pose.position.x = b2+a2*4.5;
-        pose_value10.pose.pose.position.y = d2+c2*3;
+        pose_value10.pose.pose.position.x = b2+a2*6.5;
+        pose_value10.pose.pose.position.y = d2+c2*3.7;
         robot_pose10.publish(pose_value10);
 
 
