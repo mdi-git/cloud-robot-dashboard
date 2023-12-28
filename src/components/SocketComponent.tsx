@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import "dotenv/config";
 
-// let socksrv = "localhost";
-let socksrv = "13.124.24.230";
+let socksrv = "localhost";
+// let socksrv = "13.124.24.230";
 let socksrvp = 3002;
 
 if (process.env.SOCK != null) {
@@ -130,7 +130,7 @@ const SocketComponent = ({}) => {
     });
 
     socket.on("getData", (data) => {
-      console.log(atob(data));
+      // console.log(atob(data));
       setReceivedData((prevReceivedData) => {
         const tempData = getKeyValueObject(atob(data));
         return { ...prevReceivedData, ...tempData };
@@ -140,7 +140,6 @@ const SocketComponent = ({}) => {
 
   // for Korea Hitek
   useEffect(() => {
-    console.log('ASSEMBLEDITEMCOUNT', receivedData.ASSEMBLEDITEMCOUNT)
     dispatch(
       setDataState({
         ...selector,
@@ -252,30 +251,30 @@ const SocketComponent = ({}) => {
     }
   }, [receivedData.NEWTASKCOUNT]);
 
-  useEffect(() => {
-    const isReal = receivedData.CUMULATIVETASKSPEED[0] === "real";
-    if (isReal) {
-      dispatch(
-        setDataState({
-          ...selector,
-          real: {
-            ...selector.real,
-            CUMULATIVETASKSPEED: receivedData.CUMULATIVETASKSPEED[1],
-          },
-        })
-      );
-    } else {
-      dispatch(
-        setDataState({
-          ...selector,
-          simulation: {
-            ...selector.simulation,
-            CUMULATIVETASKSPEED: receivedData.CUMULATIVETASKSPEED[1],
-          },
-        })
-      );
-    }
-  }, [receivedData.CUMULATIVETASKSPEED]);
+  // useEffect(() => {
+  //   const isReal = receivedData.AVERAGETASKSPEED[0] === "real";
+  //   if (isReal) {
+  //     dispatch(
+  //       setDataState({
+  //         ...selector,
+  //         real: {
+  //           ...selector.real,
+  //           CUMULATIVETASKSPEED: [...selector.real.CUMULATIVETASKSPEED, receivedData.AVERAGETASKSPEED[1]],
+  //         },
+  //       })
+  //     );
+  //   } else {
+  //     dispatch(
+  //       setDataState({
+  //         ...selector,
+  //         simulation: {
+  //           ...selector.simulation,
+  //           CUMULATIVETASKSPEED: [...selector.real.CUMULATIVETASKSPEED, receivedData.AVERAGETASKSPEED[1]],
+  //         },
+  //       })
+  //     );
+  //   }
+  // }, [receivedData.AVERAGETASKSPEED]);
 
   useEffect(() => {
     const isReal = receivedData.AVERAGETASKSPEED[0] === "real";
@@ -286,6 +285,7 @@ const SocketComponent = ({}) => {
           real: {
             ...selector.real,
             AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED[1],
+            CUMULATIVETASKSPEED: [...selector.real.CUMULATIVETASKSPEED, receivedData.AVERAGETASKSPEED[1]].filter(el => el !== 0)
           },
         })
       );
@@ -296,6 +296,7 @@ const SocketComponent = ({}) => {
           simulation: {
             ...selector.simulation,
             AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED[1],
+            CUMULATIVETASKSPEED: [...selector.real.CUMULATIVETASKSPEED, receivedData.AVERAGETASKSPEED[1]].filter(el => el !== 0)
           },
         })
       );
@@ -336,6 +337,9 @@ const SocketComponent = ({}) => {
             receivedData.ROBOTTASKSTATUS[3],
           ],
         };
+
+        console.log(temp)
+
         dispatch(
           setPotenitState({
             ...potenitSelector,
@@ -423,7 +427,7 @@ const SocketComponent = ({}) => {
         ],
       };
     }
-    console.log(temp, robotSelector);
+    // console.log(temp, robotSelector);
     dispatch(
       setRobotPosState({
         ...robotSelector,

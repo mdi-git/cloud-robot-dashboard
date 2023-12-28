@@ -6,7 +6,7 @@ interface ObjType {
   ONGOINGTASKCOUNT : number;
   COMPLETEDTASKCOUNT : number;
   NEWTASKCOUNT : number;
-  CUMULATIVETASKSPEED : number;
+  CUMULATIVETASKSPEED : number[];
   AVERAGETASKSPEED : number;
 }
 interface DataType {
@@ -21,7 +21,7 @@ export const initialState: DataType = {
     ONGOINGTASKCOUNT: 0,
     COMPLETEDTASKCOUNT: 0,
     NEWTASKCOUNT: 0,
-    CUMULATIVETASKSPEED: 0,
+    CUMULATIVETASKSPEED: [],
     AVERAGETASKSPEED: 0,
   },
   simulation: {
@@ -29,7 +29,7 @@ export const initialState: DataType = {
     ONGOINGTASKCOUNT:  0,
     COMPLETEDTASKCOUNT:  0,
     NEWTASKCOUNT:  0,
-    CUMULATIVETASKSPEED:  0,
+    CUMULATIVETASKSPEED: [],
     AVERAGETASKSPEED:  0,
   },
   hitek: {

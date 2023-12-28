@@ -22,9 +22,9 @@ interface ChartType {
   AMR_LIFT5: RobotData;
   AMR_LIFT6: RobotData;
   AMR_LIFT7: RobotData;
-  PALLETIZER1: RobotData;
-  PALLETIZER2: RobotData;
-  PALLETIZER3: RobotData;
+  Palletizer1: RobotData;
+  Palletizer2: RobotData;
+  Palletizer3: RobotData;
   UR: HitekData;
   Epson: HitekData;
 }
@@ -80,21 +80,21 @@ export const initialState: ChartType = {
     PERFIRMABLETASKCOUNT: 0,
   },
 
-  PALLETIZER1: {
+  Palletizer1: {
     TASKPROGRESS: "1/4",
     ROBOTTASKSTATUS: ["-", "progress"],
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
   },
-  PALLETIZER2: {
+  Palletizer2: {
     TASKPROGRESS: "1/4",
     ROBOTTASKSTATUS: ["-", "progress"],
     BATTERYREMAIN: 0,
     BATTERYSTATUS: "Using",
     PERFIRMABLETASKCOUNT: 0,
   },
-  PALLETIZER3: {
+  Palletizer3: {
     TASKPROGRESS: "1/4",
     ROBOTTASKSTATUS: ["-", "progress"],
     BATTERYREMAIN: 0,

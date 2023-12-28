@@ -86,7 +86,7 @@ function Dashboard() {
                 </h5>
                 <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                   <span className="text-5xl font-extrabold tracking-tight">
-                    {selector.real.CUMULATIVETASKSPEED}
+                    {selector.real.CUMULATIVETASKSPEED.length > 0 ? (selector.real.CUMULATIVETASKSPEED.reduce((acc, cur) => acc + cur, 0) / selector.real.CUMULATIVETASKSPEED.length).toFixed(3) : '-'}
                   </span>
                   <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                     건/m
@@ -99,7 +99,7 @@ function Dashboard() {
                 </h5>
                 <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                   <span className="text-5xl font-extrabold tracking-tight">
-                    {selector.real.AVERAGETASKSPEED.toFixed(0)}
+                    {selector.real.AVERAGETASKSPEED === 0 ? '-' : selector.real.AVERAGETASKSPEED.toFixed(3)}
                   </span>
                   <span className="ml-1 text-m font-normal text-gray-500 dark:text-gray-400">
                     건/m
@@ -312,28 +312,26 @@ function Dashboard() {
                   <div className="font-bold mb-3">PALLETIZER1</div>
                   <div>
                     진행도{" "}
-                    {eval(potenitSelector.PALLETIZER1.TASKPROGRESS) * 100}%
+                    {potenitSelector.Palletizer1.ROBOTTASKSTATUS[1] == 'progress' ? 25 : 100}%
                     <Line
                       className="m-auto mt-1 w-4/5 "
                       percent={
-                        potenitSelector.PALLETIZER1.TASKPROGRESS
-                          ? eval(potenitSelector.PALLETIZER1.TASKPROGRESS) * 100
-                          : 0
+                        potenitSelector.Palletizer1.ROBOTTASKSTATUS[1] == 'progress' ? 25 : 100
                       }
                       strokeWidth={7}
                       strokeColor={colorByProgress(
-                        potenitSelector.PALLETIZER1.TASKPROGRESS
+                        potenitSelector.Palletizer1.TASKPROGRESS
                       )}
                     />
                   </div>
                   <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
                   <div className="mt-5 font-bold">현재 진행중인 작업</div>
                   <div>
-                    {potenitSelector.PALLETIZER1.ROBOTTASKSTATUS ? (
+                    {potenitSelector.Palletizer1.ROBOTTASKSTATUS ? (
                       <div>
-                        {potenitSelector.PALLETIZER1.ROBOTTASKSTATUS[0]}
+                        {potenitSelector.Palletizer1.ROBOTTASKSTATUS[0]}
                         <div>
-                          {potenitSelector.PALLETIZER1.ROBOTTASKSTATUS[1]}
+                          {potenitSelector.Palletizer1.ROBOTTASKSTATUS[1]}
                         </div>
                       </div>
                     ) : (
@@ -414,7 +412,7 @@ function Dashboard() {
                 </h5>
                 <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                   <span className="text-5xl font-extrabold tracking-tight">
-                    {selector.simulation.CUMULATIVETASKSPEED}
+                  {selector.simulation.CUMULATIVETASKSPEED.length > 0 ? (selector.simulation.CUMULATIVETASKSPEED.reduce((acc, cur) => acc + cur, 0) / selector.simulation.CUMULATIVETASKSPEED.length).toFixed(3) : '-' }
                   </span>
                   <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">
                     건/m
@@ -427,7 +425,7 @@ function Dashboard() {
                 </h5>
                 <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                   <span className="text-5xl font-extrabold tracking-tight">
-                    {selector.simulation.AVERAGETASKSPEED.toFixed(0)}
+                    {selector.simulation.AVERAGETASKSPEED === 0 ? '-' : selector.simulation.AVERAGETASKSPEED.toFixed(3)}
                   </span>
                   <span className="ml-1 text-m font-normal text-gray-500 dark:text-gray-400">
                     건/m
@@ -591,28 +589,26 @@ function Dashboard() {
                   <div className="font-bold mb-3">PALLETIZER2</div>
                   <div>
                     진행도{" "}
-                    {eval(potenitSelector.PALLETIZER2.TASKPROGRESS) * 100}%
+                    {potenitSelector.Palletizer2.ROBOTTASKSTATUS[1] == 'progress' ? 25 : 100}%
                     <Line
                       className="m-auto mt-1 w-4/5 "
                       percent={
-                        potenitSelector.PALLETIZER2.TASKPROGRESS
-                          ? eval(potenitSelector.PALLETIZER2.TASKPROGRESS) * 100
-                          : 0
+                        potenitSelector.Palletizer2.ROBOTTASKSTATUS[1] == 'progress' ? 25 : 100
                       }
                       strokeWidth={7}
                       strokeColor={colorByProgress(
-                        potenitSelector.PALLETIZER2.TASKPROGRESS
+                        potenitSelector.Palletizer2.TASKPROGRESS
                       )}
                     />
                   </div>
                   <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
                   <div className="mt-5 font-bold">현재 진행중인 작업</div>
                   <div>
-                    {potenitSelector.PALLETIZER2.ROBOTTASKSTATUS ? (
+                    {potenitSelector.Palletizer2.ROBOTTASKSTATUS ? (
                       <div>
-                        {potenitSelector.PALLETIZER2.ROBOTTASKSTATUS[0]}
+                        {potenitSelector.Palletizer2.ROBOTTASKSTATUS[0]}
                         <div>
-                          {potenitSelector.PALLETIZER2.ROBOTTASKSTATUS[1]}
+                          {potenitSelector.Palletizer2.ROBOTTASKSTATUS[1]}
                         </div>
                       </div>
                     ) : (
@@ -625,28 +621,26 @@ function Dashboard() {
                   <div className="font-bold mb-3">PALLETIZER3</div>
                   <div>
                     진행도{" "}
-                    {eval(potenitSelector.PALLETIZER3.TASKPROGRESS) * 100}%
+                    {potenitSelector.Palletizer3.ROBOTTASKSTATUS[1] == 'progress' ? 25 : 100}%
                     <Line
                       className="m-auto mt-1 w-4/5 "
                       percent={
-                        potenitSelector.PALLETIZER3.TASKPROGRESS
-                          ? eval(potenitSelector.PALLETIZER3.TASKPROGRESS) * 100
-                          : 0
+                        potenitSelector.Palletizer3.ROBOTTASKSTATUS[1] == 'progress' ? 25 : 100
                       }
                       strokeWidth={7}
                       strokeColor={colorByProgress(
-                        potenitSelector.PALLETIZER3.TASKPROGRESS
+                        potenitSelector.Palletizer3.TASKPROGRESS
                       )}
                     />
                   </div>
                   <hr className="mt-3 mb-3 w-4/5 m-auto h-px border-indigo-900" />
                   <div className="mt-5 font-bold">현재 진행중인 작업</div>
                   <div>
-                    {potenitSelector.PALLETIZER3.ROBOTTASKSTATUS ? (
+                    {potenitSelector.Palletizer3.ROBOTTASKSTATUS ? (
                       <div>
-                        {potenitSelector.PALLETIZER3.ROBOTTASKSTATUS[0]}
+                        {potenitSelector.Palletizer3.ROBOTTASKSTATUS[0]}
                         <div>
-                          {potenitSelector.PALLETIZER3.ROBOTTASKSTATUS[1]}
+                          {potenitSelector.Palletizer3.ROBOTTASKSTATUS[1]}
                         </div>
                       </div>
                     ) : (
