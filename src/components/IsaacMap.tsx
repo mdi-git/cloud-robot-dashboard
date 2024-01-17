@@ -85,14 +85,14 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, robot5Pos, robo
       });
       const layer = layerRef.current;
 
-      // var background = new Konva.Rect({
-      //   x: 0,
-      //   y: 0,
-      //   width: stage.width(),
-      //   height: stage.height(),
-      //   fill: '#6B7280'
-      // });
-      // layer.add(background);
+      var background = new Konva.Rect({
+        x: 0,
+        y: 0,
+        width: stage.width(),
+        height: stage.height(),
+        fill: '#1e293b'
+      });
+      layer.add(background);
 
       // 우측 1번째
       {

@@ -234,17 +234,17 @@ export default function Potenit() {
                 <div className="font-bold">PALLETIZER1</div>
                 <div>
                   진행도{" "}
-                  {potenitSelector.PALLETIZER1.TASKPROGRESS
-                    ? potenitSelector.PALLETIZER1.TASKPROGRESS +
+                  {potenitSelector.Palletizer1.TASKPROGRESS
+                    ? potenitSelector.Palletizer1.TASKPROGRESS +
                       `(${
-                        eval(potenitSelector.PALLETIZER1.TASKPROGRESS) * 100
+                        eval(potenitSelector.Palletizer1.TASKPROGRESS) * 100
                       }%)`
                     : "-/-"}
                 </div>
                 <div className="mt-3 font-bold">현재 진행중인 작업</div>
                 <div>
-                  {potenitSelector.PALLETIZER1.ROBOTTASKSTATUS
-                    ? `${potenitSelector.PALLETIZER1.ROBOTTASKSTATUS[0]} / ${potenitSelector.PALLETIZER1.ROBOTTASKSTATUS[1]} `
+                  {potenitSelector.Palletizer1.ROBOTTASKSTATUS
+                    ? `${potenitSelector.Palletizer1.ROBOTTASKSTATUS[0]} / ${potenitSelector.Palletizer1.ROBOTTASKSTATUS[1]} `
                     : "-"}{" "}
                 </div>
               </div>

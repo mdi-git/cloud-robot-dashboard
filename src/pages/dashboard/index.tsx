@@ -99,7 +99,7 @@ function Dashboard() {
                 </h5>
                 <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                   <span className="text-5xl font-extrabold tracking-tight">
-                    {selector.real.AVERAGETASKSPEED === 0 ? '-' : selector.real.AVERAGETASKSPEED.toFixed(3)}
+                    {selector.real.CUMULATIVETASKSPEED.length > 0 ? selector.real.CUMULATIVETASKSPEED[selector.real.CUMULATIVETASKSPEED.length - 1].toFixed(3) : '-'}
                   </span>
                   <span className="ml-1 text-m font-normal text-gray-500 dark:text-gray-400">
                     건/m
@@ -425,7 +425,7 @@ function Dashboard() {
                 </h5>
                 <div className="flex items-baseline text-gray-900 dark:text-white justify-center">
                   <span className="text-5xl font-extrabold tracking-tight">
-                    {selector.simulation.AVERAGETASKSPEED === 0 ? '-' : selector.simulation.AVERAGETASKSPEED.toFixed(3)}
+                    {selector.simulation.CUMULATIVETASKSPEED.length > 0 ? selector.simulation.CUMULATIVETASKSPEED[selector.simulation.CUMULATIVETASKSPEED.length - 1].toFixed(3) : '-'}
                   </span>
                   <span className="ml-1 text-m font-normal text-gray-500 dark:text-gray-400">
                     건/m

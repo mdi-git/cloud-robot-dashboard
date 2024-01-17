@@ -285,7 +285,10 @@ const SocketComponent = ({}) => {
           real: {
             ...selector.real,
             AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED[1],
-            CUMULATIVETASKSPEED: [...selector.real.CUMULATIVETASKSPEED, receivedData.AVERAGETASKSPEED[1]].filter(el => el !== 0)
+            CUMULATIVETASKSPEED: [
+              ...selector.real.CUMULATIVETASKSPEED,
+              receivedData.AVERAGETASKSPEED[1],
+            ].filter((el) => el !== 0),
           },
         })
       );
@@ -296,7 +299,10 @@ const SocketComponent = ({}) => {
           simulation: {
             ...selector.simulation,
             AVERAGETASKSPEED: receivedData.AVERAGETASKSPEED[1],
-            CUMULATIVETASKSPEED: [...selector.real.CUMULATIVETASKSPEED, receivedData.AVERAGETASKSPEED[1]].filter(el => el !== 0)
+            CUMULATIVETASKSPEED: [
+              ...selector.real.CUMULATIVETASKSPEED,
+              receivedData.AVERAGETASKSPEED[1],
+            ].filter((el) => el !== 0),
           },
         })
       );
@@ -338,7 +344,7 @@ const SocketComponent = ({}) => {
           ],
         };
 
-        console.log(temp)
+        console.log(temp);
 
         dispatch(
           setPotenitState({

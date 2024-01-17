@@ -99,6 +99,15 @@ const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({ data, obj, robot1Pos,
       });
       const layer = layerRef.current;
 
+      var background = new Konva.Rect({
+        x: 0,
+        y: 0,
+        width: stage.width(),
+        height: stage.height(),
+        fill: '#1e293b'
+      });
+      layer.add(background);
+
       // 우측 1번째
       {
         const xAxis1 = new Konva.Line({
