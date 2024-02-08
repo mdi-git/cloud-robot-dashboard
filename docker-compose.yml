@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  web:
+    image: cloud-robot-dashboard
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "3001:3001"
